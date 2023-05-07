@@ -63,7 +63,7 @@ public:
 class Node
 {
 public:
-    Node();
+    Node(Stock* stock);
     ~Node();
     // pointer to the data held for the node 
     Stock* data;

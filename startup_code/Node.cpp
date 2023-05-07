@@ -1,7 +1,7 @@
 #include "Node.h"
 
-Node::Node(){
-    // TODO
+Node::Node(Stock* stock){
+    data = stock;
 };
 Node::~Node(){
     // TODO
