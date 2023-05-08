@@ -64,6 +64,21 @@ void LinkedList::printLL(){
         std::cout << stock->id << "|" << stock->name << nameSpaces << "|" << stock->on_hand << availSpaces << "|$ " << price << std::endl;
         
         node = node->next;
+    } 
+}
+
+
+Stock* LinkedList::findItem(string id){
+    Node* node = head;
+    Stock* stock = nullptr;
+
+    while (node != nullptr){
+        if (node->data->id == id){
+            stock = node->data;
+        }
+        
+        node = node->next;
     }
     
+    return stock;
 }

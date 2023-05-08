@@ -12,6 +12,7 @@ public:
     // more functions to be added perhaps...
     void initialiseLL(std::vector<std::vector<std::string>>& items);
     void printLL();
+    Stock* findItem(std::string id);
 
 private:
     // the beginning of the list
