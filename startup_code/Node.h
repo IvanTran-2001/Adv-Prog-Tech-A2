@@ -2,6 +2,7 @@
 #define NODE_H
 #include <string> 
 #include "Coin.h"
+#include "helper.h"
 
 
 //The length of the id string not counting the nul terminator
