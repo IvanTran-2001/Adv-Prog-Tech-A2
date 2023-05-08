@@ -10,6 +10,9 @@
 #include <string.h>
 #include <random>
 
+using std::string;
+using std::vector;
+
 class Helper
 {
 private:
@@ -17,9 +20,9 @@ private:
 
 public:
 
-    static void splitString(std::string s, std::vector<std::string>& tokens, std::string delimeter);
+    static void splitString(string s, vector<string>& tokens, string delimeter);
 
-    static void readCoinFile(std::string fileName);
+    static void readCoinFile(string fileName);
 };
 
 #endif

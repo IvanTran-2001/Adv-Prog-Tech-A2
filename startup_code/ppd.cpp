@@ -13,6 +13,8 @@ using std::vector;
 using std::cout;
 using std::endl;
 
+void menu();
+
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -23,8 +25,6 @@ using std::endl;
 int main(int argc, char **argv)
 {
     /* validate command line arguments */
-
-    cout << "hello" << endl;
     
     string fileName(argv[1]);
     string line;
@@ -69,6 +69,7 @@ int main(int argc, char **argv)
     LL->initialiseLL(items);
     
     do {
+
         menu();
 
         string input;
