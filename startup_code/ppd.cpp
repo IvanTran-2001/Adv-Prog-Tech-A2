@@ -5,8 +5,7 @@
 #include <vector>
 
 #include <algorithm> // added to fix sort undefined
-#include <cstring> // added to fix Helper::splitString()
-#include "helper.h"
+#include <cstring> // added to fix splitString()
 
 using std::string;
 using std::vector;
@@ -14,6 +13,7 @@ using std::cout;
 using std::endl;
 
 void menu();
+void splitString(string s, vector<string>& tokens, string delimeter);
 
 
 /**
@@ -40,9 +40,9 @@ int main(int argc, char **argv)
     readFile.open(fileName);
 
     while (getline(readFile, line)){
-        Helper::splitString(line, item, "|");
+        splitString(line, item, "|");
 
-        Helper::splitString(item[3], price, ".");
+        splitString(item[3], price, ".");
         item.at(3) = price[0];
         item.insert(item.begin() + 4, price[1]);
 
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     fileName = argv[2];
     readFile.open(fileName);
     while(getline(readFile, line)){
-        Helper::splitString(line, denom, ",");
+        splitString(line, denom, ",");
 
         Coin coin(denom[0], denom[1]);
   
@@ -89,6 +89,22 @@ int main(int argc, char **argv)
         }
     }
     while (true);
+}
+
+void splitString(string s, vector<string>& tokens, string delimeter)
+{
+    tokens.clear();
+    char* _s = new char[s.length()+1];
+    strcpy(_s, s.c_str());
+
+    char * pch;
+    pch = strtok (_s, delimeter.c_str());
+    while (pch != NULL)
+    {
+        tokens.push_back(pch);
+        pch = strtok (NULL, delimeter.c_str());
+    }
+    delete[] _s;
 }
 
 void menu()
