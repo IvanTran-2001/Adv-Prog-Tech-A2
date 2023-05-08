@@ -6,6 +6,7 @@
 
 #include <algorithm> // added to fix sort undefined
 #include <cstring> // added to fix splitString()
+#include "helper.cpp"
 
 using std::string;
 using std::vector;
@@ -17,6 +18,7 @@ void splitString(string s, vector<string>& tokens, string delimiter);
  * data, display the main menu, and handles the processing of options. 
  * Make sure free memory and close all files before exiting the program.
  **/
+
 int main(int argc, char **argv)
 {
     /* validate command line arguments */
@@ -94,6 +96,8 @@ int main(int argc, char **argv)
     }
     while (true);
 }
+
+
 
 
 void splitString(string s, vector<string>& tokens, string delimeter)
