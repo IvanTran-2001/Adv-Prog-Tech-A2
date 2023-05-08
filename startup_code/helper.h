@@ -17,11 +17,9 @@ private:
 
 public:
 
-    void splitString(string s, vector<string>& tokens, string delimeter);
+    static void splitString(std::string s, std::vector<std::string>& tokens, std::string delimeter);
 
-    void readCoinFile();
-
-    void readStockFile();
+    static void readCoinFile(std::string fileName);
 };
 
 #endif

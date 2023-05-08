@@ -1,8 +1,18 @@
-
+#include <iostream>
 #include "LinkedList.h"
+#include <fstream>
+#include <string>
+#include <vector>
+
 #include <algorithm> // added to fix sort undefined
-#include <cstring> // added to fix splitString()
+#include <cstring> // added to fix Helper::splitString()
 #include "helper.h"
+
+using std::string;
+using std::vector;
+using std::cout;
+using std::endl;
+
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -13,10 +23,13 @@
 int main(int argc, char **argv)
 {
     /* validate command line arguments */
+
+    cout << "hello" << endl;
     
     string fileName(argv[1]);
     string line;
     vector<vector<string>> items;
+
     vector<string> item;
     vector<string> price;
     vector<Coin> coins;
@@ -27,9 +40,9 @@ int main(int argc, char **argv)
     readFile.open(fileName);
 
     while (getline(readFile, line)){
-        splitString(line, item, "|");
+        Helper::splitString(line, item, "|");
 
-        splitString(item[3], price, ".");
+        Helper::splitString(item[3], price, ".");
         item.at(3) = price[0];
         item.insert(item.begin() + 4, price[1]);
 
@@ -41,7 +54,7 @@ int main(int argc, char **argv)
     fileName = argv[2];
     readFile.open(fileName);
     while(getline(readFile, line)){
-        splitString(line, denom, ",");
+        Helper::splitString(line, denom, ",");
 
         Coin coin(denom[0], denom[1]);
   
@@ -56,18 +69,7 @@ int main(int argc, char **argv)
     LL->initialiseLL(items);
     
     do {
-        std::cout << "Main Menu:" << std::endl;
-        std::cout << "\t1.Display Items" << std::endl;
-        std::cout << "\t2.Purchase Items" << std::endl;
-        std::cout << "\t3.Save and Exit" << std::endl;
-        std::cout << "Administrator-Only Menu:" << std::endl;
-        std::cout << "\t4.Add Item" << std::endl;
-        std::cout << "\t5.Remove Item" << std::endl;
-        std::cout << "\t6.Display Coins" << std::endl;
-        std::cout << "\t7.Reset Stock" << std::endl;
-        std::cout << "\t8.Reset Coins" << std::endl;
-        std::cout << "\t9.Abort Program" << std::endl;
-        std::cout << "Select your option (1-9):" << std::endl;
+        menu();
 
         string input;
     
@@ -77,9 +79,9 @@ int main(int argc, char **argv)
             return EXIT_SUCCESS;
         }
         else if (input == "1"){
-            std::cout << std::endl;
+            cout << endl;
             LL->printLL();
-            std::cout << std::endl;
+            cout << endl;
         }
         else if (input == "2"){
 
@@ -88,6 +90,21 @@ int main(int argc, char **argv)
     while (true);
 }
 
+void menu()
+{
+    cout << "Main Menu:" << endl;
+    cout << "\t1.Display Items" << endl;
+    cout << "\t2.Purchase Items" << endl;
+    cout << "\t3.Save and Exit" << endl;
+    cout << "Administrator-Only Menu:" << endl;
+    cout << "\t4.Add Item" << endl;
+    cout << "\t5.Remove Item" << endl;
+    cout << "\t6.Display Coins" << endl;
+    cout << "\t7.Reset Stock" << endl;
+    cout << "\t8.Reset Coins" << endl;
+    cout << "\t9.Abort Program" << endl;
+    cout << "Select your option (1-9):" << endl;
+}
 
 
 
