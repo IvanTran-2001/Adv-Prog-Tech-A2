@@ -1,17 +1,8 @@
-#include <iostream>
-#include "LinkedList.h"
-#include <fstream>
-#include <string>
-#include <vector>
 
+#include "LinkedList.h"
 #include <algorithm> // added to fix sort undefined
 #include <cstring> // added to fix splitString()
-#include "helper.cpp"
-
-using std::string;
-using std::vector;
-
-void splitString(string s, vector<string>& tokens, string delimiter);
+#include "helper.h"
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -100,18 +91,3 @@ int main(int argc, char **argv)
 
 
 
-void splitString(string s, vector<string>& tokens, string delimeter)
-{
-    tokens.clear();
-    char* _s = new char[s.length()+1];
-    strcpy(_s, s.c_str());
-
-    char * pch;
-    pch = strtok (_s, delimeter.c_str());
-    while (pch != NULL)
-    {
-        tokens.push_back(pch);
-        pch = strtok (NULL, delimeter.c_str());
-    }
-    delete[] _s;
-}
