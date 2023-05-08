@@ -1,7 +1,6 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include "Node.h"
-#include "helper.h"
 
 
 class LinkedList
@@ -11,9 +10,8 @@ public:
     ~LinkedList();
 
     // more functions to be added perhaps...
-    void initialiseLL(std::vector<std::vector<string>>& items);
+    void initialiseLL(std::vector<std::vector<std::string>>& items);
     void printLL();
-
 
 private:
     // the beginning of the list
@@ -24,5 +22,3 @@ private:
 };
 
 #endif  // LINKEDLIST_H
-
-
