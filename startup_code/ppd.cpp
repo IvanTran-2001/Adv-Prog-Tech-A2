@@ -5,6 +5,9 @@
 #include <vector>
 #include <iomanip>
 
+#include <algorithm> // added to fix sort undefined
+#include <cstring> // added to fix splitString()
+
 using std::string;
 using std::vector;
 
