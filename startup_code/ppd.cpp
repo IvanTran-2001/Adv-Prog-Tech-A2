@@ -8,6 +8,8 @@
 #include <algorithm> // added to fix sort undefined
 #include <cstring> // added to fix splitString()
 
+#include <vector>
+
 using std::string;
 using std::vector;
 
@@ -203,7 +205,7 @@ string getChange(vector<Coin>& coins, vector<int>& newChange, int amount){
 
     unsigned coinsCount[8] = {coins[0].count, coins[1].count, coins[2].count, coins[3].count, coins[4].count, coins[5].count, coins[6].count, coins[7].count};
 
-    for (int i = 0; i < newChange.size(); i++){
+    for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
         if (newChange[i] == 1000){
             coinsCount[0] += 1;
         }
