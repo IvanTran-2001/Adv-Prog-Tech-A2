@@ -1,6 +1,7 @@
 #ifndef COIN_H
 #define COIN_H
 #include <string>
+#include "helper.h"
 
 // Coin.h defines the coin structure for managing currency in the system. 
 #define DELIM ","  // delimiter 

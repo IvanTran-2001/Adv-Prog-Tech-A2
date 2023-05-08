@@ -15,7 +15,7 @@ LinkedList::~LinkedList() {
 
 void LinkedList::initialiseLL(vector<vector<string>>& items) {
     
-    for (int i = 0; i < items.size(); i++){
+    for (int i = 0; i < int(items.size()); i++){
         Stock* stock = new Stock;
         Price price;
 
