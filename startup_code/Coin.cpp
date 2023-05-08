@@ -29,3 +29,40 @@ Coin::Coin(std::string s, std::string amount){
 
     count = stoul(amount);
 }
+
+std::string Coin::getDenomination() const {
+    
+    std::string cents;
+
+    if (denom == FIVE_CENTS) {
+        cents = "5";
+    }
+    else if (denom == TEN_CENTS){
+        cents = "10";
+    }
+    else if (denom == TWENTY_CENTS){
+        cents = "20";
+    }
+    else if (denom == FIFTY_CENTS){
+        cents = "50";
+    }
+    else if (denom == ONE_DOLLAR){
+        cents = "100";
+    }
+    else if (denom == TWO_DOLLARS){
+        cents = "200";
+    }
+    else if (denom == FIVE_DOLLARS){
+        cents = "500";
+    }
+    else if (denom == TEN_DOLLARS){
+        cents = "1000";
+    }
+
+    return cents;
+
+}
+
+unsigned Coin::getQuantity() const {
+    return count;
+}

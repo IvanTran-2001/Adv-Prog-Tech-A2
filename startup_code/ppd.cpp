@@ -92,7 +92,23 @@ int main(int argc, char **argv)
         getline(std::cin, input);
 
         if (input == "3"){
-            return EXIT_SUCCESS;
+
+            // Saving and Exiting
+            std::ofstream coinsFile(argv[2]);
+            for (Coin& coin : coins) {
+                coinsFile << coin.getDenomination() << "," << coin.getQuantity() << std::endl;
+            }
+
+            coinsFile.close();
+
+            LL->saveLL(argv[1]);
+
+            delete LL;
+
+            exit(EXIT_SUCCESS);
+
+
+            //return EXIT_SUCCESS;
         }
         else if (input == "1"){
             std::cout << std::endl;
@@ -190,6 +206,7 @@ bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
         
         if (validChange && exit == false){
             std::cout << "Here is your " << item->name << " and your change of $" << amount * 0.01 << change << std::endl;
+            item->on_hand--; // remove one item from stock
             return_value = true;
         }
         

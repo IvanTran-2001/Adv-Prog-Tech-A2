@@ -4,7 +4,6 @@
 
 #include <vector>
 
-
 class LinkedList
 {
 public:
@@ -15,6 +14,7 @@ public:
     void initialiseLL(std::vector<std::vector<std::string>>& items);
     void printLL();
     Stock* findItem(std::string id);
+    void saveLL(std::string filename);
 
 private:
     // the beginning of the list

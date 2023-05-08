@@ -24,6 +24,12 @@ public:
     
     // the count of how many of these are in the cash register
     unsigned count;
+
+    // getter for denomination
+    std::string getDenomination() const;
+
+    // getter for quantity
+    unsigned getQuantity() const;
 };
 
 #endif // COIN_H

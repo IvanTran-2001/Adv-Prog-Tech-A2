@@ -1,6 +1,7 @@
 #include "LinkedList.h"
 #include <vector>
 #include <iostream>
+#include <fstream>
 using std::vector;
 using std::string;
 
@@ -82,4 +83,28 @@ Stock* LinkedList::findItem(string id){
     }
     
     return stock;
+}
+
+void LinkedList::saveLL(std::string filename){
+    std::ofstream outfile;
+    outfile.open(filename);
+
+    if (!outfile.is_open()){
+        std::cout << "Error: could not open file" << std::endl;
+    }
+
+
+    Node* node = head;
+    Stock* stock;
+
+    while (node != nullptr) {
+        stock = node->data;
+
+        outfile << stock->id << "|" << stock->name << "|" << stock->description << "|" << stock->price.dollars << "."
+                << stock->price.cents << "|" << stock->on_hand << std::endl;
+
+        node = node->next;
+    }
+
+    outfile.close();
 }
