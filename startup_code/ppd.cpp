@@ -9,19 +9,14 @@
 
 using std::string;
 using std::vector;
-using std::cout;
-using std::endl;
 
-void menu();
-void splitString(string s, vector<string>& tokens, string delimeter);
-
+void splitString(string s, vector<string>& tokens, string delimiter);
 
 /**
  * manages the running of the program, initialises data structures, loads
  * data, display the main menu, and handles the processing of options. 
  * Make sure free memory and close all files before exiting the program.
  **/
-
 int main(int argc, char **argv)
 {
     /* validate command line arguments */
@@ -29,7 +24,6 @@ int main(int argc, char **argv)
     string fileName(argv[1]);
     string line;
     vector<vector<string>> items;
-
     vector<string> item;
     vector<string> price;
     vector<Coin> coins;
@@ -69,8 +63,18 @@ int main(int argc, char **argv)
     LL->initialiseLL(items);
     
     do {
-
-        menu();
+        std::cout << "Main Menu:" << std::endl;
+        std::cout << "\t1.Display Items" << std::endl;
+        std::cout << "\t2.Purchase Items" << std::endl;
+        std::cout << "\t3.Save and Exit" << std::endl;
+        std::cout << "Administrator-Only Menu:" << std::endl;
+        std::cout << "\t4.Add Item" << std::endl;
+        std::cout << "\t5.Remove Item" << std::endl;
+        std::cout << "\t6.Display Coins" << std::endl;
+        std::cout << "\t7.Reset Stock" << std::endl;
+        std::cout << "\t8.Reset Coins" << std::endl;
+        std::cout << "\t9.Abort Program" << std::endl;
+        std::cout << "Select your option (1-9):" << std::endl;
 
         string input;
     
@@ -80,9 +84,9 @@ int main(int argc, char **argv)
             return EXIT_SUCCESS;
         }
         else if (input == "1"){
-            cout << endl;
+            std::cout << std::endl;
             LL->printLL();
-            cout << endl;
+            std::cout << std::endl;
         }
         else if (input == "2"){
 
@@ -90,6 +94,7 @@ int main(int argc, char **argv)
     }
     while (true);
 }
+
 
 void splitString(string s, vector<string>& tokens, string delimeter)
 {
@@ -106,22 +111,3 @@ void splitString(string s, vector<string>& tokens, string delimeter)
     }
     delete[] _s;
 }
-
-void menu()
-{
-    cout << "Main Menu:" << endl;
-    cout << "\t1.Display Items" << endl;
-    cout << "\t2.Purchase Items" << endl;
-    cout << "\t3.Save and Exit" << endl;
-    cout << "Administrator-Only Menu:" << endl;
-    cout << "\t4.Add Item" << endl;
-    cout << "\t5.Remove Item" << endl;
-    cout << "\t6.Display Coins" << endl;
-    cout << "\t7.Reset Stock" << endl;
-    cout << "\t8.Reset Coins" << endl;
-    cout << "\t9.Abort Program" << endl;
-    cout << "Select your option (1-9):" << endl;
-}
-
-
-
