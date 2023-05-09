@@ -24,6 +24,8 @@ public:
     ~Coin();
     // the denomination type
     enum Denomination denom;
+
+    void convertToCoin(std::string fileName);
     
     // the count of how many of these are in the cash register
     unsigned count;

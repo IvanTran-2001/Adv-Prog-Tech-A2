@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-#include "Helper.h"
 
 using std::vector;
 using std::string;
@@ -11,6 +10,44 @@ LinkedList::LinkedList() {
 
 LinkedList::~LinkedList() {
     // TODO
+}
+
+void LinkedList::convertToStock(std::string fileName) {
+    string line;
+
+    LinkedList items;
+    vector<string> item;
+    vector<string> price;
+
+    std::ifstream readFile;
+
+    readFile.open(fileName);
+
+    while (getline(readFile, line))
+    {
+        
+        Helper::splitString(line, item, "|");
+
+        if (Helper::validStock(item)) 
+        {
+            Stock* addStock = new Stock();
+            Price split;
+
+            Helper::splitString(item[3], price, ".");
+            split.dollars = stoi(price[0]);
+            split.cents = stoi(price[1]);
+
+            addStock->id = item[0];
+            addStock->name = item[1];
+            addStock->description = item[2];
+            addStock->price = split;
+            addStock->on_hand = stoi(item[4]);
+            
+            addLL(addStock);
+        }
+    }
+    readFile.close();
+
 }
 
 bool LinkedList::addLL(Stock* stock) {

@@ -2,6 +2,8 @@
 #define VENDING_MACHINE_H
 
 #include "Helper.h"
+#include "LinkedList.h"
+#include "Coin.h"
 
 #define DISPLAY_ITEMS "1"
 #define PURCHASE_ITEMS "2"
@@ -47,7 +49,7 @@ private:
 
 public:
 
-    VendingMachine(LinkedList s, std::vector<Coin*> c);
+    VendingMachine(std::string s, std::string c);
     ~VendingMachine();
 
     void on();

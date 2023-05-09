@@ -11,10 +11,6 @@
 #include <fstream>
 #include <iomanip>
 
-#include "Node.h"
-#include "LinkedList.h"
-#include "Coin.h"
-
 class Helper
 {
 private:
@@ -25,10 +21,6 @@ public:
     static void splitString(std::string s, std::vector<std::string>& tokens, std::string delimeter);
 
     static std::string readInput();
-
-    static LinkedList convertToStock(std::string fileName);
-
-    static std::vector<Coin*> convertToCoin(std::string fileName);
 
     static bool validStock(std::vector<std::string> stock);
 

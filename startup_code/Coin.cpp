@@ -1,4 +1,6 @@
 #include "Coin.h"
+using std::string;
+using std::vector;
 
 Coin::Coin()
 {
@@ -74,3 +76,26 @@ std::string Coin::getDenomination() const {
 
 }
 
+void Coin::convertToCoin(std::string fileName)
+{
+
+    string line;
+    vector<Coin*> coins;
+    vector<string> denom;
+
+    std::ifstream readFile;
+
+    readFile.open(fileName);
+
+    while (getline(readFile, line))
+    {
+        Helper::splitString(line, denom, ",");
+        if (Helper::validCoin(denom)) {
+            Coin* coin = new Coin(denom[0], denom[1]);
+            coins.push_back(coin);
+        }
+    }
+
+    readFile.close();
+
+}

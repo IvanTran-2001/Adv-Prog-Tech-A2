@@ -17,6 +17,7 @@ public:
     void resetStock();
     bool remove(std::string id);
     bool addLL(Stock* stock);
+    void convertToStock(std::string fileName);
 
 private:
     // the beginning of the list
