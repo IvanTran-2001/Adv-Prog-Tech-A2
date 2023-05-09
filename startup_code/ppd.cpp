@@ -17,6 +17,8 @@ void splitString(string s, vector<string>& tokens, string delimiter);
 bool purchaseItem(LinkedList* LL, vector<Coin>& coins);
 string getChange(vector<Coin>& coins, vector<int>& newChange, int amount);
 void updateCoins(unsigned coinsCount[], vector<Coin>& coins);
+void menu();
+
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -74,18 +76,8 @@ int main(int argc, char **argv)
     denom.clear();
     
     do {
-        std::cout << "Main Menu:" << std::endl;
-        std::cout << "\t1.Display Items" << std::endl;
-        std::cout << "\t2.Purchase Items" << std::endl;
-        std::cout << "\t3.Save and Exit" << std::endl;
-        std::cout << "Administrator-Only Menu:" << std::endl;
-        std::cout << "\t4.Add Item" << std::endl;
-        std::cout << "\t5.Remove Item" << std::endl;
-        std::cout << "\t6.Display Coins" << std::endl;
-        std::cout << "\t7.Reset Stock" << std::endl;
-        std::cout << "\t8.Reset Coins" << std::endl;
-        std::cout << "\t9.Abort Program" << std::endl;
-        std::cout << "Select your option (1-9):" << std::endl;
+
+        menu();
 
         string input;
     
@@ -95,6 +87,7 @@ int main(int argc, char **argv)
 
             // Saving and Exiting
             std::ofstream coinsFile(argv[2]);
+
             for (Coin& coin : coins) {
                 coinsFile << coin.getDenomination() << "," << coin.getQuantity() << std::endl;
             }
@@ -117,7 +110,26 @@ int main(int argc, char **argv)
         }
         else if (input == "2"){
             purchaseItem(LL, coins);
+        
+        } else if (input == "4") {
+            std::cout << "not done" << std::endl;
+
+        } else if (input == "5") {
+            std::cout << "not done" << std::endl;
+
+        } else if (input == "6") {
+            std::cout << "not done" << std::endl;
+
+        } else if (input == "7") {
+            std::cout << "not done" << std::endl;
+
+        } else if (input == "8") {
+            std::cout << "not done" << std::endl;
+
+        } else if (input == "9") {
+            std::cout << "not done" << std::endl;
         }
+
     }
     while (true);
 }
@@ -304,4 +316,19 @@ void updateCoins(unsigned coinsCount[], vector<Coin>& coins){
     for (int i = 0; i < 8; i++){
         coins[i].count = coinsCount[i];
     }
+}
+
+void menu() {
+    std::cout << "Main Menu:" << std::endl;
+    std::cout << "\t1.Display Items" << std::endl;
+    std::cout << "\t2.Purchase Items" << std::endl;
+    std::cout << "\t3.Save and Exit" << std::endl;
+    std::cout << "Administrator-Only Menu:" << std::endl;
+    std::cout << "\t4.Add Item" << std::endl;
+    std::cout << "\t5.Remove Item" << std::endl;
+    std::cout << "\t6.Display Coins" << std::endl;
+    std::cout << "\t7.Reset Stock" << std::endl;
+    std::cout << "\t8.Reset Coins" << std::endl;
+    std::cout << "\t9.Abort Program" << std::endl;
+    std::cout << "Select your option (1-9):" << std::endl;
 }
