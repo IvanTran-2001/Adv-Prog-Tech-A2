@@ -1,10 +1,9 @@
 #include "Coin.h"
-#include "Helper.h"
  
  // implement functions for managing coins; this may depend on your design.
 Coin::Coin(std::string s, std::string amount){
     if (s == "5"){
-        denom = FIVE_CENTS;
+        this->denom = FIVE_CENTS;
     }
     else if (s == "10"){
         denom = TEN_CENTS;

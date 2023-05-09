@@ -1,5 +1,6 @@
 #ifndef VENDING_MACHINE_H
 #define VENDING_MACHINE_H
+#include "Helper.h"
 
 #define DISPLAY_ITEMS "1"
 #define PURCHASE_ITEMS "2"

@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-#include "Helper.h"
 
 using std::vector;
 using std::string;

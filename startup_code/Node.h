@@ -1,6 +1,7 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include "Helper.h"
 
 //The length of the id string not counting the nul terminator
 #define IDLEN 5

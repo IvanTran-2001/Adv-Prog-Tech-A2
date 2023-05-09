@@ -1,5 +1,4 @@
 #include "Node.h"
-#include "Helper.h"
 
 Node::Node(Stock* stock){
     data = stock;
