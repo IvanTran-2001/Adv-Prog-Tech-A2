@@ -1,10 +1,6 @@
 #ifndef VENDING_MACHINE_H
 #define VENDING_MACHINE_H
 
-#include "helper.h"
-#include "Coin.h"
-#include "LinkedList.h"
-
 #define DISPLAY_ITEMS "1"
 #define PURCHASE_ITEMS "2"
 #define SAVE_EXIT "3"
@@ -56,4 +52,4 @@ public:
 };
 
 
-#endif
+#endif //VENDING_MACHINE_H

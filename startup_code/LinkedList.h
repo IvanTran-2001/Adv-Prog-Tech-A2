@@ -2,9 +2,6 @@
 #define LINKEDLIST_H
 
 #include "Node.h"
-#include "Helper.h"
-
-#include <vector>
 
 class LinkedList
 {

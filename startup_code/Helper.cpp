@@ -73,7 +73,7 @@ LinkedList Helper::convertToStock(std::string fileName)
 
 bool Helper::validStock(vector<string> stock) 
 {
-
+    return true;
 }
 
 std::vector<Coin*> Helper::convertToCoin(std::string fileName)

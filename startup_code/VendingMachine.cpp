@@ -1,4 +1,6 @@
 #include "VendingMachine.h"
+#include "Helper.h"
+
 using std::cout;
 using std::endl;
 using std::string;
@@ -53,7 +55,7 @@ void VendingMachine::displayItems()
 
 bool VendingMachine::purchaseItems()
 {
-
+    return true;
 }
 
 void VendingMachine::saveAndExit() 
@@ -63,12 +65,12 @@ void VendingMachine::saveAndExit()
 
 bool VendingMachine::addItem() 
 {
-
+    return true;
 }
 
 bool VendingMachine::removeItem()
 {
-
+    return true;
 }
 
 void VendingMachine::displayCoins()

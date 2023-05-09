@@ -1,4 +1,5 @@
 #include "Coin.h"
+#include "Helper.h"
  
  // implement functions for managing coins; this may depend on your design.
 Coin::Coin(std::string s, std::string amount){

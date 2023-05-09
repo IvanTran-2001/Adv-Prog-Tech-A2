@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iomanip>
 
+#include "Node.h"
 #include "LinkedList.h"
 #include "Coin.h"
 
@@ -35,4 +36,5 @@ public:
 
 
 };
+
 #endif
