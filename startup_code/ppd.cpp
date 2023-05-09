@@ -24,7 +24,7 @@ bool remove(LinkedList* LL);
 int main(int argc, char **argv)
 {
 
-    VendingMachine* vender = new VendingMachine(Helper::convertToStock(argv[1]),Helper::convertToCoin(argv[2]));
+    VendingMachine* vender = new VendingMachine(argv[1],argv[2]);
     vender->on();
     
 }

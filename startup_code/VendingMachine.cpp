@@ -4,10 +4,12 @@ using std::cout;
 using std::endl;
 using std::string;
 
-VendingMachine::VendingMachine(LinkedList s, std::vector<Coin*> c) 
+VendingMachine::VendingMachine(string s, string c) 
 {
-    this->stockList = s;
-    this->coinList = c;
+    this->stockList;
+    this->coinList;
+    stockList.convertToStock(s);
+    
 }
 
 VendingMachine::~VendingMachine() 
