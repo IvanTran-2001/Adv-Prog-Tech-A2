@@ -19,6 +19,7 @@ enum Denomination
 class Coin
 {
 public:
+    Coin();
     Coin(std::string s, std::string amount);
     ~Coin();
     // the denomination type

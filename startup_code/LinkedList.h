@@ -1,8 +1,9 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
+#include "Helper.h"
 
 #include <string>
-#include <Node.h>
+#include "Node.h"
 
 class LinkedList
 {
