@@ -12,12 +12,15 @@
 
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 void splitString(string s, vector<string>& tokens, string delimiter);
 bool purchaseItem(LinkedList* LL, vector<Coin>& coins);
 string getChange(vector<Coin>& coins, vector<int>& newChange, int amount);
 void updateCoins(unsigned coinsCount[], vector<Coin>& coins);
 void menu();
+bool remove(LinkedList* LL);
 
 
 /**
@@ -89,7 +92,7 @@ int main(int argc, char **argv)
             std::ofstream coinsFile(argv[2]);
 
             for (Coin& coin : coins) {
-                coinsFile << coin.getDenomination() << "," << coin.getQuantity() << std::endl;
+                coinsFile << coin.getDenomination() << "," << coin.getQuantity() << endl;
             }
 
             coinsFile.close();
@@ -104,28 +107,27 @@ int main(int argc, char **argv)
             //return EXIT_SUCCESS;
         }
         else if (input == "1"){
-            std::cout << std::endl;
+            cout << endl;
             LL->printLL();
-            std::cout << std::endl;
+            cout << endl;
         }
         else if (input == "2"){
             purchaseItem(LL, coins);
         
         } else if (input == "4") {
-            std::cout << "not done" << std::endl;
+            cout << "not done" << endl;
 
         } else if (input == "5") {
-            LL->remove("I0002");
-            LL->printLL();
+            remove(LL);
 
         } else if (input == "6") {
-            std::cout << "not done" << std::endl;
+            cout << "not done" << endl;
 
         } else if (input == "7") {
-            std::cout << "not done" << std::endl;
+            cout << "not done" << endl;
 
         } else if (input == "8") {
-            std::cout << "not done" << std::endl;
+            cout << "not done" << endl;
 
         } 
 
@@ -149,14 +151,21 @@ void splitString(string s, vector<string>& tokens, string delimeter)
     }
     delete[] _s;
 }
-
+bool remove(LinkedList* LL) {
+    string input;
+    cout << "Enter the item id of the item to remove from the menu: ";
+    getline(std::cin, input);
+    if (!LL->remove(input)) {
+        cout << "Invalid ID" << endl;
+    }
+}
 bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
     string validDenom[8] = {"5", "10", "20", "50", "100", "200", "500", "1000"};
     bool return_value;
     
-    std::cout << "Purchase Item" << std::endl;
-    std::cout << "-------------" << std::endl;
-    std::cout << "please enter the id of the item you wish to purchase:" << std::endl;
+    cout << "Purchase Item" << endl;
+    cout << "-------------" << endl;
+    cout << "please enter the id of the item you wish to purchase:" << endl;
 
     string input;
     
@@ -166,11 +175,11 @@ bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
     item = LL->findItem(input);
 
     if (item == nullptr){
-        std::cout << "invalid item" << std::endl;
+        cout << "invalid item" << endl;
         return_value = false;
     }
     else if (item->on_hand < 1){
-        std::cout << "item out of stock" << std::endl;
+        cout << "item out of stock" << endl;
         return_value = false;
     }
     else{
@@ -180,14 +189,14 @@ bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
         string change;
         bool exit = false;
 
-        std::cout << "You have selected \"" << item->name << " - " << item->description;
-        std::cout << "\". This will cost you $ ";
-        std::cout << std::fixed << std::setprecision(2) << amount * 0.01 << "." << std::endl;
-        std::cout << "Please hand over the money - type in the value of each note/coins in cents." << std::endl;
-        std::cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << std::endl;
+        cout << "You have selected \"" << item->name << " - " << item->description;
+        cout << "\". This will cost you $ ";
+        cout << std::fixed << std::setprecision(2) << amount * 0.01 << "." << endl;
+        cout << "Please hand over the money - type in the value of each note/coins in cents." << endl;
+        cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
 
         while (amount > 0 && exit == false){
-            std::cout << "You still need to give us $" << amount * 0.01 << ": ";
+            cout << "You still need to give us $" << amount * 0.01 << ": ";
             
             getline(std::cin, input);
             
@@ -200,8 +209,8 @@ bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
                 newChange.push_back(stoi(input));
             }
             else if (exit == false){
-                std::cout << "Error: $" << stoi(input) * 0.01;
-                std::cout << " is not a valid denomination of money. Please try again." << std::endl;
+                cout << "Error: $" << stoi(input) * 0.01;
+                cout << " is not a valid denomination of money. Please try again." << endl;
             }
         }
 
@@ -210,13 +219,13 @@ bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
             change = getChange(coins, newChange, amount);
             if (change == "-1"){
                 validChange = false;
-                std::cout << "insufficient coins available for correct change" << std::endl;
+                cout << "insufficient coins available for correct change" << endl;
                 return_value = false;
             }
         }
         
         if (validChange && exit == false){
-            std::cout << "Here is your " << item->name << " and your change of $" << amount * 0.01 << change << std::endl;
+            cout << "Here is your " << item->name << " and your change of $" << amount * 0.01 << change << endl;
             item->on_hand--; // remove one item from stock
             return_value = true;
         }
@@ -318,16 +327,16 @@ void updateCoins(unsigned coinsCount[], vector<Coin>& coins){
 }
 
 void menu() {
-    std::cout << "Main Menu:" << std::endl;
-    std::cout << "\t1.Display Items" << std::endl;
-    std::cout << "\t2.Purchase Items" << std::endl;
-    std::cout << "\t3.Save and Exit" << std::endl;
-    std::cout << "Administrator-Only Menu:" << std::endl;
-    std::cout << "\t4.Add Item" << std::endl;
-    std::cout << "\t5.Remove Item" << std::endl;
-    std::cout << "\t6.Display Coins" << std::endl;
-    std::cout << "\t7.Reset Stock" << std::endl;
-    std::cout << "\t8.Reset Coins" << std::endl;
-    std::cout << "\t9.Abort Program" << std::endl;
-    std::cout << "Select your option (1-9): ";
+    cout << "Main Menu:" << endl;
+    cout << "\t1.Display Items" << endl;
+    cout << "\t2.Purchase Items" << endl;
+    cout << "\t3.Save and Exit" << endl;
+    cout << "Administrator-Only Menu:" << endl;
+    cout << "\t4.Add Item" << endl;
+    cout << "\t5.Remove Item" << endl;
+    cout << "\t6.Display Coins" << endl;
+    cout << "\t7.Reset Stock" << endl;
+    cout << "\t8.Reset Coins" << endl;
+    cout << "\t9.Abort Program" << endl;
+    cout << "Select your option (1-9): ";
 }

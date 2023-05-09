@@ -120,11 +120,12 @@ bool LinkedList::remove(std::string id) {
         found = true;
     }
 
-    while ((node != nullptr) && (!found)){
+    while ((node->next != nullptr) && (!found)){
         beforeNode = node;
         node = node->next;
 
         if (node->data->id == id) {
+            std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
             found = true;
             beforeNode->next = node->next;
             delete node;
