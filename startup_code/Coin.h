@@ -1,6 +1,7 @@
 #ifndef COIN_H
 #define COIN_H
 #include <string>
+#include "Helper.h"
 
 // Coin.h defines the coin structure for managing currency in the system. 
 #define DELIM ","  // delimiter 
@@ -19,6 +20,7 @@ class Coin
 {
 public:
     Coin(std::string s, std::string amount);
+    ~Coin();
     // the denomination type
     enum Denomination denom;
     
@@ -28,8 +30,6 @@ public:
     // getter for denomination
     std::string getDenomination() const;
 
-    // getter for quantity
-    unsigned getQuantity() const;
 };
 
 #endif // COIN_H

@@ -14,29 +14,41 @@ LinkedList::~LinkedList() {
     // TODO
 }
 
-void LinkedList::initialiseLL(vector<vector<string>>& items) {
-    
+bool LinkedList::addLL(Stock* stock) {
 
-    for (vector<vector<string>>::size_type i = 0; i < items.size(); i++){
-        Stock* stock = new Stock;
-        Price price;
+    bool add = false;
+    Node* node = new Node(stock);
 
-        unsigned dollars = stoul(items[i][3]);
-        unsigned cents = stoul(items[i][4]);
-        price.dollars = dollars;
-        price.cents = cents;
-
-        stock->id = items[i][0];
-        stock->name = items[i][1];
-        stock->description = items[i][2];
-        stock->price = price;
-        stock->on_hand = stoul(items[i][5]);
-
-        
-        Node* node = new Node(stock);
-        node->next = head;
+    if (head == nullptr) {
         head = node;
+        add = true;
+        return add;
     }
+
+    Node* beforeNode = nullptr;
+    Node* tempNode = head;
+
+    if (tempNode->data->name >= node->data->name) {
+        head = node;
+        head->next = tempNode;
+        add = true;
+        return add;
+    }
+
+    while (!add && (tempNode->next != nullptr)) {
+
+        beforeNode = tempNode;
+        tempNode = tempNode->next;
+
+        if (tempNode->data->name >= node->data->name) {
+            beforeNode->next = node;
+            node->next = tempNode;
+            add = true;
+            return add;
+        }
+    }
+
+    return add;
 }
 
 void LinkedList::printLL(){
@@ -129,7 +141,9 @@ bool LinkedList::remove(std::string id) {
         node = node->next;
 
         if (node->data->id == id) {
-            std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
+
+            //std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
+
             found = true;
             beforeNode->next = node->next;
             delete node->data;
@@ -148,5 +162,5 @@ void LinkedList::resetStock() {
         node = node->next;
     }
 
-    std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
+    //std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
 }

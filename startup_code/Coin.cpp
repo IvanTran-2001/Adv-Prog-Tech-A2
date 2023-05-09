@@ -30,6 +30,12 @@ Coin::Coin(std::string s, std::string amount){
     count = stoul(amount);
 }
 
+Coin::~Coin() 
+{
+    
+}
+
+
 std::string Coin::getDenomination() const {
     
     std::string cents;
@@ -63,6 +69,3 @@ std::string Coin::getDenomination() const {
 
 }
 
-unsigned Coin::getQuantity() const {
-    return count;
-}

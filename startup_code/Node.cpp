@@ -5,5 +5,5 @@ Node::Node(Stock* stock){
     next = nullptr;
 };
 Node::~Node(){
-    // TODO
+    delete data;
 };

@@ -1,6 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include "Node.h"
+#include "Helper.h"
 
 #include <vector>
 
@@ -10,13 +11,12 @@ public:
     LinkedList();
     ~LinkedList();
 
-    // more functions to be added perhaps...
-    void initialiseLL(std::vector<std::vector<std::string>>& items);
     void printLL();
     Stock* findItem(std::string id);
     void saveLL(std::string filename);
     void resetStock();
     bool remove(std::string id);
+    bool addLL(Stock* stock);
 
 private:
     // the beginning of the list

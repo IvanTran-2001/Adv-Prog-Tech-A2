@@ -1,14 +1,7 @@
-#include <iostream>
-#include "LinkedList.h"
-#include <fstream>
-#include <string>
-#include <vector>
-#include <iomanip>
-
 #include <algorithm> // added to fix sort undefined
 #include <cstring> // added to fix splitString()
-
-#include <vector>
+#include "Helper.h"
+#include "VendingMachine.h"
 
 using std::string;
 using std::vector;
@@ -30,127 +23,14 @@ bool remove(LinkedList* LL);
  **/
 int main(int argc, char **argv)
 {
-    /* validate command line arguments */
+
+    VendingMachine* vender = new VendingMachine(Helper::convertToStock(argv[1]),Helper::convertToCoin(argv[2]));
+    vender->on();
     
-    string fileName(argv[1]);
-    string line;
-    vector<vector<string>> items;
-    vector<string> item;
-    vector<string> price;
-    vector<Coin> coins;
-    vector<string> denom;
-    
-
-    std::ifstream readFile;
-    readFile.open(fileName);
-
-    while (getline(readFile, line)){
-        splitString(line, item, "|");
-
-        splitString(item[3], price, ".");
-        item.at(3) = price[0];
-        item.insert(item.begin() + 4, price[1]);
-
-        items.push_back(item);
-    }
-    readFile.close();
-
-
-    fileName = argv[2];
-    readFile.open(fileName);
-    while(getline(readFile, line)){
-        splitString(line, denom, ",");
-
-        Coin coin(denom[0], denom[1]);
-  
-        coins.push_back(coin);
-    }
-    readFile.close();
-
-
-    sort(items.begin(), items.end(), [](const vector<string>& a, const vector<string>& b){return a[1] > b[1];});
-
-    LinkedList* LL = new LinkedList();
-    LL->initialiseLL(items);
-
-    items.clear();
-    item.clear();
-    price.clear();
-    denom.clear();
-
-    string input;
-    
-    do {
-
-        menu();
-    
-        getline(std::cin, input);
-
-        if (input == "3"){
-
-            // Saving and Exiting
-            std::ofstream coinsFile(argv[2]);
-
-            for (Coin& coin : coins) {
-                coinsFile << coin.getDenomination() << "," << coin.getQuantity() << endl;
-            }
-
-            coinsFile.close();
-
-            LL->saveLL(argv[1]);
-
-            delete LL;
-
-            exit(EXIT_SUCCESS);
-
-
-            //return EXIT_SUCCESS;
-        }
-        else if (input == "1"){
-            cout << endl;
-            LL->printLL();
-            cout << endl;
-        }
-        else if (input == "2"){
-            purchaseItem(LL, coins);
-        
-        } else if (input == "4") {
-            cout << "not done" << endl;
-
-        } else if (input == "5") {
-            remove(LL);
-
-        } else if (input == "6") {
-            cout << "not done" << endl;
-
-        } else if (input == "7") {
-            LL->resetStock();
-
-        } else if (input == "8") {
-            cout << "not done" << endl;
-
-        } 
-
-    }
-    while (input != "9");
 }
 
 
-void splitString(string s, vector<string>& tokens, string delimeter)
-{
-    tokens.clear();
-    char* _s = new char[s.length()+1];
-    strcpy(_s, s.c_str());
 
-    char * pch;
-    pch = strtok (_s, delimeter.c_str());
-    while (pch != NULL)
-    {
-        tokens.push_back(pch);
-        pch = strtok (NULL, delimeter.c_str());
-    }
-    delete[] _s;
-}
 bool remove(LinkedList* LL) {
     string input;
     cout << "Enter the item id of the item to remove from the menu: ";
@@ -327,19 +207,4 @@ void updateCoins(unsigned coinsCount[], vector<Coin>& coins){
     for (int i = 0; i < 8; i++){
         coins[i].count = coinsCount[i];
     }
-}
-
-void menu() {
-    cout << "Main Menu:" << endl;
-    cout << "\t1.Display Items" << endl;
-    cout << "\t2.Purchase Items" << endl;
-    cout << "\t3.Save and Exit" << endl;
-    cout << "Administrator-Only Menu:" << endl;
-    cout << "\t4.Add Item" << endl;
-    cout << "\t5.Remove Item" << endl;
-    cout << "\t6.Display Coins" << endl;
-    cout << "\t7.Reset Stock" << endl;
-    cout << "\t8.Reset Coins" << endl;
-    cout << "\t9.Abort Program" << endl;
-    cout << "Select your option (1-9): ";
 }
