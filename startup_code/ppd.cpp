@@ -74,12 +74,12 @@ int main(int argc, char **argv)
     item.clear();
     price.clear();
     denom.clear();
+
+    string input;
     
     do {
 
         menu();
-
-        string input;
     
         getline(std::cin, input);
 
@@ -115,7 +115,8 @@ int main(int argc, char **argv)
             std::cout << "not done" << std::endl;
 
         } else if (input == "5") {
-            std::cout << "not done" << std::endl;
+            LL->remove("I0002");
+            LL->printLL();
 
         } else if (input == "6") {
             std::cout << "not done" << std::endl;
@@ -126,12 +127,10 @@ int main(int argc, char **argv)
         } else if (input == "8") {
             std::cout << "not done" << std::endl;
 
-        } else if (input == "9") {
-            std::cout << "not done" << std::endl;
-        }
+        } 
 
     }
-    while (true);
+    while (input != "9");
 }
 
 

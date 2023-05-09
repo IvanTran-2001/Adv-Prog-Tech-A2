@@ -108,3 +108,28 @@ void LinkedList::saveLL(std::string filename){
 
     outfile.close();
 }
+
+bool LinkedList::remove(std::string id) {
+
+    Node* node = head;
+    Node* beforeNode = nullptr;
+    bool found = false;
+
+    if (node->data->id == id) {
+        head = node->next;
+        found = true;
+    }
+
+    while ((node != nullptr) || found){
+        beforeNode = node;
+        node = node->next;
+
+        if (node->data->id == id) {
+            found = true;
+            beforeNode->next = node->next;
+        }
+    }
+
+    return found;
+
+}
