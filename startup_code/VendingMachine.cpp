@@ -1,13 +1,13 @@
 #include "VendingMachine.h"
+#include "Helper.h"
 
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 VendingMachine::VendingMachine(string s, string c) 
 {
-    this->stockList;
-    this->coinList;
     stockList.convertToStock(s);
     
 }
@@ -51,7 +51,7 @@ void VendingMachine::on()
 
 void VendingMachine::displayItems()
 {
-    stockList.printLL();
+    this->stockList.printLL();
 }
 
 bool VendingMachine::purchaseItems()

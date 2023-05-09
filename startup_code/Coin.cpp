@@ -1,4 +1,5 @@
 #include "Coin.h"
+#include "Helper.h"
 using std::string;
 using std::vector;
 
