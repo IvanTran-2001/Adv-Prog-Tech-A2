@@ -329,5 +329,5 @@ void menu() {
     std::cout << "\t7.Reset Stock" << std::endl;
     std::cout << "\t8.Reset Coins" << std::endl;
     std::cout << "\t9.Abort Program" << std::endl;
-    std::cout << "Select your option (1-9):" << std::endl;
+    std::cout << "Select your option (1-9): ";
 }
