@@ -158,7 +158,10 @@ bool remove(LinkedList* LL) {
     if (!LL->remove(input)) {
         cout << "Invalid ID" << endl;
     }
+
+    return true;
 }
+
 bool purchaseItem(LinkedList* LL, vector<Coin>& coins){
     string validDenom[8] = {"5", "10", "20", "50", "100", "200", "500", "1000"};
     bool return_value;
