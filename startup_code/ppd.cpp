@@ -1,7 +1,6 @@
 #include <algorithm> // added to fix sort undefined
 #include <cstring> // added to fix splitString()
 
-#include "Helper.h"
 #include "VendingMachine.h"
 
 using std::string;
