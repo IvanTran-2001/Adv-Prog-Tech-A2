@@ -15,7 +15,7 @@ public:
     void printLL();
     Stock* findItem(std::string id);
     void saveLL(std::string filename);
-    void reset();
+    void resetStock();
     bool remove(std::string id);
 
 private:
