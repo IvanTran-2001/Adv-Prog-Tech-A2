@@ -124,7 +124,7 @@ int main(int argc, char **argv)
             cout << "not done" << endl;
 
         } else if (input == "7") {
-            cout << "not done" << endl;
+            LL->resetStock();
 
         } else if (input == "8") {
             cout << "not done" << endl;

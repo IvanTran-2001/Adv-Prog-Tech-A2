@@ -138,3 +138,13 @@ bool LinkedList::remove(std::string id) {
     return found;
 
 }
+
+void LinkedList::resetStock() {
+    Node* node = head;
+    while (node != nullptr) {
+        node->data->on_hand = DEFAULT_STOCK_LEVEL;
+        node = node->next;
+    }
+
+    std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
+}
