@@ -2,6 +2,7 @@
 
 Node::Node(Stock* stock){
     data = stock;
+    next = nullptr;
 };
 Node::~Node(){
     // TODO
