@@ -1,4 +1,5 @@
 #include "VendingMachine.h"
+#include "Helper.h"
 
 using std::cout;
 using std::endl;
