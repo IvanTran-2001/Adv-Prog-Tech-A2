@@ -6,7 +6,7 @@ using std::stoi;
 
 Helper::Helper(){}
 
-void splitString(string s, vector<string>& tokens, string delimeter)
+void Helper::splitString(string s, vector<string>& tokens, string delimeter)
 {
     tokens.clear();
     char* _s = new char[s.length()+1];

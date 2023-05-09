@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-#include "Helper.h"
 
 using std::vector;
 using std::string;
@@ -44,7 +43,7 @@ void LinkedList::convertToStock(std::string fileName) {
             addStock->price = split;
             addStock->on_hand = stoi(item[4]);
             
-            addLL(addStock);
+            std::cout << addLL(addStock) << std::endl;
         }
     }
     readFile.close();
@@ -84,6 +83,8 @@ bool LinkedList::addLL(Stock* stock) {
             return add;
         }
     }
+
+    tempNode->next = node;
 
     return add;
 }
