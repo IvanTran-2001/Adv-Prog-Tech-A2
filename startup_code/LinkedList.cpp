@@ -117,7 +117,6 @@ bool LinkedList::remove(std::string id) {
 
     if (node->data->id == id) {
         std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
-        delete head;
         head = node->next;
         found = true;
 
@@ -131,7 +130,6 @@ bool LinkedList::remove(std::string id) {
             std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
             found = true;
             beforeNode->next = node->next;
-            delete node;
         }
     }
 
