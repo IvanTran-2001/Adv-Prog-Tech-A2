@@ -42,6 +42,8 @@ private:
 
     void resetCoins();
 
+    void optionMenu();
+
 
 public:
 

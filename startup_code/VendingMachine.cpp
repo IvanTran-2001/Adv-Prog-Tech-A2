@@ -177,7 +177,7 @@ void VendingMachine::resetCoins()
 
 }
 
-void optionMenu()
+void VendingMachine::optionMenu()
 {
     cout << "Main Menu:" << endl;
     cout << "\t1.Display Items" << endl;
