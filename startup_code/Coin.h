@@ -27,9 +27,9 @@ public:
 
     static std::vector<Coin*> convertToCoin(std::string fileName);
 
-    static string getChange(vector<Coin*> coins, vector<int>& newChange, int amount);
+    static std::string getChange(std::vector<Coin*> coins, std::vector<int>& newChange, int amount);
 
-    static void updateCoins(unsigned coinsCount[], vector<Coin*> coins);
+    static void updateCoins(unsigned coinsCount[], std::vector<Coin*> coins);
     
     // the count of how many of these are in the cash register
     unsigned count;

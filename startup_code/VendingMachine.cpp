@@ -7,8 +7,7 @@ using std::vector;
 
 VendingMachine::VendingMachine(string s, string c) 
 {
-    stockList.convertToStock(s);
-    
+    this->stockList.convertToStock(s);
 }
 
 VendingMachine::~VendingMachine() 
@@ -67,7 +66,7 @@ bool VendingMachine::purchaseItems()
     
     cout << "Purchase Item" << endl;
     cout << "-------------" << endl;
-    cout << "please enter the id of the item you wish to purchase:" << endl;
+    cout << "Please enter the id of the item you wish to purchase: ";
 
     string input;
     

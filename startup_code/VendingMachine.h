@@ -15,9 +15,6 @@
 #define RESET_COINS "8"
 #define ABORT "9"
 
-using std::cout;
-using std::endl;
-
 class VendingMachine
 {
 

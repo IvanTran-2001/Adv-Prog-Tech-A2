@@ -42,8 +42,6 @@ void LinkedList::convertToStock(std::string fileName) {
             addStock->description = item[2];
             addStock->price = split;
             addStock->on_hand = stoi(item[4]);
-            
-            std::cout << addLL(addStock) << std::endl;
         }
     }
     readFile.close();
@@ -85,6 +83,7 @@ bool LinkedList::addLL(Stock* stock) {
     }
 
     tempNode->next = node;
+    add = true;
 
     return add;
 }
@@ -180,7 +179,7 @@ bool LinkedList::remove(std::string id) {
 
         if (node->data->id == id) {
 
-            //std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
+            std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
 
             found = true;
             beforeNode->next = node->next;
@@ -200,5 +199,5 @@ void LinkedList::resetStock() {
         node = node->next;
     }
 
-    //std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
+    std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
 }
