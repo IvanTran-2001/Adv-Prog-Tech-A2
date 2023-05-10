@@ -192,3 +192,13 @@ void VendingMachine::optionMenu()
     cout << "\t9.Abort Program" << endl;
     cout << "Select your option (1-9): ";
 }
+
+void VendingMachine::deleteStockList()
+{
+
+}
+
+void VendingMachine::deleteCoinList()
+{
+    
+}

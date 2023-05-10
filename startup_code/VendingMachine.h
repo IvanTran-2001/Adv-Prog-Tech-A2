@@ -44,6 +44,10 @@ private:
 
     void optionMenu();
 
+    void deleteStockList();
+
+    void deleteCoinList();
+
 
 public:
 
