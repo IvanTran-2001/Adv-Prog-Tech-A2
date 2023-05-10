@@ -26,27 +26,39 @@ private:
     std::string stockFile;
     std::string coinFile;
 
+    // Displays all stock
     void displayItems();
 
+    // For user to purchase stock
     bool purchaseItems();
 
+    // Save stock and coin data into file
     void saveAndExit();
 
+    // Add stock to vending machine
     bool addItem();
 
+    // Remove stock from vending machine
     bool removeItem();
 
+    // Display how much money in vending machine
     void displayCoins();
 
+    // Resetting or restocking vending machine
     void resetStock();
 
+    // Resetting coin list
     void resetCoins();
 
-    void optionMenu();
-
+    // Freeing stock memory
     void deleteStockList();
 
+    // Freeing coin memory
     void deleteCoinList();
+
+    // User prompts
+    void optionMenu();
+    void purchaseMsg();
 
 
 public:

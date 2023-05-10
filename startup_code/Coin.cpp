@@ -2,13 +2,11 @@
 using std::string;
 using std::vector;
 
-Coin::Coin()
-{
-    
-}
+//This class does not require a deconstructor.
 
- // implement functions for managing coins; this may depend on your design.
 Coin::Coin(std::string s, std::string amount){
+
+    // Converts string to denomation
     if (s == "5"){
         this->denom = FIVE_CENTS;
     }
@@ -34,19 +32,15 @@ Coin::Coin(std::string s, std::string amount){
         denom = TEN_DOLLARS;
     }
 
+    // Stores the amount of cash/coins
     count = stoul(amount);
 }
-
-Coin::~Coin() 
-{
-    
-}
-
 
 std::string Coin::getDenomination() const {
     
     std::string cents;
 
+    //Converts denomination to string
     if (denom == FIVE_CENTS) {
         cents = "5";
     }
@@ -76,6 +70,7 @@ std::string Coin::getDenomination() const {
 
 }
 
+
 vector<Coin*> Coin::convertToCoin(std::string fileName)
 {
 
@@ -83,30 +78,53 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
     vector<Coin*> coins;
     vector<string> denom;
 
+    // Reading file
     std::ifstream readFile;
 
+    // Open file
     readFile.open(fileName);
 
     while (getline(readFile, line))
     {
-        Helper::splitString(line, denom, ",");
+        // Splits string by deliminter
+        Helper::splitString(line, denom, DELIM);
+
+        // Checking if valid
         if (Helper::validCoin(denom)) {
-            Coin* coin = new Coin(denom[0], denom[1]);
+
+            // Representation of string line
+            string coinType = denom[0];
+            string amount = denom[1];
+
+            // Create coin on the heap
+            Coin* coin = new Coin(coinType, amount);
+
+            // Add coin type to the vector
             coins.push_back(coin);
+
+        } else {
+            //Error Message
+
         }
     }
 
+    // Close file
     readFile.close();
 
+    // Return a vector of coin pointers
     return coins;
 }
 
+
+
 string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
 
+    amount *= -1;
     string change = ":";
 
     unsigned coinsCount[8] = {coins[0]->count, coins[1]->count, coins[2]->count, coins[3]->count, coins[4]->count, coins[5]->count, coins[6]->count, coins[7]->count};
 
+    // Loops through change and convert to denominations
     for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
         if (newChange[i] == 1000){
             coinsCount[0] += 1;
@@ -134,6 +152,10 @@ string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
         }
     }
 
+    // The while loops will essentially go through
+    // the coin list and essentially calculate
+    // if we have valid change or not.
+    // This is dermined by if amount is 0 or over.
     while (amount >= 1000 && coinsCount[0] > 0){
         amount -= 1000;
         coinsCount[0] -= 1;
@@ -175,17 +197,23 @@ string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
         change += " 5c";
     }
     
+    // If not 0, means change invalid
     if (amount > 0){
         change = "-1";
     }
+
+    // Will update the coinlist
     else {
         updateCoins(coinsCount, coins);
     }
+
+    //
     return change;
 }
 
 void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
     
+    // Essentially replaces the count values for each Coin object
     for (int i = 0; i < 8; i++){
         coins[i]->count = coinsCount[i];
     }
@@ -194,11 +222,14 @@ void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
 
 void Coin::saveCoinFile(std::string fileName, vector<Coin*> coins) {
 
+    // Creates file for coin list
     std::ofstream coinsFile(fileName);
 
+    // Creating format
     for (Coin* coin : coins) {
         coinsFile << coin->getDenomination() << "," << coin->count << std::endl;
     }
 
+    // Close
     coinsFile.close();
 }
