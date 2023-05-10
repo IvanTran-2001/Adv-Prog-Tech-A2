@@ -9,9 +9,21 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
+
+    Node* afterNode;
+
+    if (head != nullptr) {
+        afterNode = head->next;
+    }
+
     while (head != nullptr) {
-        delete head->data;
-        head = head->next;
+        delete head;
+
+        head = afterNode;
+
+        if (afterNode != nullptr) {
+            afterNode = head->next;
+        }
     }
 }
 
@@ -172,7 +184,6 @@ bool LinkedList::remove(std::string id) {
 
     if (node->data->id == id) {
         std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
-        delete head->data;
         delete head;
         head = node->next;
         found = true;
@@ -190,6 +201,7 @@ bool LinkedList::remove(std::string id) {
             found = true;
             beforeNode->next = node->next;
             delete node;
+            return found;
         }
     }
 
