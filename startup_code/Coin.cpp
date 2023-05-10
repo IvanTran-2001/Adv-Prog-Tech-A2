@@ -192,7 +192,7 @@ void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
 
 }
 
-static void saveCoinFile(std::string fileName, vector<Coin*> coins) {
+void Coin::saveCoinFile(std::string fileName, vector<Coin*> coins) {
 
     std::ofstream coinsFile(fileName);
 

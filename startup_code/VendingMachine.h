@@ -23,6 +23,9 @@ private:
     LinkedList stockList;
     std::vector<Coin*> coinList;
 
+    std::string stockFile;
+    std::string coinFile;
+
     void displayItems();
 
     bool purchaseItems();
@@ -38,8 +41,6 @@ private:
     void resetStock();
 
     void resetCoins();
-
-    void optionMenu();
 
 
 public:

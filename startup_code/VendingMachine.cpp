@@ -143,7 +143,7 @@ bool VendingMachine::purchaseItems()
 void VendingMachine::saveAndExit() 
 {
     stockList.saveLL(stockFile);
-    Coin::saveCoinFile(this->coinFile, this->coinList)
+    Coin::saveCoinFile(this->coinFile, this->coinList);
 }
 
 bool VendingMachine::addItem() 
@@ -177,7 +177,7 @@ void VendingMachine::resetCoins()
 
 }
 
-void VendingMachine::optionMenu()
+void optionMenu()
 {
     cout << "Main Menu:" << endl;
     cout << "\t1.Display Items" << endl;
