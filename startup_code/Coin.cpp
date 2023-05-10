@@ -197,7 +197,7 @@ void Coin::saveCoinFile(std::string fileName, vector<Coin*> coins) {
     std::ofstream coinsFile(fileName);
 
     for (Coin* coin : coins) {
-        coinsFile << coin->denom << "," << coin->count << std::endl;
+        coinsFile << coin->getDenomination() << "," << coin->count << std::endl;
     }
 
     coinsFile.close();
