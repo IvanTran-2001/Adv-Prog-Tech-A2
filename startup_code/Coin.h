@@ -19,24 +19,29 @@ enum Denomination
 class Coin
 {
 public:
-    Coin();
+
+    // Construct coin
     Coin(std::string s, std::string amount);
-    ~Coin();
+
     // the denomination type
     enum Denomination denom;
 
+    // It will convert file into a proper vector of Coin Object
     static std::vector<Coin*> convertToCoin(std::string fileName);
 
+    // When user purchase, this will determine change amount
     static std::string getChange(std::vector<Coin*> coins, std::vector<int>& newChange, int amount);
 
+    // Updates the coin list
     static void updateCoins(unsigned coinsCount[], std::vector<Coin*> coins);
 
+    // Saves coin data into original coin file
     static void saveCoinFile(std::string fileName, std::vector<Coin*> coins);
     
     // the count of how many of these are in the cash register
     unsigned count;
 
-    // getter for denomination
+    // Returns a string (denomination to string)
     std::string getDenomination() const;
 
 };

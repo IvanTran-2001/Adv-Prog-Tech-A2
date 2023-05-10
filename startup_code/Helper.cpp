@@ -22,12 +22,16 @@ void Helper::splitString(string s, vector<string>& tokens, string delimeter)
     delete[] _s;
 }
 
+
 string Helper::readInput()
 {
+
+    // Getting user input as line
     string input;
     std::getline(std::cin, input);
     std::cout << std::endl;
 
+    // Return string
     return input;
 }
 
