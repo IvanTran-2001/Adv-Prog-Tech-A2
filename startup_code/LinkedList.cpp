@@ -9,7 +9,10 @@ LinkedList::LinkedList() {
 }
 
 LinkedList::~LinkedList() {
-    // TODO
+    while (head != nullptr) {
+        delete head->data;
+        head = head->next;
+    }
 }
 
 void LinkedList::convertToStock(std::string fileName) {
@@ -42,8 +45,11 @@ void LinkedList::convertToStock(std::string fileName) {
             addStock->description = item[2];
             addStock->price = split;
             addStock->on_hand = stoi(item[4]);
+
+            addLL(addStock);
         }
     }
+
     readFile.close();
 
 }

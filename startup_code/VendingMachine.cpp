@@ -7,7 +7,11 @@ using std::vector;
 
 VendingMachine::VendingMachine(string s, string c) 
 {
-    this->stockList.convertToStock(s);
+    this->coinFile = c;
+    this->stockFile = s;
+
+    this->stockList.convertToStock(stockFile);
+    this->coinList = Coin::convertToCoin(coinFile);
 }
 
 VendingMachine::~VendingMachine() 
@@ -138,7 +142,8 @@ bool VendingMachine::purchaseItems()
 
 void VendingMachine::saveAndExit() 
 {
-
+    stockList.saveLL(stockFile);
+    Coin::saveCoinFile(this->coinFile, this->coinList)
 }
 
 bool VendingMachine::addItem() 

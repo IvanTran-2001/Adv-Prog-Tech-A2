@@ -191,3 +191,14 @@ void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
     }
 
 }
+
+static void saveCoinFile(std::string fileName, vector<Coin*> coins) {
+
+    std::ofstream coinsFile(fileName);
+
+    for (Coin* coin : coins) {
+        coinsFile << coin->denom << "," << coin->count << std::endl;
+    }
+
+    coinsFile.close();
+}

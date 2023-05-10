@@ -30,6 +30,8 @@ public:
     static std::string getChange(std::vector<Coin*> coins, std::vector<int>& newChange, int amount);
 
     static void updateCoins(unsigned coinsCount[], std::vector<Coin*> coins);
+
+    static void saveCoinFile(std::string fileName, std::vector<Coin*> coins);
     
     // the count of how many of these are in the cash register
     unsigned count;
