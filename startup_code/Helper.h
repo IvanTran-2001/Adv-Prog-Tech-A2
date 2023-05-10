@@ -20,12 +20,16 @@ private:
 
 public:
 
+    // Will split string based on delimeter
     static void splitString(std::string s, std::vector<std::string>& tokens, std::string delimeter);
 
+    // User input
     static std::string readInput();
 
+    // Check if the stock file is valid
     static bool validStock(std::vector<std::string> stock);
 
+    // Check if the coin file is valid
     static bool validCoin(std::vector<std::string> coin);
 
 

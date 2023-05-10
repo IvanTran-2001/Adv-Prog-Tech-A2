@@ -10,15 +10,32 @@ public:
     LinkedList();
     ~LinkedList();
 
+    // Print linkedlist in a format
     void printLL();
+
+    // Find an item within list
     Stock* findItem(std::string id);
+
+    // Saving list in a format as a file
     void saveLL(std::string filename);
+
+    // Reset all stock on hand by default value
     void resetStock();
+
+    // Removing a stock by id
     bool remove(std::string id);
+
+    // Adding a stock to the list in proper order
     bool addLL(Stock* stock);
+
+    // Converting stock file to stock list
     void convertToStock(std::string fileName);
 
+    // freeing memory
+    void deleteLL();
+
 private:
+
     // the beginning of the list
     Node* head;
   

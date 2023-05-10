@@ -9,9 +9,13 @@
 int main(int argc, char **argv)
 {
 
+    // Intiating vending machine
     VendingMachine* vender = new VendingMachine(argv[1],argv[2]);
+
+    // Turning on the vending machine
     vender->on();
 
+    //Free all data
     delete vender;
     
 }
