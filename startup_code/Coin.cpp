@@ -76,7 +76,7 @@ std::string Coin::getDenomination() const {
 
 }
 
-void Coin::convertToCoin(std::string fileName)
+vector<Coin*> Coin::convertToCoin(std::string fileName)
 {
 
     string line;
@@ -97,5 +97,97 @@ void Coin::convertToCoin(std::string fileName)
     }
 
     readFile.close();
+
+    return coins;
+}
+
+string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
+
+    string change = ":";
+
+    unsigned coinsCount[8] = {coins[0]->count, coins[1]->count, coins[2]->count, coins[3]->count, coins[4]->count, coins[5]->count, coins[6]->count, coins[7]->count};
+
+    for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
+        if (newChange[i] == 1000){
+            coinsCount[0] += 1;
+        }
+        else if (newChange[i] == 500){
+            coinsCount[1] += 1;
+        }
+        else if (newChange[i] == 200){
+            coinsCount[2] += 1;
+        }
+        else if (newChange[i] == 100){
+            coinsCount[3] += 1;
+        }
+        else if (newChange[i] == 50){
+            coinsCount[4] += 1;
+        }
+        else if (newChange[i] == 20){
+            coinsCount[5] += 1;
+        }
+        else if (newChange[i] == 10){
+            coinsCount[6] += 1;
+        }
+        else if (newChange[i] == 5){
+            coinsCount[7] += 1;
+        }
+    }
+
+    while (amount >= 1000 && coinsCount[0] > 0){
+        amount -= 1000;
+        coinsCount[0] -= 1;
+        change += " $10";
+    }
+    while (amount >= 500 && coinsCount[1] > 0){
+        amount -= 500;
+        coinsCount[1] -= 1;
+        change += " $5";
+    }
+    while (amount >= 200 && coinsCount[2] > 0){
+        amount -= 200;
+        coinsCount[2] -= 1;
+        change += " $2";
+    }
+    while (amount >= 100 && coinsCount[3] > 0){
+        amount -= 100;
+        coinsCount[3] -= 1;
+        change += " $1";
+    }
+    while (amount >= 50 && coinsCount[4] > 0){
+        amount -= 50;
+        coinsCount[4] -= 1;
+        change += " 50c";
+    }
+    while (amount >= 20 && coinsCount[5] > 0){
+        amount -= 20;
+        coinsCount[5] -= 1;
+        change += " 20c";
+    }
+    while (amount >= 10 && coinsCount[6] > 0){
+        amount -= 10;
+        coinsCount[6] -= 1;
+        change += " 10c";
+    }
+    while (amount >= 5 && coinsCount[7] > 0){
+        amount -= 5;
+        coinsCount[7] -= 1;
+        change += " 5c";
+    }
+    
+    if (amount > 0){
+        change = "-1";
+    }
+    else {
+        updateCoins(coinsCount, coins);
+    }
+    return change;
+}
+
+void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
+    
+    for (int i = 0; i < 8; i++){
+        coins[i]->count = coinsCount[i];
+    }
 
 }

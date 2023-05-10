@@ -25,7 +25,11 @@ public:
     // the denomination type
     enum Denomination denom;
 
-    void convertToCoin(std::string fileName);
+    static std::vector<Coin*> convertToCoin(std::string fileName);
+
+    static string getChange(vector<Coin*> coins, vector<int>& newChange, int amount);
+
+    static void updateCoins(unsigned coinsCount[], vector<Coin*> coins);
     
     // the count of how many of these are in the cash register
     unsigned count;

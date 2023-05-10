@@ -42,8 +42,6 @@ private:
 
     void resetCoins();
 
-    void abort();
-
     void optionMenu();
 
 

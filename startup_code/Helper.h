@@ -10,6 +10,8 @@
 #include <string.h>
 #include <fstream>
 #include <iomanip>
+#include <algorithm> 
+#include <cstring> 
 
 class Helper
 {
