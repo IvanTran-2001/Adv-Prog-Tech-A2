@@ -169,7 +169,7 @@ void VendingMachine::displayCoins()
 
 void VendingMachine::resetStock()
 {
-
+    stockList.resetStock();
 }
 
 void VendingMachine::resetCoins()

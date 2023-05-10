@@ -189,7 +189,6 @@ bool LinkedList::remove(std::string id) {
 
             found = true;
             beforeNode->next = node->next;
-            delete node->data;
             delete node;
         }
     }

@@ -11,6 +11,8 @@ int main(int argc, char **argv)
 
     VendingMachine* vender = new VendingMachine(argv[1],argv[2]);
     vender->on();
+
+    delete vender;
     
 }
 
