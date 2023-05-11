@@ -29,7 +29,7 @@ public:
     bool addLL(Stock* stock);
 
     // Converting stock file to stock list
-    void convertToStock(std::string fileName);
+    bool convertToStock(std::string fileName);
 
     // freeing memory
     void deleteLL();

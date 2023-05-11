@@ -66,6 +66,8 @@ void VendingMachine::on()
 
     }
 
+    std::cout << "---Closing Vending Machine---" << std::endl;
+
 }
 
 void VendingMachine::displayItems()

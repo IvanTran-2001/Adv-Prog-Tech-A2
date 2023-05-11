@@ -73,7 +73,9 @@ bool LinkedList::convertToStock(std::string fileName) {
             // Adding stock to linkedlist
             addLL(addStock);
         } else {
+
             validFile = false;
+            
         }
     }
 
