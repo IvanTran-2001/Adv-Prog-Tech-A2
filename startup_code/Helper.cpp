@@ -64,6 +64,14 @@ bool Helper::validStock(vector<string> stock)
 
         } else {
 
+            int idCheck = std::stoi(stock[0].substr(1, 4));
+
+            // Checking if id is appropriate number
+            if ((idCheck < 0)) {
+                throw std::invalid_argument("ID cannot be negative");
+            }
+
+
             int count;
             // Convert to integer
             count = std::stoi(stock[4]);
