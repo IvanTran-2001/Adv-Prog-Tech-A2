@@ -243,7 +243,7 @@ void VendingMachine::resetStock()
 
 void VendingMachine::resetCoins()
 {
-
+    Coin::resetCoins(coinList);
 }
 
 void VendingMachine::purchaseMsg()

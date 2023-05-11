@@ -230,3 +230,9 @@ void Coin::saveCoinFile(std::string fileName, vector<Coin*> coins) {
     // Close
     coinsFile.close();
 }
+
+void Coin::resetCoins(vector<Coin*> coins){
+    for (Coin* coin : coins){
+        coin->count = DEFAULT_COIN_COUNT;
+    }
+}
