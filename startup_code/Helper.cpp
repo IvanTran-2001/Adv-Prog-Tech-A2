@@ -45,23 +45,23 @@ bool Helper::validStock(vector<string> stock)
     {
         // Checking size of inputs
         if ((stock.size() != 5)) {
-            throw std::runtime_error("Run time Error: Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]");
+            throw std::runtime_error("Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]");
 
             // Check ID size
         } else if (stock[0].size() != IDLEN) {
-            throw std::length_error("Length Error: ID must be length of 5");
+            throw std::length_error("ID must be length of 5");
 
             // Check if ID start with 'I'
         } else if (stock[0][0] != 'I') {
-            throw std::invalid_argument("Invalid Argument Error: ID must start with \'I\'");
+            throw std::invalid_argument("ID must start with \'I\'");
 
             // Check valid name size
         } else if ((stock[1].size() > NAMELEN)) {
-            throw std::length_error("Length Error: Name length must be within 40");
+            throw std::length_error("Name length must be within 40");
 
             // Check for description size
         } else if ((stock[2].size() > DESCLEN)) {      
-            throw std::length_error("Length Error: Description length must be within 255");
+            throw std::length_error("Description length must be within 255");
 
         } else {
 
@@ -70,7 +70,7 @@ bool Helper::validStock(vector<string> stock)
             count = std::stoi(stock[4]);
             // If on hand is in the negatives
             if (count < 0) {
-                throw std::domain_error("Domain Error: On hand cannot be negative");
+                throw std::domain_error("On hand cannot be negative");
             }
 
             float price;
@@ -80,7 +80,7 @@ bool Helper::validStock(vector<string> stock)
             // Check if negative
             if (price < 0.00f) {
 
-                throw std::domain_error("Domain Error: Price cannot be negative");
+                throw std::domain_error("Price cannot be negative");
             } else {
 
                 vector<string> decimal;
@@ -94,7 +94,8 @@ bool Helper::validStock(vector<string> stock)
             }
         }
          
-    } catch (const std::invalid_argument& e)
+    } 
+    catch (const std::invalid_argument& e)
     {
         // False
         valid = false;
@@ -102,7 +103,34 @@ bool Helper::validStock(vector<string> stock)
         // Print error
         std::cout << "ID-" << stock[0] << ": ";
         std::cout << "Invalid argument error: " << e.what() << std::endl;
-    }
+    } 
+    catch (const std::runtime_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "ID-" << stock[0] << ": ";
+        std::cout << "Run time Error: " << e.what() << std::endl;
+    } 
+    catch (const std::length_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "ID-" << stock[0] << ": ";
+        std::cout << "Length Error: " << e.what() << std::endl;
+    }  
+    catch (const std::domain_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "ID-" << stock[0] << ": ";
+        std::cout << "Domain Error: " << e.what() << std::endl;
+    } 
     catch (const std::exception& e)
     {
         // False
@@ -112,7 +140,6 @@ bool Helper::validStock(vector<string> stock)
         std::cout << "ID-" << stock[0] << ": ";
         std::cout << e.what() << std::endl;
     } 
-
 
     return valid;
 }
