@@ -93,6 +93,12 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
 
     }
 
+    // Sort list
+    std::sort(checkValidCoins.begin(), checkValidCoins.end(), [](const string& a, const string& b) {
+        return a < b;
+    });
+
+
     if (Helper::validCoin(checkValidCoins)) {
         for (string s:checkValidCoins) {
             // Splits string by deliminter
@@ -112,11 +118,6 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
 
     // Close file
     readFile.close();
-
-    // Sorts from lowest to highest
-    std::sort(coins.begin(), coins.end(), [](const Coin& a, const Coin& b) {
-        return a.getDenomination() < b.getDenomination();
-    });
 
     // Return a vector of coin pointers
     return coins;
