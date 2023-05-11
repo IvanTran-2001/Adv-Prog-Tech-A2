@@ -19,7 +19,6 @@ VendingMachine::~VendingMachine()
 {
     deleteStockList();
     deleteCoinList();
-
 }
 
 void VendingMachine::on()
@@ -174,7 +173,6 @@ bool VendingMachine::purchaseItems()
 
         // Change will be given if appropriate
         if (validChange && exit == false){
-
 
             cout << "Here is your " << item->name << " and your change of $" << amount * 0.01 << change << endl;
             item->on_hand--; 
