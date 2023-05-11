@@ -308,3 +308,31 @@ void LinkedList::deleteLL()
         }
     }
 }
+
+string LinkedList::getNextAvailableID(){
+    Node* node = head;
+    int max_num = -1;
+    string id;
+    int id_num;
+
+    // Looping through list
+    while (node != nullptr){
+        id = node->data->id;
+        id_num = stoi(id.substr(1, 4));
+
+        if (id_num > max_num){
+            max_num = id_num;
+        }
+        
+        node = node->next;
+    }
+    
+    id_num++;
+
+    int num_digits = std::to_string(id_num).length();
+    string zeroes(4 - num_digits, '0');
+    
+    string new_id = "I" + zeroes + std::to_string(id_num);
+    
+    return new_id;
+}
