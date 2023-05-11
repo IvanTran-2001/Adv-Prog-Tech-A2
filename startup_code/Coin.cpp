@@ -75,6 +75,8 @@ std::string Coin::getDenomination() const {
 vector<Coin*> Coin::convertToCoin(std::string fileName)
 {
 
+    std::cout << "\nLoading Coin File: "<< "\'" << fileName << "\'" << std::endl;
+
     string line;
     vector<Coin*> coins;
     vector<string> denom;
@@ -118,6 +120,8 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
 
     // Close file
     readFile.close();
+
+    std::cout << "Closing Coin File: "<< "\'" << fileName << "\'\n" << std::endl;
 
     // Return a vector of coin pointers
     return coins;

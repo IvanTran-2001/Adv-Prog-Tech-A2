@@ -18,6 +18,7 @@ LinkedList::~LinkedList() {
 
 bool LinkedList::convertToStock(std::string fileName) {
 
+    std::cout << "\nLoading Stock File: "<< "\'" << fileName << "\'" << std::endl;
     string line;
 
     // Used to construct Stock objects
@@ -30,8 +31,6 @@ bool LinkedList::convertToStock(std::string fileName) {
 
     // Opening file
     readFile.open(fileName);
-
-    std::cout << "Loading Stock File: "<< "\'" << fileName << "\'" << std::endl;
 
     // If valid file
     bool validFile = true;
@@ -77,8 +76,9 @@ bool LinkedList::convertToStock(std::string fileName) {
 
     readFile.close();
 
-    return validFile;
+    std::cout << "Closing Stock File: "<< "\'" << fileName << "\'\n" << std::endl;
 
+    return validFile;
 }
 
 bool LinkedList::addLL(Stock* stock) {
