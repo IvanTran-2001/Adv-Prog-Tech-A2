@@ -48,6 +48,7 @@ public:
     // Returns a string (denomination to string)
     std::string getDenomination() const;
 
+    static void resetCoins(std::vector<Coin*> coins);
 };
 
 #endif // COIN_H

@@ -150,7 +150,7 @@ void LinkedList::printLL(){
 
         // The rest below is just formatting the data
         nameLength = stock->name.length();
-        string nameSpaces(40 - nameLength, ' ');
+        string nameSpaces(NAMELEN - nameLength, ' ');
 
         on_handLength = std::to_string(stock->on_hand).length();
         string availSpaces(11 - on_handLength, ' ');

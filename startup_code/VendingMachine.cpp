@@ -216,6 +216,27 @@ bool VendingMachine::removeItem()
 
 void VendingMachine::displayCoins()
 {
+    string formatting_spaces[8];
+    int count_digits;
+
+    for (int i = 0; i < 8; i++){
+        count_digits = std::to_string(coinList[i]->count).length();
+        string spaces(10 - count_digits, ' ');
+        formatting_spaces[i] = spaces;
+    }
+    
+    cout << "Coins Summary" << endl;
+    cout << "-------------" << endl;
+    cout << "Denomination    |    Count" << endl;
+    cout << "---------------------------" << endl;
+    cout << "5 Cents         |" << formatting_spaces[7] << coinList[7]->count << endl;
+    cout << "10 Cents        |" << formatting_spaces[6] << coinList[6]->count << endl;
+    cout << "20 Cents        |" << formatting_spaces[5] << coinList[5]->count << endl;
+    cout << "50 Cents        |" << formatting_spaces[4] << coinList[4]->count << endl;
+    cout << "1 Dollar        |" << formatting_spaces[3] << coinList[3]->count << endl;
+    cout << "2 Dollars       |" << formatting_spaces[2] << coinList[2]->count << endl;
+    cout << "5 Dollars       |" << formatting_spaces[1] << coinList[1]->count << endl;
+    cout << "10 Dollars      |" << formatting_spaces[0] << coinList[0]->count << endl;
 
 }
 
@@ -228,7 +249,7 @@ void VendingMachine::resetStock()
 
 void VendingMachine::resetCoins()
 {
-
+    Coin::resetCoins(coinList);
 }
 
 void VendingMachine::purchaseMsg()
