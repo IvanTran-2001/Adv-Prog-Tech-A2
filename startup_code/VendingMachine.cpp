@@ -9,8 +9,6 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
-
-    this->stockList.convertToStock(stockFile);
     this->coinList = Coin::convertToCoin(coinFile);
 }
 
@@ -25,8 +23,13 @@ void VendingMachine::on()
     //Input
     string input;
 
+    if ((this->stockList.convertToStock(stockFile))) {
+        input = ABORT;
+    }
 
-    do {
+
+    // Will quit if abort or save and exit
+    while ((input != ABORT) && (input != SAVE_EXIT)) {
 
         // Menu Options
         optionMenu();
@@ -63,8 +66,6 @@ void VendingMachine::on()
 
     }
 
-    // Will quit if abort or save and exit
-    while ((input != ABORT) && (input != SAVE_EXIT));
 }
 
 void VendingMachine::displayItems()

@@ -16,7 +16,7 @@ LinkedList::~LinkedList() {
     deleteLL();
 }
 
-void LinkedList::convertToStock(std::string fileName) {
+bool LinkedList::convertToStock(std::string fileName) {
 
     string line;
 
@@ -33,7 +33,11 @@ void LinkedList::convertToStock(std::string fileName) {
 
     std::cout << "Loading Stock File: "<< "\'" << fileName << "\'" << std::endl;
 
-    int lineCount = 1;
+    // Keep track of each line in file for error output
+    int lineCount = 0;
+
+    // 
+    bool validFile = true;
 
     // Looping for every line
     while (getline(readFile, line))
@@ -68,10 +72,14 @@ void LinkedList::convertToStock(std::string fileName) {
 
             // Adding stock to linkedlist
             addLL(addStock);
-        } 
+        } else {
+            validFile = false;
+        }
     }
 
     readFile.close();
+
+    return validFile;
 
 }
 

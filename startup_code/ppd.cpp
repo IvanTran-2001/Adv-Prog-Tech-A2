@@ -31,24 +31,30 @@ bool checkInput(int count, char **command) {
     // Will validate
     bool valid = true;
 
-    // Checks the length of argument
-    if (count != 3) {
-        valid = false;
-        throw std::runtime_error("In correct format, example: ./ppd [stock file] [coin file]");
-    } 
+    try {
+        // Checks the length of argument
+        if (count != 3) {
+            valid = false;
+            throw std::runtime_error("Runtime Error: Incorrect format, example: ./ppd [stock file] [coin file]");
+        } 
 
-    // Checking if stock file is accessible
-    if (!accessibleFile(command[1])) {
-        valid = false;
-        throw std::runtime_error("Error: Failed to open file: ");
-        std::cout << "\'" << command[1] << "\'" << std::endl;
-    }
+        // Checking if stock file is accessible
+        if (!accessibleFile(command[1])) {
+            valid = false;
+            throw std::runtime_error("Runtime Error: Failed to open file: ");
+            std::cout << "\'" << command[1] << "\'" << std::endl;
+        }
 
-    // Checking if coin file is accessible
-    if (!accessibleFile(command[2])) {
-        valid = false;
-        throw std::runtime_error("Error: Failed to open file: ");
-        std::cout << "\'" << command[2] << "\'" << std::endl;
+        // Checking if coin file is accessible
+        if (!accessibleFile(command[2])) {
+            valid = false;
+            throw std::runtime_error("Runtime Error: Failed to open file: ");
+            std::cout << "\'" << command[2] << "\'" << std::endl;
+        }
+    } catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+
     }
 
 

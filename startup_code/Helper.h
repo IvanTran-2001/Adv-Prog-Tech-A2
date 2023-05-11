@@ -34,7 +34,8 @@ public:
     // Check if the coin file is valid
     static bool validCoin(std::vector<std::string> coin);
 
-    static void throwMessage(std::exception e, int line);
+    template<typename ExceptionType>
+    static void throwMessage(const ExceptionType& e, int line);
 
 
 

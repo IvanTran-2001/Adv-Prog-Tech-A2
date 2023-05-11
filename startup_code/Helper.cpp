@@ -41,88 +41,36 @@ bool Helper::validStock(vector<string> stock, int line)
 
     // Valid line
     bool valid = true;
-
+    try
+    {
         // Checking size of inputs
-    if ((stock.size() != 5)) {
+        if ((stock.size() != 5)) {
+            throwMessage(std::runtime_error("Run time Error: Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]"), line);
 
-        std::cout << 1 << std::endl;
+            // Check ID size
+        } else if (stock[0].size() != IDLEN) {
+            throwMessage(std::length_error("Length Error: ID must be length of 5"), line);
 
-        // Too many inputs
-        throwMessage(std::runtime_error("Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]"), line);
+            // Check if ID start with 'I'
+        } else if (stock[0][0] != 'I') {
+            throwMessage(std::invalid_argument("Invalid Argument Error: ID must start with \'I\'"), line);
 
-        valid = false;
+            // Check valid name size
+        } else if ((stock[1].size() > NAMELEN)) {
+            throwMessage(std::length_error("Length Error: Name length must be within 40"), line);
 
-        // Check ID size
-    } else if (stock[0].size() != IDLEN) {
-
-        std::cout << 2 << std::endl;
-
-        // Input size too long
-        throwMessage(std::length_error("ID must be length of 5"), line);
-        valid = false;
-
-        // Check if ID start with 'I'
-    } else if (stock[0][0] != 'I') {
-
-        std::cout << 3 << std::endl;
-
-        // Invalid Input
-        throwMessage(std::invalid_argument("ID must start with \'I\'"), line);
-        valid = false;
-
-        // Check valid name size
-    } else if ((stock[1].size() > NAMELEN)) {
-
-        std::cout << 4 << std::endl;
-
-        // Input size too long
-        throwMessage(std::length_error("Name length must be within 40"), line);
-        valid = false;
-
-        // Check for description size
-    } else if ((stock[2].size() > DESCLEN)) {
-
-        std::cout << 5 << std::endl;
-        
-        // Input size too long        
-        throwMessage(std::length_error("Description length must be within 255"), line);
-        valid = false;
-    }
-    
-    else {
-
-        try {
+            // Check for description size
+        } else if ((stock[2].size() > DESCLEN)) {      
+            throwMessage(std::length_error("Length Error: Description length must be within 255"), line);
+        } else {
 
             int count;
             // Convert to integer
             count = std::stoi(stock[4]);
-
             // If on hand is in the negatives
             if (count < 0) {
-
-                std::cout << 6 << std::endl;
-                
                 throwMessage(std::domain_error("On hand cannot be negative"), line);
-                valid = false;
             }
-
-            // Will catch if out of range or invalid input
-        } catch (const std::exception& e) {
-
-            std::cout << "CATCHCHCHHCHCHC" << std::endl;
-
-            if (line != -1) {
-                std::cout << "Line " << line << ": " << std::endl;
-            }
-
-            std::cout << 7 << std::endl;
-            // Tells us what the error is
-            std::cout << "Exception caught: " << e.what() << std::endl;
-            valid = false;
-
-        }
-
-        try {
 
             float price;
             // Convert to float
@@ -132,7 +80,7 @@ bool Helper::validStock(vector<string> stock, int line)
             if (price < 0.00) {
 
                 std::cout << 8 << std::endl;
-                throwMessage(std::domain_error("Price cannot be negative"), line);
+                throwMessage(std::domain_error("Domain Error: Price cannot be negative"), line);
                 valid = false;
             } else {
 
@@ -147,24 +95,13 @@ bool Helper::validStock(vector<string> stock, int line)
                     valid = false;
                 }
             }
-
-        // Will catch out of range or invalid string
-        } catch (const std::exception& e) {
-
-            std::cout << "yep catch 2" << std::endl;
-
-            if (line != -1) {
-                std::cout << "Line " << line << ": " << std::endl;
-            }
-
-            std::cout << 10 << std::endl;
-
-            // Tells us what the error is
-            std::cout << "Exception caught: " << e.what() << std::endl;
-            valid = false;
-
         }
-
+         
+    }
+    catch (const std::exception& e)
+    {
+        // Print error
+        std::cout << e.what() << std::endl;
     }
 
 
@@ -176,7 +113,8 @@ bool Helper::validCoin(std::vector<std::string> coin)
     return true;
 }
 
-void Helper::throwMessage(std::exception e, int line) {
+template<typename ExceptionType>
+void Helper::throwMessage(const ExceptionType& e, int line) {
 
     if (line != -1) {
         std::cout << "Line " << line << ": ";
