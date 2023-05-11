@@ -31,6 +31,10 @@ void LinkedList::convertToStock(std::string fileName) {
     // Opening file
     readFile.open(fileName);
 
+    std::cout << "Loading Stock File: "<< "\'" << fileName << "\'" << std::endl;
+
+    int lineCount = 1;
+
     // Looping for every line
     while (getline(readFile, line))
     {
@@ -40,7 +44,7 @@ void LinkedList::convertToStock(std::string fileName) {
 
 
         // If a valid line
-        if (Helper::validStock(item)) 
+        if (Helper::validStock(item, count)) 
         {
             // Intiating new Stock object on heap
             Stock* addStock = new Stock();
@@ -64,7 +68,7 @@ void LinkedList::convertToStock(std::string fileName) {
 
             // Adding stock to linkedlist
             addLL(addStock);
-        }
+        } 
     }
 
     readFile.close();

@@ -13,6 +13,8 @@
 #include <algorithm> 
 #include <cstring> 
 
+#include "Node.h"
+
 class Helper
 {
 private:
@@ -27,10 +29,13 @@ public:
     static std::string readInput();
 
     // Check if the stock file is valid
-    static bool validStock(std::vector<std::string> stock);
+    static bool validStock(std::vector<std::string> stock, int line);
 
     // Check if the coin file is valid
     static bool validCoin(std::vector<std::string> coin);
+
+    static void throwMessage(std::exception& e, int line);
+
 
 
 };
