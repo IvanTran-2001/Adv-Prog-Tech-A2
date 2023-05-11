@@ -157,7 +157,6 @@ void LinkedList::printLL(){
 
         string price = std::to_string(stock->price.dollars) + "." + std::to_string(stock->price.cents);
 
-
         std::cout << stock->id << "|" << stock->name << nameSpaces << "|" << stock->on_hand << availSpaces << "|$ " << price << std::endl;
         
         //Next node
@@ -310,29 +309,56 @@ void LinkedList::deleteLL()
 }
 
 string LinkedList::getNextAvailableID(){
+
     Node* node = head;
-    int max_num = -1;
+    vector<int> sortedID;
     string id;
-    int id_num;
 
-    // Looping through list
-    while (node != nullptr){
+    // Creating a list of IDs
+    while (node != nullptr) {
         id = node->data->id;
-        id_num = stoi(id.substr(1, 4));
-
-        if (id_num > max_num){
-            max_num = id_num;
-        }
-        
+        sortedID.push_back(std::stoi(id.substr(1, 4)));
         node = node->next;
     }
-    
-    id_num++;
 
-    int num_digits = std::to_string(id_num).length();
+    // Sorting the ID
+    std::sort(sortedID.begin(), sortedID.end());
+
+
+    bool found = false;
+    int i = 0;
+    int beforeID = 0;
+    int listLen = sortedID.size();
+    int maxID = -1;
+
+    // Will find if there is a gap between IDs
+    while ((i < listLen) && !found)
+    {
+        // Find a gap between ID numbers
+        if (sortedID[i] - beforeID > 1) {
+            id = std::to_string(beforeID + 1);
+
+            // Will stop Loop
+            found = true;
+        } else {
+            beforeID = sortedID[i];
+            if (maxID < sortedID[i]) {
+                maxID = sortedID[i];
+            }
+        }
+    }
+    
+    // If a gap is found
+    if (!found) {
+        id = std::to_string(maxID + 1);
+    }
+
+    // Find the needed amount of Zeroes
+    int num_digits = id.length();
     string zeroes(4 - num_digits, '0');
     
-    string new_id = "I" + zeroes + std::to_string(id_num);
+    // Creating ID
+    string new_id = "I" + zeroes + id;
     
     return new_id;
 }

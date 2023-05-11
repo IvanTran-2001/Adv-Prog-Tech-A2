@@ -34,6 +34,7 @@ public:
     // freeing memory
     void deleteLL();
 
+    // Get next ID
     std::string getNextAvailableID();
 
 private:
