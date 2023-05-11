@@ -13,6 +13,8 @@ int main(int argc, char **argv)
 {
     // Intiating vending machine
     if (checkInput(argc, argv)) {
+
+        std::cout << "---Loading Vending Machine---" << std::endl;
         VendingMachine* vender = new VendingMachine(argv[1],argv[2]);
 
         // Turning on the vending machine
