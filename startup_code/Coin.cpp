@@ -84,28 +84,25 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
     // Open file
     readFile.open(fileName);
 
+    if (Helper::validCoin(denom)) {
+        
+    }
+
     while (getline(readFile, line))
     {
         // Splits string by deliminter
         Helper::splitString(line, denom, DELIM);
 
-        // Checking if valid
-        if (Helper::validCoin(denom)) {
+        // Representation of string line
+        string coinType = denom[0];
+        string amount = denom[1];
 
-            // Representation of string line
-            string coinType = denom[0];
-            string amount = denom[1];
+        // Create coin on the heap
+        Coin* coin = new Coin(coinType, amount);
 
-            // Create coin on the heap
-            Coin* coin = new Coin(coinType, amount);
+        // Add coin type to the vector
+        coins.push_back(coin);
 
-            // Add coin type to the vector
-            coins.push_back(coin);
-
-        } else {
-            //Error Message
-
-        }
     }
 
     // Close file
