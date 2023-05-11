@@ -198,6 +198,40 @@ void VendingMachine::saveAndExit()
 
 bool VendingMachine::addItem() 
 {
+    string id = stockList.getNextAvailableID();
+    string name;
+    string description;
+    string price;
+    vector<string> priceVector;
+
+
+    cout << "The id of the new stock will be: " << id << endl;
+
+    cout << "Enter the item name: ";
+    name = Helper::readInput();
+
+    cout << "Enter the item description: ";
+    description = Helper::readInput();
+
+    cout << "Enter the price for the item: ";
+    price = Helper::readInput();
+
+    Helper::splitString(price, priceVector, ".");
+
+    Price split;
+
+    split.dollars = stoul(priceVector[0]);
+    split.cents = stoul(priceVector[1]);
+
+    Stock* stock = new Stock();
+
+    stock->id = id;
+    stock->name = name;
+    stock->description = description;
+    stock->price = split;
+    stock->on_hand = DEFAULT_STOCK_LEVEL;
+
+    stockList.addLL(stock);
     return true;
 }
 
