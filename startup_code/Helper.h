@@ -33,7 +33,7 @@ public:
     static bool validStock(std::vector<std::string> stock);
 
     // Check if the coin file is valid
-    static bool validCoin(std::vector<std::string> coin, int i);
+    static bool validCoin(std::vector<std::string> coin);
 
     // For future purposes
     template<typename ExceptionType>

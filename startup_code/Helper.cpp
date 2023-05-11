@@ -144,10 +144,9 @@ bool Helper::validStock(vector<string> stock)
     return valid;
 }
 
-bool Helper::validCoin(std::vector<std::string> coin, int i)
+bool Helper::validCoin(std::vector<std::string> coin)
 {
-    // Used to validate file
-    int startingIndex = i;
+    bool valid = true;
 
     try
     {
@@ -157,28 +156,67 @@ bool Helper::validCoin(std::vector<std::string> coin, int i)
 
         } else {
 
-                // Checking if all denomination exist
-                while (i < 8) {
+            try
+            {
 
-                    // Split line by delimiter
+                // 8 denomination
+                for (int i = 0; i < 8; i++) {
+
+                    // Splitting values into 2
                     vector<string> splitCoin;
                     Helper::splitString(coin[i], splitCoin, ",");
 
-                    // Check if only contains 2 inputs
+                    // Check if 2 inputs
                     if (splitCoin.size() != 2) {
                         throw std::invalid_argument("Invalid Line");
-                    }
+                    } 
 
-                    // Checks if all denomination is in file
-                    if (Coin::coinDenomination[i] != splitCoin[0]) {
-                        throw std::invalid_argument("Missing/wrong Denomination");
-                    }
-
-                    // Attempt to convert to integer
-                    std::stoi(coin[1]);
-
-                    i += 1;
+                    // If it is a number
+                    std::stoi(splitCoin[1]);
                 }
+            }
+            catch (const std::invalid_argument& e)
+            {
+
+                // Print error
+                std::cout << "Invalid argument error: " << e.what() << std::endl;
+                valid = false;
+            }
+
+            try
+            {
+                // Used for denomination confirmation
+                vector<string> tempDenom = Coin::coinDenomination;
+
+                // 8 denomination
+                for (int i = 0; i < 8; i++) {
+
+                    // Splitting values into 2
+                    vector<string> splitCoin;
+                    Helper::splitString(coin[i], splitCoin, ",");
+
+                    // Finding value
+                    auto findValue = find(begin(tempDenom), end(tempDenom), splitCoin[0]);
+
+                    // Check if in denomination
+                    if (findValue == end(tempDenom)) {
+                        throw std::invalid_argument("Invalid Denomination");
+                    } else {
+                        // Will shorten denomination list as only 
+                        // one denomination of type is allowed
+                        tempDenom.erase(findValue);
+                    }
+                }
+            }
+            catch (const std::invalid_argument& e)
+            {
+
+                // Print error
+                std::cout << "Invalid argument error: " << e.what() << std::endl;
+                valid = false;
+            } 
+
+
         }
     }
     catch (const std::invalid_argument& e)
@@ -186,43 +224,37 @@ bool Helper::validCoin(std::vector<std::string> coin, int i)
 
         // Print error
         std::cout << "Invalid argument error: " << e.what() << std::endl;
-        validCoin(coin, i + 1);
+        valid = false;
     } 
     catch (const std::runtime_error& e)
     {
 
         // Print error
         std::cout << "Run time Error: " << e.what() << std::endl;
-        validCoin(coin, i + 1);
+        valid = false;
     } 
     catch (const std::length_error& e)
     {
         // Print error
         std::cout << "Length Error: " << e.what() << std::endl;
-        validCoin(coin, i + 1);
+        valid = false;
     }  
     catch (const std::domain_error& e)
     {
 
         // Print error
         std::cout << "Domain Error: " << e.what() << std::endl;
-        validCoin(coin, i + 1);
+        valid = false;
     } 
     catch (const std::exception& e) 
     {
 
         // Print error
         std::cout << e.what() << std::endl;
-        return validCoin(coin, i + 1);
+        valid = false;
     } 
     
-    std::cout << startingIndex << std::endl;
-    // If the starting index changed, it means an error occured
-    if (startingIndex != 0) {
-        return false;
-    }
-
-    return true;
+    return valid;
 
 }
 

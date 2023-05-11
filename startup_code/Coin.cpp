@@ -95,13 +95,8 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
 
     }
 
-    // Sort list
-    std::sort(checkValidCoins.begin(), checkValidCoins.end(), [](const string& a, const string& b) {
-        return a < b;
-    });
 
-
-    if (Helper::validCoin(checkValidCoins, 0)) {
+    if (Helper::validCoin(checkValidCoins)) {
         for (string s:checkValidCoins) {
             // Splits string by deliminter
             Helper::splitString(s, denom, DELIM);
@@ -116,6 +111,13 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
             // Add coin type to the vector
             coins.push_back(coin);
         }
+    }
+
+    // Sort list
+    if (coins.size() != 0) {
+        std::sort(begin(coins), end(coins), [](const Coin& a, const Coin& b) {
+        return stoi(a.getDenomination()) < stoi(b.getDenomination());
+        });
     }
 
     // Close file
