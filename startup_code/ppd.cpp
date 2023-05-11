@@ -6,6 +6,9 @@
  * data, display the main menu, and handles the processing of options. 
  * Make sure free memory and close all files before exiting the program.
  **/
+bool checkInput(int count, char **command);
+bool accessibleFile(std::string filename);
+
 int main(int argc, char **argv)
 {
 
