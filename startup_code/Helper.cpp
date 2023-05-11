@@ -172,7 +172,11 @@ bool Helper::validCoin(std::vector<std::string> coin)
                     } 
 
                     // If it is a number
-                    std::stoi(splitCoin[1]);
+                    int count = std::stoi(splitCoin[1]);
+
+                    if (count < 0) {
+                        throw std::domain_error("Negative on hand");
+                    }
                 }
             }
             catch (const std::invalid_argument& e)
@@ -180,6 +184,13 @@ bool Helper::validCoin(std::vector<std::string> coin)
 
                 // Print error
                 std::cout << "Invalid argument error: " << e.what() << std::endl;
+                valid = false;
+            }
+            catch (const std::domain_error& e)
+            {
+
+                // Print error
+                std::cout << "Domain error: " << e.what() << std::endl;
                 valid = false;
             }
 
