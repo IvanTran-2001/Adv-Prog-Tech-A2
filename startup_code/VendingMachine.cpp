@@ -16,6 +16,9 @@ VendingMachine::~VendingMachine()
 {
     deleteStockList();
     deleteCoinList();
+
+    // Constructing coin list
+    this->coinList = Coin::convertToCoin(coinFile);
 }
 
 void VendingMachine::on()
@@ -25,12 +28,11 @@ void VendingMachine::on()
     string input;
 
     // Checking file compatibility
-    if (!(this->stockList.convertToStock(stockFile))) {
+    // Check if coin list empty
+    if (!(this->stockList.convertToStock(stockFile)) || \
+         (this->coinList.size() == 0)                 ) {
         input = ABORT;
     }
-
-    // Constructing coin list
-    this->coinList = Coin::convertToCoin(coinFile);
 
 
     // Will quit if abort or save and exit
@@ -83,8 +85,7 @@ void VendingMachine::displayItems()
 
 bool VendingMachine::purchaseItems()
 {
-    // The denominations
-    string validDenom[8] = {"5", "10", "20", "50", "100", "200", "500", "1000"};
+
     bool return_value;
     
     // Message
@@ -143,7 +144,7 @@ bool VendingMachine::purchaseItems()
             }
 
             // Will confirm if within denomination
-            if (find(begin(validDenom), end(validDenom), input) != end(validDenom)){
+            if (find(begin(Coin::coinDenomination), end(Coin::coinDenomination), input) != end(Coin::coinDenomination)){
 
                 amount -= stoi(input);
                 newChange.push_back(stoi(input));

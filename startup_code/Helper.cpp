@@ -2,7 +2,6 @@
 
 using std::string;
 using std::vector;
-using std::stoi;
 
 Helper::Helper(){}
 
@@ -147,18 +146,82 @@ bool Helper::validStock(vector<string> stock)
 
 bool Helper::validCoin(std::vector<std::string> coin)
 {
+
+    // Validate whole coin list
     bool valid = true;
 
     try
     {
-        if (coin.size() != 8){
-            
+        // Denominations has 8, must have exactly 8 lines.
+        if (coin.size() != 8) {
+            throw std::runtime_error("Too many lines");
+
+        } else {
+
+                // Checking if all denomination exist
+                for (int i = 0; i < 8; ++i) {
+
+                    // Split line by delimiter
+                    vector<string> splitCoin;
+                    Helper::splitString(coin[i], splitCoin, ",");
+
+                    // Check if only contains 2 inputs
+                    if (splitCoin.size() != 2) {
+                        throw std::invalid_argument("Invalid Line");
+
+                    }
+
+                    // Checks if all denomination is in file
+                    if (Coin::coinDenomination[i] != splitCoin[0]) {
+                        throw std::invalid_argument("Missing/wrong Denomination");
+                    }
+
+                    // Attempt to convert to integer
+                    std::stoi(coin[1]);
+
+                }
         }
     }
-    catch(const std::exception& e)
+    catch (const std::invalid_argument& e)
     {
-        std::cerr << e.what() << '\n';
-    }
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "Invalid argument error: " << e.what() << std::endl;
+    } 
+    catch (const std::runtime_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "Run time Error: " << e.what() << std::endl;
+    } 
+    catch (const std::length_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "Length Error: " << e.what() << std::endl;
+    }  
+    catch (const std::domain_error& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "Domain Error: " << e.what() << std::endl;
+    } 
+    catch (const std::exception& e) 
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << e.what() << std::endl;
+    } 
     
     return valid;
 

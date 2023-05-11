@@ -14,6 +14,7 @@
 #include <cstring> 
 
 #include "Node.h"
+#include "Coin.h"
 
 class Helper
 {

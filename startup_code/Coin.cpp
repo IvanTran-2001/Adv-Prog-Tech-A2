@@ -2,6 +2,7 @@
 using std::string;
 using std::vector;
 
+const std::vector<std::string> coinDenomination = {"5", "10", "20", "50", "100", "200", "500", "1000"};
 //This class does not require a deconstructor.
 
 Coin::Coin(std::string s, std::string amount){
@@ -78,35 +79,44 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
     vector<Coin*> coins;
     vector<string> denom;
 
+    vector<string> checkValidCoins;
+
     // Reading file
     std::ifstream readFile;
 
     // Open file
     readFile.open(fileName);
 
-    if (Helper::validCoin(denom)) {
-        
-    }
-
     while (getline(readFile, line))
     {
-        // Splits string by deliminter
-        Helper::splitString(line, denom, DELIM);
+        checkValidCoins.push_back(line);
 
-        // Representation of string line
-        string coinType = denom[0];
-        string amount = denom[1];
+    }
 
-        // Create coin on the heap
-        Coin* coin = new Coin(coinType, amount);
+    if (Helper::validCoin(checkValidCoins)) {
+        for (string s:checkValidCoins) {
+            // Splits string by deliminter
+            Helper::splitString(s, denom, DELIM);
 
-        // Add coin type to the vector
-        coins.push_back(coin);
+            // Representation of string line
+            string coinType = denom[0];
+            string amount = denom[1];
 
+            // Create coin on the heap
+            Coin* coin = new Coin(coinType, amount);
+
+            // Add coin type to the vector
+            coins.push_back(coin);
+        }
     }
 
     // Close file
     readFile.close();
+
+    // Sorts from lowest to highest
+    std::sort(coins.begin(), coins.end(), [](const Coin& a, const Coin& b) {
+        return a.getDenomination() < b.getDenomination();
+    });
 
     // Return a vector of coin pointers
     return coins;

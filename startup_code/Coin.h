@@ -18,7 +18,11 @@ enum Denomination
 // will have exactly one of these in the cash register.
 class Coin
 {
+
 public:
+
+    // Denominations
+    const static std::vector<std::string> coinDenomination;
 
     // Construct coin
     Coin(std::string s, std::string amount);
