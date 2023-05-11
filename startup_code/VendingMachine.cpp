@@ -10,6 +10,9 @@ VendingMachine::VendingMachine(string s, string c)
     this->coinFile = c;
     this->stockFile = s;
 
+    // Constructing coin list
+    this->coinList = Coin::convertToCoin(coinFile);
+
 }
 
 VendingMachine::~VendingMachine() 
@@ -17,8 +20,6 @@ VendingMachine::~VendingMachine()
     deleteStockList();
     deleteCoinList();
 
-    // Constructing coin list
-    this->coinList = Coin::convertToCoin(coinFile);
 }
 
 void VendingMachine::on()
