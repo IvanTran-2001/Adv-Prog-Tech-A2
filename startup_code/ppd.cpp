@@ -11,7 +11,6 @@ bool accessibleFile(std::string filename);
 
 int main(int argc, char **argv)
 {
-
     // Intiating vending machine
     if (checkInput(argc, argv)) {
         VendingMachine* vender = new VendingMachine(argv[1],argv[2]);
@@ -49,6 +48,7 @@ bool checkInput(int count, char **command) {
         throw std::runtime_error("Error: Failed to open file: ");
         std::cout << "\'" << command[2] << "\'" << std::endl;
     }
+
 
     return valid;
 }

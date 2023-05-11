@@ -95,7 +95,7 @@ bool Helper::validStock(vector<string> stock, int line)
             }
 
             // Will catch if out of range or invalid input
-        } catch (const std::exception e) {
+        } catch (const std::exception& e) {
 
             if (line != -1) {
                 std::cout << "Line " << line << ": " << std::endl;
@@ -129,7 +129,7 @@ bool Helper::validStock(vector<string> stock, int line)
             }
 
         // Will catch out of range or invalid string
-        } catch (const std::exception e) {
+        } catch (const std::exception& e) {
 
             if (line != -1) {
                 std::cout << "Line " << line << ": " << std::endl;
@@ -152,7 +152,7 @@ bool Helper::validCoin(std::vector<std::string> coin)
     return true;
 }
 
-void Helper::throwMessage(std::exception& e, int line) {
+void Helper::throwMessage(std::exception&& e, int line) {
 
     if (line != -1) {
         std::cout << "Line " << line << ": " << std::endl;

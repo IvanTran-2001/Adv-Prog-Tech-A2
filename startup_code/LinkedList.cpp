@@ -42,9 +42,9 @@ void LinkedList::convertToStock(std::string fileName) {
         // Get user input
         Helper::splitString(line, item, "|");
 
-
+        lineCount += 1;
         // If a valid line
-        if (Helper::validStock(item, count)) 
+        if (Helper::validStock(item, lineCount)) 
         {
             // Intiating new Stock object on heap
             Stock* addStock = new Stock();
