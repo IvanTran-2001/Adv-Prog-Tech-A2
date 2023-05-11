@@ -9,12 +9,13 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
-    this->coinList = Coin::convertToCoin(coinFile);
+
 }
 
 VendingMachine::~VendingMachine() 
 {
-
+    deleteStockList();
+    deleteCoinList();
 }
 
 void VendingMachine::on()
@@ -23,9 +24,13 @@ void VendingMachine::on()
     //Input
     string input;
 
-    if ((this->stockList.convertToStock(stockFile))) {
+    // Checking file compatibility
+    if (!(this->stockList.convertToStock(stockFile))) {
         input = ABORT;
     }
+
+    // Constructing coin list
+    this->coinList = Coin::convertToCoin(coinFile);
 
 
     // Will quit if abort or save and exit

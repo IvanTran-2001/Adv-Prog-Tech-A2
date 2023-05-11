@@ -149,6 +149,17 @@ bool Helper::validCoin(std::vector<std::string> coin)
 {
     bool valid = true;
 
+    try
+    {
+        if (coin.size() != 8){
+            
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
     return valid;
 
 }
