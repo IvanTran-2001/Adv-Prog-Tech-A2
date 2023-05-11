@@ -36,7 +36,7 @@ string Helper::readInput()
 }
 
 
-bool Helper::validStock(vector<string> stock, int line) 
+bool Helper::validStock(vector<string> stock) 
 {
 
     // Valid line
@@ -45,23 +45,24 @@ bool Helper::validStock(vector<string> stock, int line)
     {
         // Checking size of inputs
         if ((stock.size() != 5)) {
-            throwMessage(std::runtime_error("Run time Error: Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]"), line);
+            throw std::runtime_error("Run time Error: Wrong format: [ID] [NAME] [DESC] [PRICE] [COUNT]");
 
             // Check ID size
         } else if (stock[0].size() != IDLEN) {
-            throwMessage(std::length_error("Length Error: ID must be length of 5"), line);
+            throw std::length_error("Length Error: ID must be length of 5");
 
             // Check if ID start with 'I'
         } else if (stock[0][0] != 'I') {
-            throwMessage(std::invalid_argument("Invalid Argument Error: ID must start with \'I\'"), line);
+            throw std::invalid_argument("Invalid Argument Error: ID must start with \'I\'");
 
             // Check valid name size
         } else if ((stock[1].size() > NAMELEN)) {
-            throwMessage(std::length_error("Length Error: Name length must be within 40"), line);
+            throw std::length_error("Length Error: Name length must be within 40");
 
             // Check for description size
         } else if ((stock[2].size() > DESCLEN)) {      
-            throwMessage(std::length_error("Length Error: Description length must be within 255"), line);
+            throw std::length_error("Length Error: Description length must be within 255");
+
         } else {
 
             int count;
@@ -69,7 +70,7 @@ bool Helper::validStock(vector<string> stock, int line)
             count = std::stoi(stock[4]);
             // If on hand is in the negatives
             if (count < 0) {
-                throwMessage(std::domain_error("On hand cannot be negative"), line);
+                throw std::domain_error("Domain Error: On hand cannot be negative");
             }
 
             float price;
@@ -77,11 +78,9 @@ bool Helper::validStock(vector<string> stock, int line)
             price = std::stof(stock[3]);
 
             // Check if negative
-            if (price < 0.00) {
+            if (price < 0.00f) {
 
-                std::cout << 8 << std::endl;
-                throwMessage(std::domain_error("Domain Error: Price cannot be negative"), line);
-                valid = false;
+                throw std::domain_error("Domain Error: Price cannot be negative");
             } else {
 
                 vector<string> decimal;
@@ -90,19 +89,29 @@ bool Helper::validStock(vector<string> stock, int line)
                 // Checking if exactly 2 decimal places
                 if (decimal[1].size() != 2) {
 
-                    std::cout << 9 << std::endl;
-                    throwMessage(std::invalid_argument("Price not convertible: Unsuitable cents"), line);
-                    valid = false;
+                    throw std::invalid_argument("Price not convertible: Unsuitable cents");
                 }
             }
         }
          
+    } catch (const std::invalid_argument& e)
+    {
+        // False
+        valid = false;
+
+        // Print error
+        std::cout << "ID-" << stock[0] << ": ";
+        std::cout << "Invalid argument error: " << e.what() << std::endl;
     }
     catch (const std::exception& e)
     {
+        // False
+        valid = false;
+
         // Print error
+        std::cout << "ID-" << stock[0] << ": ";
         std::cout << e.what() << std::endl;
-    }
+    } 
 
 
     return valid;
@@ -111,16 +120,6 @@ bool Helper::validStock(vector<string> stock, int line)
 bool Helper::validCoin(std::vector<std::string> coin)
 {
     return true;
-}
-
-template<typename ExceptionType>
-void Helper::throwMessage(const ExceptionType& e, int line) {
-
-    if (line != -1) {
-        std::cout << "Line " << line << ": ";
-    }
-
-    throw e;
 }
 
 

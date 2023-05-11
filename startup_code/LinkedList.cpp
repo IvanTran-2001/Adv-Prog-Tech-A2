@@ -33,10 +33,7 @@ bool LinkedList::convertToStock(std::string fileName) {
 
     std::cout << "Loading Stock File: "<< "\'" << fileName << "\'" << std::endl;
 
-    // Keep track of each line in file for error output
-    int lineCount = 0;
-
-    // 
+    // If valid file
     bool validFile = true;
 
     // Looping for every line
@@ -46,9 +43,8 @@ bool LinkedList::convertToStock(std::string fileName) {
         // Get user input
         Helper::splitString(line, item, "|");
 
-        lineCount += 1;
         // If a valid line
-        if (Helper::validStock(item, lineCount)) 
+        if (Helper::validStock(item)) 
         {
             // Intiating new Stock object on heap
             Stock* addStock = new Stock();
