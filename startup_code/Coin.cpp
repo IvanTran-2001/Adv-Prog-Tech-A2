@@ -115,8 +115,8 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
 
     // Sort list
     if (coins.size() != 0) {
-        std::sort(begin(coins), end(coins), [](const Coin& a, const Coin& b) {
-        return stoi(a.getDenomination()) < stoi(b.getDenomination());
+        std::sort(begin(coins), end(coins), [](const Coin* a, const Coin* b) {
+        return stoi(a->getDenomination()) < stoi(b->getDenomination());
         });
     }
 
