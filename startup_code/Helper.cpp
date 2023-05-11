@@ -94,6 +94,7 @@ bool Helper::validStock(vector<string> stock)
             }
         }
          
+    // Catch errors
     } 
     catch (const std::invalid_argument& e)
     {
@@ -146,7 +147,10 @@ bool Helper::validStock(vector<string> stock)
 
 bool Helper::validCoin(std::vector<std::string> coin)
 {
-    return true;
+    bool valid = true;
+
+    return valid;
+
 }
 
 
