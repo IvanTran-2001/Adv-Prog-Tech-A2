@@ -144,11 +144,10 @@ bool Helper::validStock(vector<string> stock)
     return valid;
 }
 
-bool Helper::validCoin(std::vector<std::string> coin)
+bool Helper::validCoin(std::vector<std::string> coin, int i)
 {
-
-    // Validate whole coin list
-    bool valid = true;
+    // Used to validate file
+    int startingIndex = i;
 
     try
     {
@@ -159,7 +158,7 @@ bool Helper::validCoin(std::vector<std::string> coin)
         } else {
 
                 // Checking if all denomination exist
-                for (int i = 0; i < 8; ++i) {
+                while (i < 8) {
 
                     // Split line by delimiter
                     vector<string> splitCoin;
@@ -168,7 +167,6 @@ bool Helper::validCoin(std::vector<std::string> coin)
                     // Check if only contains 2 inputs
                     if (splitCoin.size() != 2) {
                         throw std::invalid_argument("Invalid Line");
-
                     }
 
                     // Checks if all denomination is in file
@@ -179,51 +177,52 @@ bool Helper::validCoin(std::vector<std::string> coin)
                     // Attempt to convert to integer
                     std::stoi(coin[1]);
 
+                    i += 1;
                 }
         }
     }
     catch (const std::invalid_argument& e)
     {
-        // False
-        valid = false;
 
         // Print error
         std::cout << "Invalid argument error: " << e.what() << std::endl;
+        validCoin(coin, i + 1);
     } 
     catch (const std::runtime_error& e)
     {
-        // False
-        valid = false;
 
         // Print error
         std::cout << "Run time Error: " << e.what() << std::endl;
+        validCoin(coin, i + 1);
     } 
     catch (const std::length_error& e)
     {
-        // False
-        valid = false;
-
         // Print error
         std::cout << "Length Error: " << e.what() << std::endl;
+        validCoin(coin, i + 1);
     }  
     catch (const std::domain_error& e)
     {
-        // False
-        valid = false;
 
         // Print error
         std::cout << "Domain Error: " << e.what() << std::endl;
+        validCoin(coin, i + 1);
     } 
     catch (const std::exception& e) 
     {
-        // False
-        valid = false;
 
         // Print error
         std::cout << e.what() << std::endl;
+        return validCoin(coin, i + 1);
     } 
     
-    return valid;
+    std::cout << startingIndex << std::endl;
+    // If the starting index changed, it means an error occured
+    if (startingIndex != 0) {
+        return false;
+    }
+
+    return true;
 
 }
 

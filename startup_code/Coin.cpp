@@ -101,7 +101,7 @@ vector<Coin*> Coin::convertToCoin(std::string fileName)
     });
 
 
-    if (Helper::validCoin(checkValidCoins)) {
+    if (Helper::validCoin(checkValidCoins, 0)) {
         for (string s:checkValidCoins) {
             // Splits string by deliminter
             Helper::splitString(s, denom, DELIM);
