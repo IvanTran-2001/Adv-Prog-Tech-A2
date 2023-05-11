@@ -346,6 +346,7 @@ string LinkedList::getNextAvailableID(){
                 maxID = sortedID[i];
             }
         }
+        i += 1;
     }
     
     // If a gap is found
@@ -358,7 +359,7 @@ string LinkedList::getNextAvailableID(){
     string zeroes(4 - num_digits, '0');
     
     // Creating ID
-    string new_id = "I" + zeroes + id;
+    id = "I" + zeroes + id;
     
-    return new_id;
+    return id;
 }
