@@ -22,7 +22,7 @@ class Coin
 public:
 
     // Denominations
-    const static std::vector<std::string> coinDenomination;
+    static const std::vector<std::string> coinDenomination;
 
     // Construct coin
     Coin(std::string s, std::string amount);

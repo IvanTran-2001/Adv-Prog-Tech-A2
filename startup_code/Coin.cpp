@@ -2,7 +2,7 @@
 using std::string;
 using std::vector;
 
-const std::vector<std::string> coinDenomination = {"5", "10", "20", "50", "100", "200", "500", "1000"};
+const std::vector<std::string> Coin::coinDenomination = {"5", "10", "20", "50", "100", "200", "500", "1000"};
 //This class does not require a deconstructor.
 
 Coin::Coin(std::string s, std::string amount){
