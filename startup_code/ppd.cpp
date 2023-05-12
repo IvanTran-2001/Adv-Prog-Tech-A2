@@ -1,3 +1,10 @@
+/**
+ * Author: Ivan Tran, 
+ * Student No: s3849505
+ * Date: 05/05/2023
+ * Version: APT Assignment 2
+*/
+
 #include "Helper.h"
 #include "VendingMachine.h"
 
