@@ -119,7 +119,6 @@ bool VendingMachine::purchaseItems()
 
         // Change amount
         vector<int> newChange;
-        bool validChange = true;
         string change;
         bool exit = false;
 
@@ -161,34 +160,36 @@ bool VendingMachine::purchaseItems()
             }
         }
 
-        // Calculating change (this will also change the coin List automatically if valid)
-        // Updates coinlist
-        change = Coin::getChange(coinList, newChange, amount);
-
-        if (amount == 0) {
-            validChange = false;
-        } 
-
-        // Checking if possible to give change
-        if (change == "-1"){
-
-            validChange = false;
-            cout << "insufficient coins available for correct change" << endl;
+        if (exit == true){
             return_value = false;
-        } 
-
-
-        // Change will be given if appropriate
-        if (validChange && exit == false){
-            amount *= -1;
-
-            cout << "Here is your " << item->name << " and your change of $" \
-                 << amount * 0.01 << change << endl;
-            item->on_hand--; 
-            return_value = true;
         }
-        
-        
+        else {
+            // Calculating change (this will also change the coin List automatically if valid)
+            // Updates coinlist
+            change = Coin::getChange(coinList, newChange, amount);
+
+            // Checking if possible to give change
+            if (change == "-1"){
+
+                cout << "insufficient coins available for correct change" << endl;
+                return_value = false;
+            }
+
+            // Change will be given if appropriate
+            else {
+                amount *= -1;
+
+                cout << "Here is your " << item->name;
+                if (change != ":"){
+                    cout << " and your change of $" << amount * 0.01 << change << endl;
+                }
+                else {
+                    cout << "." << endl;
+                }
+                item->on_hand--; 
+                return_value = true;
+            }
+        }       
     }
 
     // Return if possible
