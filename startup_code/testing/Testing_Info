@@ -1,0 +1,23 @@
+Tests are run the same as expected in Milestone 1, they are just saved in folders to reduce clutter.
+
+    ./ppd stock.dat coins.dat < testing/<testname>/<testname>.input > testing/<testname>/<testname>.actual_ppd_out
+    diff -w <testname>.output <testname>.actual_ppd_out
+    diff -w -y <testname>.expcoins <actual_ppd_save_coins>
+
+        - where applicable there may be .expstock to ensure that the stock file is updated appropriately
+        - There may also be alternative stock and coin files to test cases where these are set to alternative values
+        - Where stock and/or data was not intended to be updated, they may be removed from testing
+            - In the cases where the defualt stock or coin file was used, these were reset between tests
+
+Test Commands:
+
+abortPurch:
+./ppd stock.dat coins.dat < testing/abortPurch/abortPurch.input > testing/abortPurch/abortPurch.actual_ppd_out
+diff -w testing/abortPurch/abortPurch.output testing/abortPurch/abortPurch.actual_ppd_out
+diff -w -y testing/abortPurch/abortPurch.expcoins coins.dat 
+
+abortResets:
+./ppd testing/zerostock.dat testing/zerocoins.dat < testing/abortResets/abortResets.input > testing/abortResets/abortResets.actual_ppd_out
+diff -w testing/abortResets/abortResets.output testing/abortResets/abortResets.actual_ppd_out
+diff -w -y testing/abortResets/abortResets.expcoins testing/zerocoins.dat
+diff -w testing/abortResets/abortResets.expstock testing/zerostock.dat 
