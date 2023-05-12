@@ -37,6 +37,18 @@ string Helper::readInput()
         exit(EXIT_SUCCESS);
     }
 
+    //check if input contains non-whitespace and trim string if yes
+    if (input.find_first_not_of(" \n\r\t") != string::npos){
+        int firstIndex = input.find_first_not_of(" \n\r\t");
+        int lastIndex = input.find_last_not_of(" \n\r\t");
+        int range = lastIndex - firstIndex + 1;
+
+        input = input.substr(firstIndex, range);
+    }
+    //if the string only contains whitespace, make string empty
+    else {
+        input = "";
+    }
 
     // Return string
     return input;
