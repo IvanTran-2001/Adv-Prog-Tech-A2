@@ -175,6 +175,34 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
         }
+        else {
+            for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
+                if (newChange[i] == 1000){
+                    coinList[0]->count++;
+                }
+                else if (newChange[i] == 500){
+                    coinList[1]->count++;
+                }
+                else if (newChange[i] == 200){
+                    coinList[2]->count++;
+                }
+                else if (newChange[i] == 100){
+                    coinList[3]->count++;
+                }
+                else if (newChange[i] == 50){
+                    coinList[4]->count++;
+                }
+                else if (newChange[i] == 20){
+                    coinList[5]->count++;
+                }
+                else if (newChange[i] == 10){
+                    coinList[6]->count++;
+                }
+                else if (newChange[i] == 5){
+                    coinList[7]->count++;
+                }
+            }
+        }
 
         // Change will be given if appropriate
         if (validChange && exit == false){
