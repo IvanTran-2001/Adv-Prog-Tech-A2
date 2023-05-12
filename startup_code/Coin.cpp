@@ -2,7 +2,10 @@
 using std::string;
 using std::vector;
 
-const std::vector<std::string> Coin::coinDenomination = {"5", "10", "20", "50", "100", "200", "500", "1000"};
+// Denominations
+const std::vector<std::string> Coin::coinDenomination = \
+{"5", "10", "20", "50", "100", "200", "500", "1000"};
+
 //This class does not require a deconstructor.
 
 Coin::Coin(std::string s, std::string amount){
@@ -136,7 +139,9 @@ string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
     amount *= -1;
     string change = ":";
 
-    unsigned coinsCount[8] = {coins[0]->count, coins[1]->count, coins[2]->count, coins[3]->count, coins[4]->count, coins[5]->count, coins[6]->count, coins[7]->count};
+    // Storing coinList into an array
+    unsigned coinsCount[8] = {coins[0]->count, coins[1]->count, coins[2]->count\
+    , coins[3]->count, coins[4]->count, coins[5]->count, coins[6]->count, coins[7]->count};
 
     // Loops through change and convert to denominations
     for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
@@ -255,5 +260,6 @@ void Coin::resetCoins(vector<Coin*> coins){
     }
 
     //display message showing the default value
-    std::cout << "All coins have been reset to the default level of " << DEFAULT_COIN_COUNT << std::endl;
+    std::cout << "All coins have been reset to the default level of " \
+              << DEFAULT_COIN_COUNT << std::endl;
 }

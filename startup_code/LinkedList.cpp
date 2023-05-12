@@ -115,7 +115,9 @@ bool LinkedList::addLL(Stock* stock) {
         tempNode = tempNode->next;
 
         // Comparing in lower case
-        if (Helper::convertLowerCase(tempNode->data->name) >= Helper::convertLowerCase(node->data->name)) {
+        if (Helper::convertLowerCase(tempNode->data->name) \
+            >= Helper::convertLowerCase(node->data->name)) {
+                
             beforeNode->next = node;
             node->next = tempNode;
             add = true;
@@ -156,9 +158,11 @@ void LinkedList::printLL(){
         on_handLength = std::to_string(stock->on_hand).length();
         string availSpaces(11 - on_handLength, ' ');
 
-        string price = std::to_string(stock->price.dollars) + "." + std::to_string(stock->price.cents);
+        string price = std::to_string(stock->price.dollars) + "." \
+                     + std::to_string(stock->price.cents);
 
-        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" << stock->on_hand << availSpaces << "|$ " << price << std::endl;
+        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
+                  << stock->on_hand << availSpaces << "|$ " << price << std::endl;
         
         //Next node
         node = node->next;
@@ -207,7 +211,8 @@ void LinkedList::saveLL(std::string filename){
         stock = node->data;
 
         // Formatting and writing data
-        outfile << stock->id << "|" << stock->name << "|" << stock->description << "|" << stock->price.dollars << "."
+        outfile << stock->id << "|" << stock->name << "|" \
+                << stock->description << "|" << stock->price.dollars << "."
                 << stock->price.cents << "|" << stock->on_hand << std::endl;
 
         // Next node
@@ -228,7 +233,8 @@ bool LinkedList::remove(std::string id) {
 
     // Checking head
     if (node->data->id == id) {
-        std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
+        std::cout << id << " - " << node->data->name << " - " <<        \
+                     node->data->description << std::endl;
         delete head;
         head = node->next;
         found = true;
@@ -245,7 +251,8 @@ bool LinkedList::remove(std::string id) {
         if (node->data->id == id) {
 
             // Printing the node data
-            std::cout << id << " - " << node->data->name << " - " << node->data->description << std::endl;
+            std::cout << id << " - " << node->data->name << " - " <<    \
+                         node->data->description << std::endl;
 
             // Confirmation if found
             found = true;
@@ -279,7 +286,8 @@ void LinkedList::resetStock() {
     }
 
     // Output statement
-    std::cout << "All stock has been reset to the default level of " << DEFAULT_STOCK_LEVEL << std::endl;
+    std::cout << "All stock has been reset to the default level of " \
+              << DEFAULT_STOCK_LEVEL << std::endl;
 }
 
 void LinkedList::deleteLL()

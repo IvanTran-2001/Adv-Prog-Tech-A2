@@ -145,7 +145,9 @@ bool VendingMachine::purchaseItems()
             }
 
             // Will confirm if within denomination
-            if (find(begin(Coin::coinDenomination), end(Coin::coinDenomination), input) != end(Coin::coinDenomination)){
+            if (find(begin(Coin::coinDenomination),     \
+                end(Coin::coinDenomination),            \
+                input) != end(Coin::coinDenomination)){
 
                 amount -= stoi(input);
                 newChange.push_back(stoi(input));
@@ -177,7 +179,8 @@ bool VendingMachine::purchaseItems()
         // Change will be given if appropriate
         if (validChange && exit == false){
 
-            cout << "Here is your " << item->name << " and your change of $" << amount * -0.01 << change << endl;
+            cout << "Here is your " << item->name << " and your change of $" \
+                 << amount * -0.01 << change << endl;
             item->on_hand--; 
             return_value = true;
         }
