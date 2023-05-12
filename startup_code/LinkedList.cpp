@@ -117,7 +117,7 @@ bool LinkedList::addLL(Stock* stock) {
         // Comparing in lower case
         if (Helper::convertLowerCase(tempNode->data->name) \
             >= Helper::convertLowerCase(node->data->name)) {
-                
+
             beforeNode->next = node;
             node->next = tempNode;
             add = true;
@@ -210,10 +210,17 @@ void LinkedList::saveLL(std::string filename){
         // Getting node data
         stock = node->data;
 
+        // Cents needs to be double digit
+        string zeroCent = std::to_string(stock->price.cents);
+
+        if (stock->price.cents < 10) {
+            zeroCent = "0"+zeroCent;
+        }
+
         // Formatting and writing data
         outfile << stock->id << "|" << stock->name << "|" \
                 << stock->description << "|" << stock->price.dollars << "."
-                << stock->price.cents << "|" << stock->on_hand << std::endl;
+                << zeroCent << "|" << stock->on_hand << std::endl;
 
         // Next node
         node = node->next;
