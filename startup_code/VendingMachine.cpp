@@ -117,8 +117,7 @@ bool VendingMachine::purchaseItems()
     // Going through purchase proccess
     else{
 
-        // Converting to cents
-        // Decimals are flawed
+        // Convert to cents
         int amount = (100 * item->price.dollars) + item->price.cents;
 
         bool validChange = true;
@@ -182,6 +181,7 @@ bool VendingMachine::purchaseItems()
             change = Coin::getChange(coinList, newChange, amount);
 
             if (amount == 0) {
+                cout << "Here is your " << item->name << "!" << endl;
                 validChange = false;
             } 
 
@@ -192,9 +192,10 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
 
+            // If change required
             if (validChange && exit == false){
                 cout << "Here is your " << item->name << " and your change of $" \
-                    << std::to_string(amount * -0.01) << change << endl;
+                    << std::fixed << std::setprecision(2) << amount * -0.01 << change << endl;
                 item->on_hand--; 
                 return_value = true;
             }
