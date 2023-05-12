@@ -121,6 +121,8 @@ bool VendingMachine::purchaseItems()
         // Decimals are flawed
         int amount = (100 * item->price.dollars) + item->price.cents;
 
+        bool validChange = true;
+
         // Change amount
         vector<int> newChange;
         string change;
@@ -164,6 +166,13 @@ bool VendingMachine::purchaseItems()
             }
         }
 
+        if (change == "-1"){
+
+            validChange = false;
+            cout << "insufficient coins available for correct change" << endl;
+            return_value = false;
+        } 
+
         if (exit == true){
             return_value = false;
         }
@@ -179,17 +188,9 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
 
-            // Change will be given if appropriate
-            else {
-                amount *= -1;
-
-                cout << "Here is your " << item->name;
-                if (change != ":"){
-                    cout << " and your change of $" << amount * 0.01 << change << endl;
-                }
-                else {
-                    cout << "." << endl;
-                }
+            if (validChange && exit == false){
+                cout << "Here is your " << item->name << " and your change of $" \
+                    << std::to_string(amount * -0.01) << change << endl;
                 item->on_hand--; 
                 return_value = true;
             }
