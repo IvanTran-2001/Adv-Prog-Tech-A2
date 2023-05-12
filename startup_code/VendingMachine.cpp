@@ -197,7 +197,7 @@ void VendingMachine::saveAndExit()
     Coin::saveCoinFile(this->coinFile, this->coinList);
 }
 
-bool VendingMachine::addItem() 
+void VendingMachine::addItem() 
 {
 
     // Creating stock string format [id]|[name]|[desc]|[price]|[count]
@@ -218,15 +218,16 @@ bool VendingMachine::addItem()
     cout << "Enter the price for the item: ";
     strStock += "|" + Helper::readInput();
 
-    strStock += "|" + DEFAULT_STOCK_LEVEL;
+    strStock += "|" + std::to_string(DEFAULT_STOCK_LEVEL);
 
     // Splitting stock format
     Helper::splitString(strStock, stockSplit, "|");
     vector<string> price;
 
     if (Helper::validStock(stockSplit)) {
-        Stock* addStock = new Stock();
 
+        // Initiating stock
+        Stock* addStock = new Stock();
 
         // Conversion for string to Price
         Price split;
@@ -247,7 +248,6 @@ bool VendingMachine::addItem()
 
     }
 
-    return true;
 }
 
 bool VendingMachine::removeItem()

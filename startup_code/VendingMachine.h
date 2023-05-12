@@ -36,7 +36,7 @@ private:
     void saveAndExit();
 
     // Add stock to vending machine
-    bool addItem();
+    void addItem();
 
     // Remove stock from vending machine
     bool removeItem();
