@@ -121,6 +121,8 @@ bool VendingMachine::purchaseItems()
         // Decimals are flawed
         int amount = (100 * item->price.dollars) + item->price.cents;
 
+        bool validChange = true;
+
         // Change amount
         vector<int> newChange;
         string change;
@@ -169,6 +171,13 @@ bool VendingMachine::purchaseItems()
             }
         }
 
+        if (change == "-1"){
+
+            validChange = false;
+            cout << "insufficient coins available for correct change" << endl;
+            return_value = false;
+        } 
+
         if (exit == true){
             return_value = false;
         }
@@ -177,6 +186,10 @@ bool VendingMachine::purchaseItems()
             // Updates coinlist
             change = Coin::getChange(coinList, newChange, amount);
 
+            if (amount == 0) {
+                validChange = false;
+            } 
+
             // Checking if possible to give change
             if (change == "-1"){
 
@@ -184,17 +197,9 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
 
-            // Change will be given if appropriate
-            else {
-                amount *= -1;
-
-                cout << "Here is your " << item->name;
-                if (change != ":"){
-                    cout << " and your change of $" << amount * 0.01 << change << endl;
-                }
-                else {
-                    cout << "." << endl;
-                }
+            if (validChange && exit == false){
+                cout << "Here is your " << item->name << " and your change of $" \
+                    << std::to_string(amount * -0.01) << change << endl;
                 item->on_hand--; 
                 return_value = true;
             }
@@ -306,14 +311,14 @@ void VendingMachine::displayCoins()
     cout << "-------------" << endl;
     cout << "Denomination    |    Count" << endl;
     cout << "---------------------------" << endl;
-    cout << "5 Cents         |" << formatting_spaces[7] << coinList[7]->count << endl;
-    cout << "10 Cents        |" << formatting_spaces[6] << coinList[6]->count << endl;
-    cout << "20 Cents        |" << formatting_spaces[5] << coinList[5]->count << endl;
-    cout << "50 Cents        |" << formatting_spaces[4] << coinList[4]->count << endl;
-    cout << "1 Dollar        |" << formatting_spaces[3] << coinList[3]->count << endl;
-    cout << "2 Dollars       |" << formatting_spaces[2] << coinList[2]->count << endl;
-    cout << "5 Dollars       |" << formatting_spaces[1] << coinList[1]->count << endl;
-    cout << "10 Dollars      |" << formatting_spaces[0] << coinList[0]->count << endl;
+    cout << "5 Cents         |" << formatting_spaces[7] << coinList[0]->count << endl;
+    cout << "10 Cents        |" << formatting_spaces[6] << coinList[1]->count << endl;
+    cout << "20 Cents        |" << formatting_spaces[5] << coinList[2]->count << endl;
+    cout << "50 Cents        |" << formatting_spaces[4] << coinList[3]->count << endl;
+    cout << "1 Dollar        |" << formatting_spaces[3] << coinList[4]->count << endl;
+    cout << "2 Dollars       |" << formatting_spaces[2] << coinList[5]->count << endl;
+    cout << "5 Dollars       |" << formatting_spaces[1] << coinList[6]->count << endl;
+    cout << "10 Dollars      |" << formatting_spaces[0] << coinList[7]->count << endl;
 
     // for (Coin* c:this->coinList) {
     //     cout << "denomination: " << c->getDenomination() << ", Amount: " << c->count << std::endl;
