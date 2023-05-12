@@ -180,7 +180,7 @@ bool VendingMachine::purchaseItems()
         if (validChange && exit == false){
 
             cout << "Here is your " << item->name << " and your change of $" \
-                 << std::to_string(amount * -1) << change << endl;
+                 << std::to_string(amount * -0.01) << change << endl;
             item->on_hand--; 
             return_value = true;
         }
