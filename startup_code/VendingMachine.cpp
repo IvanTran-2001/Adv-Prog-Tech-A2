@@ -120,8 +120,6 @@ bool VendingMachine::purchaseItems()
         // Convert to cents
         int amount = (100 * item->price.dollars) + item->price.cents;
 
-        bool validChange = true;
-
         // Change amount
         vector<int> newChange;
         string change;
@@ -157,7 +155,12 @@ bool VendingMachine::purchaseItems()
                 newChange.push_back(stoi(input));
             }
 
-            // Else will prompt not a proper denomination
+            //else if not proper denomination and contains non-numbers
+            else if (exit == false && input.find_first_not_of("0123456789") != std::string::npos){
+                cout << "Error: '" << input;
+                cout << "' is not a valid denomination of money. Please try again." << endl;
+            }
+            //else if not proper denomination
             else if (exit == false){
 
                 cout << "Error: $" << stoi(input) * 0.01;
@@ -165,13 +168,7 @@ bool VendingMachine::purchaseItems()
             }
         }
 
-        if (change == "-1"){
-
-            validChange = false;
-            cout << "insufficient coins available for correct change" << endl;
-            return_value = false;
-        } 
-
+        //if exit is true skip the else statement and return false
         if (exit == true){
             return_value = false;
         }
@@ -180,11 +177,6 @@ bool VendingMachine::purchaseItems()
             // Updates coinlist
             change = Coin::getChange(coinList, newChange, amount);
 
-            if (amount == 0) {
-                cout << "Here is your " << item->name << "!" << endl;
-                validChange = false;
-            } 
-
             // Checking if possible to give change
             if (change == "-1"){
 
@@ -192,10 +184,17 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
 
-            // If change required
-            if (validChange && exit == false){
-                cout << "Here is your " << item->name << " and your change of $" \
-                    << std::fixed << std::setprecision(2) << amount * -0.01 << change << endl;
+            // Change will be given if appropriate
+            else {
+                amount *= -1;
+
+                cout << "Here is your " << item->name;
+                if (change != ":"){
+                    cout << " and your change of $" << amount * 0.01 << change << endl;
+                }
+                else {
+                    cout << "!" << endl;
+                }
                 item->on_hand--; 
                 return_value = true;
             }
