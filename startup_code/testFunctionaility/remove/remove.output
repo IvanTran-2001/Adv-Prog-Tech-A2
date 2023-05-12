@@ -1,0 +1,12 @@
+Enter the item id of the item to remove from the menu: I0002
+
+"I0002 - Apple Pie - Delicious Stewed Apple in a Yummy Pastry envelope" has been removed from the system.
+
+Items Menu
+----------
+ID   |Name                                    | Available | Price
+-------------------------------------------------------------------
+I0003|Lemon Cheesecake                        |20         |$ 4.0
+I0004|Lemon Meringue Pie                      |20         |$ 3.0
+I0005|Lemon Tart                              |20         |$ 3.75
+I0001|Meat Pie                                |20         |$ 3.50
