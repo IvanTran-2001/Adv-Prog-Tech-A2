@@ -219,6 +219,8 @@ void VendingMachine::addItem()
     // Creating stock string format [id]|[name]|[desc]|[price]|[count]
     string strStock = this->stockList->getNextAvailableID();
     vector<string> stockSplit;
+    string input;
+    bool exit = false;
 
 
     // display generated new id
@@ -226,51 +228,74 @@ void VendingMachine::addItem()
 
     // prompt and read the item name, description and price.
     cout << "Enter the item name: ";
-    strStock += "|" + Helper::readInput();
+    input = Helper::readInput();
+    if (input.empty()){
+        exit = true;
+    }
 
-    cout << "Enter the item description: ";
-    strStock += "|" + Helper::readInput();
+    if (!exit){
+        strStock += "|" + input;
+        cout << "Enter the item description: ";
+        input = Helper::readInput();
+        if (input.empty()){
+            exit = true;
+        }
+    }
 
-    cout << "Enter the price for the item: ";
-    strStock += "|" + Helper::readInput();
+    if (!exit){
+        strStock += "|" + input;
+        cout << "Enter the price for the item: ";
+        input = Helper::readInput();
+        if (input.empty()){
+            exit = true;
+        }
+    }
+    
+    strStock += "|" + input;
 
     strStock += "|" + std::to_string(DEFAULT_STOCK_LEVEL);
 
-    // Splitting stock format
-    Helper::splitString(strStock, stockSplit, "|");
-    vector<string> price;
 
-    if (Helper::validStock(stockSplit)) {
+    if (!exit){
+        // Splitting stock format
+        Helper::splitString(strStock, stockSplit, "|");
+        vector<string> price;
 
-        // Initiating stock
-        Stock* addStock = new Stock();
+        if (Helper::validStock(stockSplit)) {
 
-        // Conversion for string to Price
-        Price split;
+            // Initiating stock
+            Stock* addStock = new Stock();
 
-        // Splitting the price into dollar and cent
-        Helper::splitString(stockSplit[3], price, ".");
+            // Conversion for string to Price
+            Price split;
 
-        // Conversion
-        split.dollars = stoi(price[0]);
-        split.cents = stoi(price[1]);
+            // Splitting the price into dollar and cent
+            Helper::splitString(stockSplit[3], price, ".");
 
-        // Editting stock
-        addStock->id = stockSplit[0];
-        addStock->name = stockSplit[1];
-        addStock->description = stockSplit[2];
-        addStock->price = split;
-        addStock->on_hand = stoi(stockSplit[4]);
+            // Conversion
+            split.dollars = stoi(price[0]);
+            split.cents = stoi(price[1]);
 
-        // Adding to linkedlist
-        this->stockList->addLL(addStock);
+            // Editting stock
+            addStock->id = stockSplit[0];
+            addStock->name = stockSplit[1];
+            addStock->description = stockSplit[2];
+            addStock->price = split;
+            addStock->on_hand = stoi(stockSplit[4]);
 
-    } else {
-        
-        // Invalid inputs
-        cout << "Unsuccessful: Invalid stock inputs" << endl;
+            // Adding to linkedlist
+            this->stockList->addLL(addStock);
+
+            //display success message
+            cout << "This item \"" << addStock->name << " - " << addStock->description;
+            cout << "\" has now been added to the menu." << endl;
+        }
+        else {
+            
+            // Invalid inputs
+            cout << "Unsuccessful: Invalid stock inputs" << endl;
+        }
     }
-
 }
 
 bool VendingMachine::removeItem()
@@ -344,7 +369,7 @@ void VendingMachine::purchaseMsg()
 
 void VendingMachine::optionMenu()
 {
-    cout << "Main Menu:" << endl;
+    cout << "\nMain Menu:" << endl;
     cout << "\t1.Display Items" << endl;
     cout << "\t2.Purchase Items" << endl;
     cout << "\t3.Save and Exit" << endl;

@@ -240,8 +240,8 @@ bool LinkedList::remove(std::string id) {
 
     // Checking head
     if (node->data->id == id) {
-        std::cout << id << " - " << node->data->name << " - " <<        \
-                     node->data->description << std::endl;
+        std::cout << "\"" << id << " - " << node->data->name << " - " <<        \
+                     node->data->description << "\" has been removed from the system." << std::endl;
         delete head;
         head = node->next;
         found = true;
