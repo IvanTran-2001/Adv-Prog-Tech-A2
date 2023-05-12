@@ -146,28 +146,28 @@ string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
     // Loops through change and convert to denominations
     for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
         if (newChange[i] == 1000){
-            coinsCount[0] += 1;
+            coinsCount[7] += 1;
         }
         else if (newChange[i] == 500){
-            coinsCount[1] += 1;
-        }
-        else if (newChange[i] == 200){
-            coinsCount[2] += 1;
-        }
-        else if (newChange[i] == 100){
-            coinsCount[3] += 1;
-        }
-        else if (newChange[i] == 50){
-            coinsCount[4] += 1;
-        }
-        else if (newChange[i] == 20){
-            coinsCount[5] += 1;
-        }
-        else if (newChange[i] == 10){
             coinsCount[6] += 1;
         }
+        else if (newChange[i] == 200){
+            coinsCount[5] += 1;
+        }
+        else if (newChange[i] == 100){
+            coinsCount[4] += 1;
+        }
+        else if (newChange[i] == 50){
+            coinsCount[3] += 1;
+        }
+        else if (newChange[i] == 20){
+            coinsCount[2] += 1;
+        }
+        else if (newChange[i] == 10){
+            coinsCount[1] += 1;
+        }
         else if (newChange[i] == 5){
-            coinsCount[7] += 1;
+            coinsCount[0] += 1;
         }
     }
 
@@ -234,7 +234,7 @@ void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
     
     // Essentially replaces the count values for each Coin object
     for (int i = 0; i < 8; i++){
-        coins[i]->count = coinsCount[7 - i];
+        coins[i]->count = coinsCount[i];
     }
 
 }
