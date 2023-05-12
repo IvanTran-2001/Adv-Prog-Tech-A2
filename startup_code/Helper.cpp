@@ -5,6 +5,8 @@ using std::vector;
 
 Helper::Helper(){}
 
+//this method was taken from Assignment 1
+//this method takes a string and splits it by the delimiter into the vector.
 void Helper::splitString(string s, vector<string>& tokens, string delimeter)
 {
     tokens.clear();
@@ -21,7 +23,7 @@ void Helper::splitString(string s, vector<string>& tokens, string delimeter)
     delete[] _s;
 }
 
-
+//this method read the input
 string Helper::readInput()
 {
 
@@ -29,6 +31,12 @@ string Helper::readInput()
     string input;
     std::getline(std::cin, input);
     std::cout << std::endl;
+
+    //check for eof and exit if yes
+    if (!std::cin.good()){
+        exit(EXIT_SUCCESS);
+    }
+
 
     // Return string
     return input;
