@@ -369,7 +369,7 @@ void VendingMachine::purchaseMsg()
 
 void VendingMachine::optionMenu()
 {
-    cout << "Main Menu:" << endl;
+    cout << "\nMain Menu:" << endl;
     cout << "\t1.Display Items" << endl;
     cout << "\t2.Purchase Items" << endl;
     cout << "\t3.Save and Exit" << endl;
