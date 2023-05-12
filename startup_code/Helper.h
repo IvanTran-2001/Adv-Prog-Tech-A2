@@ -15,6 +15,7 @@
 
 #include "Node.h"
 #include "Coin.h"
+#include "Node.h"
 
 class Helper
 {
@@ -41,8 +42,6 @@ public:
 
     // Used for comparing stock name
     static std::string convertLowerCase(std::string c);
-
-
 
 };
 

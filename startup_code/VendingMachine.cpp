@@ -115,7 +115,7 @@ bool VendingMachine::purchaseItems()
 
         // Converting to cents
         // Decimals are flawed
-        float amount = (100 * item->price.dollars) + item->price.cents;
+        int amount = (100 * item->price.dollars) + item->price.cents;
 
         // Change amount
         vector<int> newChange;
@@ -180,7 +180,7 @@ bool VendingMachine::purchaseItems()
         if (validChange && exit == false){
 
             cout << "Here is your " << item->name << " and your change of $" \
-                 << amount * -0.01 << change << endl;
+                 << std::to_string(amount * -1) << change << endl;
             item->on_hand--; 
             return_value = true;
         }
@@ -353,4 +353,6 @@ void VendingMachine::deleteCoinList()
         // Delete all data
         delete c;
     }
+std::invalid_argument;
+    
 }
