@@ -246,6 +246,13 @@ void VendingMachine::addItem()
         addStock->price = split;
         addStock->on_hand = stoi(stockSplit[4]);
 
+        // Adding to linkedlist
+        this->stockList->addLL(addStock);
+
+    } else {
+        
+        // Invalid inputs
+        cout << "Unsuccessful: Invalid stock inputs" << endl;
     }
 
 }
