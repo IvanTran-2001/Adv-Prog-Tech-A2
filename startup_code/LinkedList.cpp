@@ -84,25 +84,27 @@ bool LinkedList::convertToStock(std::string fileName) {
 bool LinkedList::addLL(Stock* stock) {
 
 
-    bool add = true;
+    bool add = false;
 
     // Creating node on the heap
     Node* node = new Node(stock);
 
     // Check if empty
-    if (this->head == nullptr) {
-        this->head = node;
+    if (head == nullptr) {
+        head = node;
+        add = true;
         return add;
     }
 
     // Used for ordering
     Node* beforeNode = nullptr;
-    Node* tempNode = this->head;
+    Node* tempNode = head;
 
     // If the head data name is less, it will prepend data.
     if (tempNode->data->name >= node->data->name) {
-        this->head = node;
-        this->head->next = tempNode;
+        head = node;
+        head->next = tempNode;
+        add = true;
         return add;
     }
 
@@ -112,15 +114,18 @@ bool LinkedList::addLL(Stock* stock) {
         beforeNode = tempNode;
         tempNode = tempNode->next;
 
-        if (tempNode->data->name >= node->data->name) {
+        
+        if (Helper::convertLowerCase(tempNode->data->name) >= Helper::convertLowerCase(node->data->name)) {
             beforeNode->next = node;
             node->next = tempNode;
+            add = true;
             return add;
         }
     }
 
     // Will append node
     tempNode->next = node;
+    add = true;
 
     return add;
 }

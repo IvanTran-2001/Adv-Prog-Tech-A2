@@ -39,6 +39,9 @@ public:
     template<typename ExceptionType>
     static void throwMessage(const ExceptionType& e, std::string id);
 
+    // Used for comparing stock name
+    static std::string convertLowerCase(std::string c);
+
 
 
 };

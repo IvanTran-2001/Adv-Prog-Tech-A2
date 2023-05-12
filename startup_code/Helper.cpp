@@ -277,5 +277,15 @@ bool Helper::validCoin(std::vector<std::string> coin)
 
 }
 
+std::string Helper::convertLowerCase(std::string s) {
+
+    // Converting to lower case
+    std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) {
+        return std::tolower(c);
+    });
+
+    return s;
+}
+
 
 
