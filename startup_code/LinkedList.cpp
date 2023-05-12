@@ -114,7 +114,7 @@ bool LinkedList::addLL(Stock* stock) {
         beforeNode = tempNode;
         tempNode = tempNode->next;
 
-        
+        // Comparing in lower case
         if (Helper::convertLowerCase(tempNode->data->name) >= Helper::convertLowerCase(node->data->name)) {
             beforeNode->next = node;
             node->next = tempNode;
