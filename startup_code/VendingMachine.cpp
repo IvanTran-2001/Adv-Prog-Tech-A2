@@ -353,6 +353,5 @@ void VendingMachine::deleteCoinList()
         // Delete all data
         delete c;
     }
-std::invalid_argument;
     
 }
