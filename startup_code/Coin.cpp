@@ -175,42 +175,42 @@ string Coin::getChange(vector<Coin*> coins, vector<int>& newChange, int amount){
     // the coin list and essentially calculate
     // if we have valid change or not.
     // This is dermined by if amount is 0 or over.
-    while (amount >= 1000 && coinsCount[0] > 0){
+    while (amount >= 1000 && coinsCount[7] > 0){
         amount -= 1000;
         coinsCount[0] -= 1;
         change += " $10";
     }
-    while (amount >= 500 && coinsCount[1] > 0){
+    while (amount >= 500 && coinsCount[6] > 0){
         amount -= 500;
         coinsCount[1] -= 1;
         change += " $5";
     }
-    while (amount >= 200 && coinsCount[2] > 0){
+    while (amount >= 200 && coinsCount[5] > 0){
         amount -= 200;
         coinsCount[2] -= 1;
         change += " $2";
     }
-    while (amount >= 100 && coinsCount[3] > 0){
+    while (amount >= 100 && coinsCount[4] > 0){
         amount -= 100;
         coinsCount[3] -= 1;
         change += " $1";
     }
-    while (amount >= 50 && coinsCount[4] > 0){
+    while (amount >= 50 && coinsCount[3] > 0){
         amount -= 50;
         coinsCount[4] -= 1;
         change += " 50c";
     }
-    while (amount >= 20 && coinsCount[5] > 0){
+    while (amount >= 20 && coinsCount[2] > 0){
         amount -= 20;
         coinsCount[5] -= 1;
         change += " 20c";
     }
-    while (amount >= 10 && coinsCount[6] > 0){
+    while (amount >= 10 && coinsCount[1] > 0){
         amount -= 10;
         coinsCount[6] -= 1;
         change += " 10c";
     }
-    while (amount >= 5 && coinsCount[7] > 0){
+    while (amount >= 5 && coinsCount[0] > 0){
         amount -= 5;
         coinsCount[7] -= 1;
         change += " 5c";

@@ -294,7 +294,7 @@ void VendingMachine::displayCoins()
     //iterate through every coin
     for (int i = 0; i < 8; i++){
         //get the num of digits for the coin's count
-        count_digits = std::to_string(coinList[i]->count).length();
+        count_digits = std::to_string(coinList[7-i]->count).length();
         //create a new string of empty spaces depending on the number of digits of Coin.count
         string spaces(10 - count_digits, ' ');
         formatting_spaces[i] = spaces;
