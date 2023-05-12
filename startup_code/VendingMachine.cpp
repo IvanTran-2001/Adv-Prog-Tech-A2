@@ -285,6 +285,10 @@ void VendingMachine::addItem()
 
             // Adding to linkedlist
             this->stockList->addLL(addStock);
+
+            //display success message
+            cout << "This item \"" << addStock->name << " - " << addStock->description;
+            cout << "\" has now been added to the menu." << endl;
         }
         else {
             
