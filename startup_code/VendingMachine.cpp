@@ -46,6 +46,10 @@ void VendingMachine::on()
 
         // Reading user input
         input = Helper::readInput();
+
+        //removes all whitespace from input
+        input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
+
         
         // Option Executions
         if (input == DISPLAY_ITEMS){
