@@ -181,6 +181,10 @@ bool VendingMachine::purchaseItems()
             // Updates coinlist
             change = Coin::getChange(coinList, newChange, amount);
 
+            if (amount == 0) {
+                validChange = false;
+            } 
+
             // Checking if possible to give change
             if (change == "-1"){
 
