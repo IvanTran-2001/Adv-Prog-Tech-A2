@@ -9,6 +9,8 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
+
+    // Empty List
     this->stockList = new LinkedList();
 
     // Constructing coin list
@@ -309,10 +311,16 @@ void VendingMachine::optionMenu()
 
 void VendingMachine::deleteStockList()
 {
+    // Will delete all data in linkedlist
     delete stockList;
 }
 
 void VendingMachine::deleteCoinList()
 {
-    
+    // Loop through
+    for (Coin* c: this->coinList) {
+
+        // Delete all data
+        delete c;
+    }
 }
