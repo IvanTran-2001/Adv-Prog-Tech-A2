@@ -177,7 +177,7 @@ bool VendingMachine::purchaseItems()
         // Change will be given if appropriate
         if (validChange && exit == false){
 
-            cout << "Here is your " << item->name << " and your change of $" << amount * 0.01 << change << endl;
+            cout << "Here is your " << item->name << " and your change of $" << amount * -0.01 << change << endl;
             item->on_hand--; 
             return_value = true;
         }
@@ -199,49 +199,53 @@ void VendingMachine::saveAndExit()
 
 bool VendingMachine::addItem() 
 {
-    //generate new id for item
-    string id = this->stockList->getNextAvailableID();
 
-    string name;
-    string description;
-    string price;
-    vector<string> priceVector;
+    // Creating stock string format [id]|[name]|[desc]|[price]|[count]
+    string strStock = this->stockList->getNextAvailableID();
+    vector<string> stockSplit;
 
 
-    //display generated new id
-    cout << "The id of the new stock will be: " << id << endl;
+    // display generated new id
+    cout << "The id of the new stock will be: " << strStock << endl;
 
-    //prompt and read the item name, description and price.
+    // prompt and read the item name, description and price.
     cout << "Enter the item name: ";
-    name = Helper::readInput();
+    strStock += "|" + Helper::readInput();
 
     cout << "Enter the item description: ";
-    description = Helper::readInput();
+    strStock += "|" + Helper::readInput();
 
     cout << "Enter the price for the item: ";
-    price = Helper::readInput();
+    strStock += "|" + Helper::readInput();
 
-    //split the price string into the priceVector with dollars and cents
-    Helper::splitString(price, priceVector, ".");
+    strStock += "|" + DEFAULT_STOCK_LEVEL;
 
-    Price split;
+    // Splitting stock format
+    Helper::splitString(strStock, stockSplit, "|");
+    vector<string> price;
 
-    //create new price object and assign the inputed dollars and cents
-    split.dollars = stoul(priceVector[0]);
-    split.cents = stoul(priceVector[1]);
+    if (Helper::validStock(stockSplit)) {
+        Stock* addStock = new Stock();
 
-    //create new stock object on heap
-    Stock* stock = new Stock();
 
-    //assign the generated id and inputted values into stock object
-    stock->id = id;
-    stock->name = name;
-    stock->description = description;
-    stock->price = split;
-    //set on_hand to default value
-    stock->on_hand = DEFAULT_STOCK_LEVEL;
+        // Conversion for string to Price
+        Price split;
 
-    this->stockList->addLL(stock);
+        // Splitting the price into dollar and cent
+        Helper::splitString(stockSplit[3], price, ".");
+
+        // Conversion
+        split.dollars = stoi(price[0]);
+        split.cents = stoi(price[1]);
+
+        // Editting stock
+        addStock->id = stockSplit[0];
+        addStock->name = stockSplit[1];
+        addStock->description = stockSplit[2];
+        addStock->price = split;
+        addStock->on_hand = stoi(stockSplit[4]);
+
+    }
 
     return true;
 }
