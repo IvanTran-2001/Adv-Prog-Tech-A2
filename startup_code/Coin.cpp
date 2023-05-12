@@ -234,7 +234,7 @@ void Coin::updateCoins(unsigned coinsCount[], vector<Coin*> coins){
     
     // Essentially replaces the count values for each Coin object
     for (int i = 0; i < 8; i++){
-        coins[i]->count = coinsCount[i];
+        coins[i]->count = coinsCount[7 - i];
     }
 
 }
