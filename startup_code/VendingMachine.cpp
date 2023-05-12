@@ -294,6 +294,7 @@ void VendingMachine::displayCoins()
         string spaces(10 - count_digits, ' ');
         formatting_spaces[i] = spaces;
     }
+
     
     //display coins
     cout << "Coins Summary" << endl;
@@ -308,6 +309,11 @@ void VendingMachine::displayCoins()
     cout << "2 Dollars       |" << formatting_spaces[2] << coinList[2]->count << endl;
     cout << "5 Dollars       |" << formatting_spaces[1] << coinList[1]->count << endl;
     cout << "10 Dollars      |" << formatting_spaces[0] << coinList[0]->count << endl;
+
+    // for (Coin* c:this->coinList) {
+    //     cout << "denomination: " << c->getDenomination() << ", Amount: " << c->count << std::endl;
+    // }
+    
 
 }
 
