@@ -25,9 +25,10 @@ private:
 public:
 
     // Will split string based on delimeter
+    //taken from assignment 1
     static void splitString(std::string s, std::vector<std::string>& tokens, std::string delimeter);
 
-    // User input
+    // read user input
     static std::string readInput();
 
     // Check if the stock file is valid
