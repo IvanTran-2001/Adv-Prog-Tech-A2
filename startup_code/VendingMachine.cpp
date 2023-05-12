@@ -156,7 +156,12 @@ bool VendingMachine::purchaseItems()
                 newChange.push_back(stoi(input));
             }
 
-            // Else will prompt not a proper denomination
+            //else if not proper denomination and contains non-numbers
+            else if (exit == false && input.find_first_not_of("0123456789") != std::string::npos){
+                cout << "Error: '" << input;
+                cout << "' is not a valid denomination of money. Please try again." << endl;
+            }
+            //else if not proper denomination
             else if (exit == false){
 
                 cout << "Error: $" << stoi(input) * 0.01;
