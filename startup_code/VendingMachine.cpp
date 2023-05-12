@@ -161,20 +161,21 @@ bool VendingMachine::purchaseItems()
             }
         }
 
-        // If amount is in negatives, change needs to be given
-        if (amount < 0){
+        // Calculating change (this will also change the coin List automatically if valid)
+        // Updates coinlist
+        change = Coin::getChange(coinList, newChange, amount);
 
-            // Calculating change (this will also change the coin List automatically if valid)
-            change = Coin::getChange(coinList, newChange, amount);
+        if (amount == 0) {
+            validChange = false;
+        } 
 
-            // Checking if possible to give change
-            if (change == "-1"){
+        // Checking if possible to give change
+        if (change == "-1"){
 
-                validChange = false;
-                cout << "insufficient coins available for correct change" << endl;
-                return_value = false;
-            }
-        }
+            validChange = false;
+            cout << "insufficient coins available for correct change" << endl;
+            return_value = false;
+        } 
 
         // Change will be given if appropriate
         if (validChange && exit == false){
