@@ -161,48 +161,22 @@ bool VendingMachine::purchaseItems()
             }
         }
 
-        // If amount is in negatives, change needs to be given
-        if (amount < 0){
+        // Calculating change (this will also change the coin List automatically if valid)
+        // Updates coinlist
+        change = Coin::getChange(coinList, newChange, amount);
 
-            // Calculating change (this will also change the coin List automatically if valid)
-            change = Coin::getChange(coinList, newChange, amount);
+        if (amount == 0) {
+            validChange = false;
+        } 
 
-            // Checking if possible to give change
-            if (change == "-1"){
+        // Checking if possible to give change
+        if (change == "-1"){
 
-                validChange = false;
-                cout << "insufficient coins available for correct change" << endl;
-                return_value = false;
-            }
-        }
-        else {
-            for (std::vector<int>::size_type i = 0; i < newChange.size(); i++){
-                if (newChange[i] == 1000){
-                    coinList[0]->count++;
-                }
-                else if (newChange[i] == 500){
-                    coinList[1]->count++;
-                }
-                else if (newChange[i] == 200){
-                    coinList[2]->count++;
-                }
-                else if (newChange[i] == 100){
-                    coinList[3]->count++;
-                }
-                else if (newChange[i] == 50){
-                    coinList[4]->count++;
-                }
-                else if (newChange[i] == 20){
-                    coinList[5]->count++;
-                }
-                else if (newChange[i] == 10){
-                    coinList[6]->count++;
-                }
-                else if (newChange[i] == 5){
-                    coinList[7]->count++;
-                }
-            }
-        }
+            validChange = false;
+            cout << "insufficient coins available for correct change" << endl;
+            return_value = false;
+        } 
+
 
         // Change will be given if appropriate
         if (validChange && exit == false){
