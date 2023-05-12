@@ -249,9 +249,11 @@ void Coin::saveCoinFile(std::string fileName, vector<Coin*> coins) {
 }
 
 void Coin::resetCoins(vector<Coin*> coins){
+    //iterate through each Coin in CoinList and assign Coin.count to the default value
     for (Coin* coin : coins){
         coin->count = DEFAULT_COIN_COUNT;
     }
 
+    //display message showing the default value
     std::cout << "All coins have been reset to the default level of " << DEFAULT_COIN_COUNT << std::endl;
 }

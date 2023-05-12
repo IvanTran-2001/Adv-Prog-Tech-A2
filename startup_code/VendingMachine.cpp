@@ -199,15 +199,19 @@ void VendingMachine::saveAndExit()
 
 bool VendingMachine::addItem() 
 {
+    //generate new id for item
     string id = this->stockList->getNextAvailableID();
+
     string name;
     string description;
     string price;
     vector<string> priceVector;
 
 
+    //display generated new id
     cout << "The id of the new stock will be: " << id << endl;
 
+    //prompt and read the item name, description and price.
     cout << "Enter the item name: ";
     name = Helper::readInput();
 
@@ -217,22 +221,28 @@ bool VendingMachine::addItem()
     cout << "Enter the price for the item: ";
     price = Helper::readInput();
 
+    //split the price string into the priceVector with dollars and cents
     Helper::splitString(price, priceVector, ".");
 
     Price split;
 
+    //create new price object and assign the inputed dollars and cents
     split.dollars = stoul(priceVector[0]);
     split.cents = stoul(priceVector[1]);
 
+    //create new stock object on heap
     Stock* stock = new Stock();
 
+    //assign the generated id and inputted values into stock object
     stock->id = id;
     stock->name = name;
     stock->description = description;
     stock->price = split;
+    //set on_hand to default value
     stock->on_hand = DEFAULT_STOCK_LEVEL;
 
     this->stockList->addLL(stock);
+
     return true;
 }
 
@@ -250,15 +260,20 @@ bool VendingMachine::removeItem()
 
 void VendingMachine::displayCoins()
 {
+    //string cointaining empty spaces for formatting purposes
     string formatting_spaces[8];
     int count_digits;
 
+    //iterate through every coin
     for (int i = 0; i < 8; i++){
+        //get the num of digits for the coin's count
         count_digits = std::to_string(coinList[i]->count).length();
+        //create a new string of empty spaces depending on the number of digits of Coin.count
         string spaces(10 - count_digits, ' ');
         formatting_spaces[i] = spaces;
     }
     
+    //display coins
     cout << "Coins Summary" << endl;
     cout << "-------------" << endl;
     cout << "Denomination    |    Count" << endl;
@@ -283,6 +298,7 @@ void VendingMachine::resetStock()
 
 void VendingMachine::resetCoins()
 {
+    //Reset all coins to default value
     Coin::resetCoins(coinList);
 }
 
