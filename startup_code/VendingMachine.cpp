@@ -117,8 +117,7 @@ bool VendingMachine::purchaseItems()
     // Going through purchase proccess
     else{
 
-        // Converting to cents
-        // Decimals are flawed
+        // Convert to cents
         int amount = (100 * item->price.dollars) + item->price.cents;
 
         bool validChange = true;
@@ -187,6 +186,7 @@ bool VendingMachine::purchaseItems()
             change = Coin::getChange(coinList, newChange, amount);
 
             if (amount == 0) {
+                cout << "Here is your " << item->name << "!" << endl;
                 validChange = false;
             } 
 
@@ -197,9 +197,10 @@ bool VendingMachine::purchaseItems()
                 return_value = false;
             }
 
+            // If change required
             if (validChange && exit == false){
                 cout << "Here is your " << item->name << " and your change of $" \
-                    << std::to_string(amount * -0.01) << change << endl;
+                    << std::fixed << std::setprecision(2) << amount * -0.01 << change << endl;
                 item->on_hand--; 
                 return_value = true;
             }
@@ -299,7 +300,7 @@ void VendingMachine::displayCoins()
     //iterate through every coin
     for (int i = 0; i < 8; i++){
         //get the num of digits for the coin's count
-        count_digits = std::to_string(coinList[i]->count).length();
+        count_digits = std::to_string(coinList[7-i]->count).length();
         //create a new string of empty spaces depending on the number of digits of Coin.count
         string spaces(10 - count_digits, ' ');
         formatting_spaces[i] = spaces;
