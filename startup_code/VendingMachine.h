@@ -20,7 +20,7 @@ class VendingMachine
 
 private:
 
-    LinkedList stockList;
+    LinkedList* stockList;
     std::vector<Coin*> coinList;
 
     std::string stockFile;

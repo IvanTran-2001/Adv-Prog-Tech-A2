@@ -9,6 +9,7 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
+    this->stockList = new LinkedList();
 
     // Constructing coin list
     this->coinList = Coin::convertToCoin(coinFile);
@@ -29,7 +30,7 @@ void VendingMachine::on()
 
     // Checking file compatibility
     // Check if coin list empty
-    if (!(this->stockList.convertToStock(stockFile)) || \
+    if (!(this->stockList->convertToStock(stockFile)) || \
          (this->coinList.size() == 0)                 ) {
         input = ABORT;
     }
@@ -78,7 +79,7 @@ void VendingMachine::on()
 void VendingMachine::displayItems()
 {
     // Printing the linked list in certain format
-    this->stockList.printLL();
+    this->stockList->printLL();
 }
 
 bool VendingMachine::purchaseItems()
@@ -93,7 +94,7 @@ bool VendingMachine::purchaseItems()
     string input = Helper::readInput();
 
     // Finding item of input
-    Stock* item = this->stockList.findItem(input);
+    Stock* item = this->stockList->findItem(input);
 
     // If invalid search
     if (item == nullptr){
@@ -190,13 +191,13 @@ bool VendingMachine::purchaseItems()
 void VendingMachine::saveAndExit() 
 {
     // Saving to a file
-    stockList.saveLL(stockFile);
+    this->stockList->saveLL(stockFile);
     Coin::saveCoinFile(this->coinFile, this->coinList);
 }
 
 bool VendingMachine::addItem() 
 {
-    string id = stockList.getNextAvailableID();
+    string id = this->stockList->getNextAvailableID();
     string name;
     string description;
     string price;
@@ -229,7 +230,7 @@ bool VendingMachine::addItem()
     stock->price = split;
     stock->on_hand = DEFAULT_STOCK_LEVEL;
 
-    stockList.addLL(stock);
+    this->stockList->addLL(stock);
     return true;
 }
 
@@ -238,7 +239,7 @@ bool VendingMachine::removeItem()
     // Removing a file
     cout << "Enter the item id of the item to remove from the menu: ";
     string input = Helper::readInput();
-    if (!(this->stockList.remove(input))) {
+    if (!(this->stockList->remove(input))) {
         cout << "Invalid ID" << endl;
     }
 
@@ -275,7 +276,7 @@ void VendingMachine::resetStock()
 {
 
     // Reset stock to defualt value
-    stockList.resetStock();
+    this->stockList->resetStock();
 }
 
 void VendingMachine::resetCoins()
@@ -308,7 +309,7 @@ void VendingMachine::optionMenu()
 
 void VendingMachine::deleteStockList()
 {
-
+    delete stockList;
 }
 
 void VendingMachine::deleteCoinList()
