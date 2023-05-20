@@ -32,6 +32,8 @@ int main(int argc, char **argv)
         //Free all data
         delete vender;
     }
+
+    return EXIT_SUCCESS;
     
 }
 
