@@ -7,6 +7,7 @@ LinkedList::LinkedList() {
 
     // Empty Linkedlist
     head = nullptr;
+    tail = nullptr;
     count = 0;
 }
 
@@ -92,42 +93,45 @@ bool LinkedList::addLL(Stock* stock) {
     // Check if empty
     if (head == nullptr) {
         head = node;
+        tail = node;
         add = true;
-        return add;
     }
 
     // Used for ordering
-    Node* beforeNode = nullptr;
     Node* tempNode = head;
 
     // If the head data name is less, it will prepend data.
     if (tempNode->data->name >= node->data->name) {
         head = node;
         head->next = tempNode;
+        tempNode->prev = head;
         add = true;
-        return add;
     }
 
     // Will insert node in correct spot
-    while (!add && (tempNode->next != nullptr)) {
+    while ((!add) && (tempNode->next != nullptr)) {
 
-        beforeNode = tempNode;
+
         tempNode = tempNode->next;
 
         // Comparing in lower case
         if (Helper::convertLowerCase(tempNode->data->name) \
             >= Helper::convertLowerCase(node->data->name)) {
-
-            beforeNode->next = node;
+            
+            tempNode->prev->next = node;
+            node->prev = tempNode->prev;
             node->next = tempNode;
+            tempNode->prev = node;
             add = true;
-            return add;
         }
     }
 
-    // Will append node
-    tempNode->next = node;
-    add = true;
+    // Will insert at the tail or append at end of list.
+    if (!add) {
+        tempNode->next = node;
+        tail = node;
+        add = true;
+    }
 
     return add;
 }
