@@ -72,6 +72,9 @@ public:
     // Can turn off/on enhancements
     void toggleEnhancement();
 
+    // Quit program
+    void abort();
+
     // User prompts
     void optionMenu();
     void purchaseMsg();

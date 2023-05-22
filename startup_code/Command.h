@@ -110,12 +110,12 @@ public:
 
 };
 
-class TurnOffEnhancement : public Command {
+class ToggleEnhancement : public Command {
 
 public:
 
     VendingMachine* machine;
-    TurnOffEnhancement(VendingMachine* vendingMachine);
+    ToggleEnhancement(VendingMachine* vendingMachine);
     virtual void Execute() const override;
 
 };

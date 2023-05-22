@@ -20,6 +20,7 @@
  **/
 bool checkInput(int count, char **command);
 bool accessibleFile(std::string filename);
+bool command_set_press(VendingMachine* m);
 
 int main(int argc, char **argv)
 {
@@ -31,54 +32,72 @@ int main(int argc, char **argv)
 
         // Turning on the vending machine
         vender->on();
-        std::string input = "";
+        bool loop = true;
 
             // Will quit if abort or save and exit
-        while ((input != ABORT) && (input != SAVE_EXIT)) {
+        while (loop) {
 
             // Menu Options
             vender->optionMenu();
-
-            // Reading user input
-            input = Helper::readInput();
-
-            //removes all whitespace from input
-            input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
-
-            Menu* userSelect = new Menu;
             
             // Option Executions
-            if (input == DISPLAY_ITEMS){
-                userSelect->SetOnStart(new DisplayItem(vender));
-                
-            } else if (input == PURCHASE_ITEMS){
-
-            } else if (input == SAVE_EXIT){
-
-            } else if (input == ADD_ITEM) {
-
-            } else if (input == REMOVE_ITEM) {
-
-            } else if (input == DISPLAY_COINS) {
-
-            } else if (input == RESET_STOCK) {
-
-            } else if (input == RESET_COINS) {
-
-            } else if (input == ENHANCEMENT) {
-
-            }
+            loop = command_set_press(vender);
 
         }
 
         std::cout << "---Closing Vending Machine---\n" << std::endl;
 
-        //Free all data
-        delete vender;
     }
 
     return EXIT_SUCCESS;
     
+}
+
+bool command_set_press(VendingMachine* m) {
+
+    bool loop = true;
+    Menu* userSelect = new Menu;
+
+    
+    std::string input = Helper::readInput();
+    //removes all whitespace from input
+    input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
+
+    if (input == DISPLAY_ITEMS){
+        userSelect->set(new DisplayItem(m));
+                
+    } else if (input == PURCHASE_ITEMS){
+        userSelect->set(new PurchaseItem(m));
+
+    } else if (input == SAVE_EXIT){
+        userSelect->set(new Save(m));
+        userSelect->set(new Abort(m));
+        loop = false;
+
+    } else if (input == ADD_ITEM) {
+        userSelect->set(new AddItem(m));
+
+    } else if (input == REMOVE_ITEM) {
+        userSelect->set(new RemoveItem(m));
+
+    } else if (input == DISPLAY_COINS) {
+        userSelect->set(new DisplayCoins(m));
+
+    } else if (input == RESET_STOCK) {
+        userSelect->set(new DisplayItem(m));
+
+    } else if (input == RESET_COINS) {
+        userSelect->set(new ResetCoins(m));
+
+    } else if (input == ENHANCEMENT) {
+        userSelect->set(new ToggleEnhancement(m));
+
+    } else if (input == ABORT) {
+        userSelect->set(new Abort(m));
+        loop = false;
+    }
+
+    return loop;
 }
 
 bool checkInput(int count, char **command) {

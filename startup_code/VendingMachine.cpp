@@ -27,60 +27,13 @@ VendingMachine::~VendingMachine()
 
 void VendingMachine::on()
 {
-    //Input
-    string input;
 
     // Checking file compatibility
     // Check if coin list empty
     if (!(this->stockList->convertToStock(stockFile)) || \
          (this->coinList.size() == 0)                 ) {
-        input = ABORT;
     }
 
-
-    // Will quit if abort or save and exit
-    while ((input != ABORT) && (input != SAVE_EXIT)) {
-
-        // Menu Options
-        optionMenu();
-
-        // Reading user input
-        input = Helper::readInput();
-
-        //removes all whitespace from input
-        input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
-
-        
-        // Option Executions
-        if (input == DISPLAY_ITEMS){
-            displayItems();
-            
-        } else if (input == PURCHASE_ITEMS){
-            purchaseItems();
-
-        } else if (input == SAVE_EXIT){
-            save();
-
-        } else if (input == ADD_ITEM) {
-            addItem();
-
-        } else if (input == REMOVE_ITEM) {
-            removeItem();
-
-        } else if (input == DISPLAY_COINS) {
-            displayCoins();
-
-        } else if (input == RESET_STOCK) {
-            resetStock();
-
-        } else if (input == RESET_COINS) {
-            resetCoins();
-
-        } else if (input == ENHANCEMENT) {
-            toggleEnhancement();
-        }
-
-    }
 
 }
 
@@ -460,3 +413,8 @@ void VendingMachine::deleteCoinList()
     }
     
 }
+
+ void VendingMachine::abort() 
+ {
+    delete this;
+ }
