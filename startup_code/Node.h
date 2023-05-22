@@ -61,7 +61,6 @@ class Node {
 
 public:
 
-    Node* head;
     Node* next;
     Stock* data;
 

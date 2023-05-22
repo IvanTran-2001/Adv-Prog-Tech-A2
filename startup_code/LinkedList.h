@@ -14,13 +14,13 @@ public:
     virtual void printLL();
 
     // Find an item within list
-    virtual Stock* findItem(std::string id) = 0;
+    virtual Stock* findItem(std::string id);
 
     // Saving list in a format as a file
-    virtual void saveLL(std::string filename) = 0;
+    virtual void saveLL(std::string filename);
 
     // Reset all stock on hand by default value
-    virtual void resetStock() = 0;
+    virtual void resetStock();
 
     // Removing a stock by id
     virtual bool remove(std::string id) = 0;
@@ -29,10 +29,10 @@ public:
     virtual bool addLL(Stock* stock) = 0;
 
     // Converting stock file to stock list
-    virtual bool convertToStock(std::string fileName) = 0;
+    virtual bool convertToStock(std::string fileName);
 
     // freeing memory
-    virtual void deleteLL() = 0;
+    virtual void deleteLL();
 
     // Get next ID
     virtual std::string getNextAvailableID() = 0;
