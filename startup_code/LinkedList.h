@@ -3,7 +3,7 @@
 
 #include "Helper.h"
 
-
+//The abstract class
 class LinkedList
 {
 public:

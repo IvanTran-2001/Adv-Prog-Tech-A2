@@ -63,8 +63,8 @@ bool Helper::validStock(vector<string> stock)
     try
     {
         // Checking size of inputs
-        if ((stock.size() != 5)) {
-            throw std::runtime_error("Wrong format: [ID]|[NAME]|[DESC]|[PRICE]|[COUNT]");
+        if ((stock.size() > 6)) {
+            throw std::runtime_error("Wrong format: [ID]|[NAME]|[DESC]|[PRICE]|[COUNT][TYPE(NOT REQUIRED)]");
 
             // Check ID size
         } else if (stock[0].size() != IDLEN) {

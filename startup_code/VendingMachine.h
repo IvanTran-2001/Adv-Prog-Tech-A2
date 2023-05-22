@@ -30,6 +30,15 @@ private:
     std::string coinFile;
     bool enhancement;
 
+
+public:
+
+    VendingMachine(std::string s, std::string c);
+    ~VendingMachine();
+
+    // Turn on vending machine
+    void on();
+
     // Displays all stock
     void displayItems();
 
@@ -66,13 +75,6 @@ private:
     // User prompts
     void optionMenu();
     void purchaseMsg();
-
-public:
-
-    VendingMachine(std::string s, std::string c);
-    ~VendingMachine();
-
-    void on();
 };
 
 

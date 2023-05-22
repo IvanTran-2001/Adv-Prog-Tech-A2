@@ -6,7 +6,12 @@
 */
 
 #include "Helper.h"
+//Reciever
 #include "VendingMachine.h"
+//Invoker
+#include "Menu.h"
+//Command
+#include "Command.h"
 
 /**
  * manages the running of the program, initialises data structures, loads
@@ -26,6 +31,45 @@ int main(int argc, char **argv)
 
         // Turning on the vending machine
         vender->on();
+        std::string input = "";
+
+            // Will quit if abort or save and exit
+        while ((input != ABORT) && (input != SAVE_EXIT)) {
+
+            // Menu Options
+            vender->optionMenu();
+
+            // Reading user input
+            input = Helper::readInput();
+
+            //removes all whitespace from input
+            input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
+
+            Menu* userSelect = new Menu;
+            
+            // Option Executions
+            if (input == DISPLAY_ITEMS){
+                userSelect->SetOnStart(new DisplayItem(vender));
+                
+            } else if (input == PURCHASE_ITEMS){
+
+            } else if (input == SAVE_EXIT){
+
+            } else if (input == ADD_ITEM) {
+
+            } else if (input == REMOVE_ITEM) {
+
+            } else if (input == DISPLAY_COINS) {
+
+            } else if (input == RESET_STOCK) {
+
+            } else if (input == RESET_COINS) {
+
+            } else if (input == ENHANCEMENT) {
+
+            }
+
+        }
 
         std::cout << "---Closing Vending Machine---\n" << std::endl;
 
