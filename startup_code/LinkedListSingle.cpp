@@ -3,11 +3,11 @@
 using std::vector;
 using std::string;
 
-Node::Node(Stock* stock){
+NodeS::NodeS(Stock* stock){
     data = stock;
     next = nullptr;
 };
-Node::~Node(){
+NodeS::~NodeS(){
     delete data;
 };
 
@@ -94,7 +94,7 @@ bool LinkedListSingle::addLL(Stock* stock) {
     bool add = false;
 
     // Creating node on the heap
-    Node* node = new Node(stock);
+    NodeS* node = new NodeS(stock);
 
     // Check if empty
     if (head == nullptr) {
@@ -103,8 +103,8 @@ bool LinkedListSingle::addLL(Stock* stock) {
     }
 
     // Used for ordering
-    Node* beforeNode = nullptr;
-    Node* tempNode = head;
+    NodeS* beforeNode = nullptr;
+    NodeS* tempNode = head;
 
     // If the head data name is less, it will prepend data.
     if ((!add) && (tempNode->data->name >= node->data->name)) {
@@ -138,59 +138,20 @@ bool LinkedListSingle::addLL(Stock* stock) {
     return add;
 }
 
-void LinkedListSingle::printLL(){
-
-    // Formatting linked list
-    std::cout << "Items Menu" << std::endl;
-    std::cout << "----------" << std::endl;
-    std::cout << "ID   |Name                                    | Available | Price" << std::endl;
-    std::cout << "-------------------------------------------------------------------" << std::endl;
-
-    Node* node = head;
-    Stock* stock;
-    int nameLength;
-    int on_handLength;
-
-    // Loop through list until null
-    while (node != nullptr){
-        
-        // Getting data
-        stock = node->data;
-
-        // The rest below is just formatting the data
-        nameLength = stock->name.length();
-        string nameSpaces(NAMELEN - nameLength, ' ');
-
-        on_handLength = std::to_string(stock->on_hand).length();
-        string availSpaces(11 - on_handLength, ' ');
-
-        string price = std::to_string(stock->price.dollars) + "." \
-                     + std::to_string(stock->price.cents);
-
-        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
-                  << stock->on_hand << availSpaces << "|$ " << price << std::endl;
-        
-        //Next node
-        node = node->next;
-    } 
-}
-
 
 Stock* LinkedListSingle::findItem(string id){
 
     
-    Node* node = head;
+    NodeS* node = head;
     Stock* stock = nullptr;
 
     // Looping through list
-    while (node != nullptr){
+    while ((stock == nullptr) && (node != nullptr)){
 
         // Matching ID
         if (node->data->id == id){
             stock = node->data;
 
-            // Return data
-            return stock;
         }
         
         node = node->next;
@@ -207,7 +168,7 @@ void LinkedListSingle::saveLL(std::string filename){
     outfile.open(filename);
 
     // If file does not open
-    Node* node = head;
+    NodeS* node = head;
     Stock* stock;
 
     // Loop through list
@@ -240,8 +201,8 @@ void LinkedListSingle::saveLL(std::string filename){
 
 bool LinkedListSingle::remove(std::string id) {
 
-    Node* node = head;
-    Node* beforeNode = nullptr;
+    NodeS* node = head;
+    NodeS* beforeNode = nullptr;
     bool found = false;
 
     // Checking head
@@ -275,7 +236,6 @@ bool LinkedListSingle::remove(std::string id) {
 
             // Freeing memory
             delete node;
-            return found;
         }
     }
 
@@ -287,7 +247,7 @@ bool LinkedListSingle::remove(std::string id) {
 
 void LinkedListSingle::resetStock() {
 
-    Node* node = head;
+    NodeS* node = head;
 
     // Replacing all "on_hand" variable to default stock level
     while (node != nullptr) {
@@ -306,7 +266,7 @@ void LinkedListSingle::resetStock() {
 void LinkedListSingle::deleteLL()
 {
 
-    Node* afterNode;
+    NodeS* afterNode;
 
     // Checking head exist
     if (head != nullptr) {
@@ -332,7 +292,7 @@ void LinkedListSingle::deleteLL()
 
 string LinkedListSingle::getNextAvailableID(){
 
-    Node* node = head;
+    NodeS* node = head;
     vector<int> sortedID;
     string id;
 
