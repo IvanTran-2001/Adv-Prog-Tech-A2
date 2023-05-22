@@ -50,5 +50,6 @@
         "typeinfo": "cpp",
         "cassert": "cpp",
         "cstdarg": "cpp"
-    }
+    },
+    "makefile.compileCommandsPath": "D:\\apt\\Adv-Prog-Tech-A2\\startup_code"
 }
