@@ -23,6 +23,7 @@ class Menu {
   void press() {
 
     this->command->Execute();
+    delete this->command;
 
   }
 };

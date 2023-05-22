@@ -83,6 +83,7 @@ bool command_set_press(VendingMachine* m) {
     } else if (input == SAVE_EXIT){
         userSelect->set(new Save(m));
         userSelect->press();
+
         userSelect->set(new Abort(m));
         loop = false;
 
@@ -113,6 +114,7 @@ bool command_set_press(VendingMachine* m) {
     // The command will be recieved by the vending machine
     // Vending Machine executes the command
     userSelect->press();
+    delete userSelect;
 
     return loop;
 }
