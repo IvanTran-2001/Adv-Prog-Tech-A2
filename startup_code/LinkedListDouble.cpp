@@ -82,8 +82,7 @@ bool LinkedListDouble::addLL(Stock* stock) {
 
 bool LinkedListDouble::remove(std::string id) {
 
-    Node* node = head;
-    Node* beforeNode = nullptr;
+    NodeD* node = dynamic_cast<NodeD*>(head);
     bool found = false;
 
     // Checking head
@@ -97,23 +96,24 @@ bool LinkedListDouble::remove(std::string id) {
     }
 
     // Looping through list
-    while ((node->next != nullptr) && (!found)){
+    while ((!found) && (node->next != nullptr)){
 
-        beforeNode = node;
-        node = node->next;
+        node = dynamic_cast<NodeD*>(node->next);
 
         // Checking node ID
         if (node->data->id == id) {
 
             // Printing the node data
-            std::cout << id << " - " << node->data->name << " - " <<    \
-                         node->data->description << std::endl;
+            std::cout << "\"" << id << " - " << node->data->name << " - " <<        \
+                     node->data->description << "\" has been removed from the system." << std::endl;
+
+            // Removing node from list
+            node->prev->next = node->next;
 
             // Confirmation if found
             found = true;
 
-            // Removing node
-            beforeNode->next = node->next;
+            
 
             // Freeing memory
             delete node;
@@ -123,61 +123,4 @@ bool LinkedListDouble::remove(std::string id) {
     // boolean
     return found;
 
-}
-
-
-string LinkedListDouble::getNextAvailableID(){
-
-    Node* node = head;
-    vector<int> sortedID;
-    string id;
-
-    // Creating a list of IDs
-    while (node != nullptr) {
-        id = node->data->id;
-        sortedID.push_back(std::stoi(id.substr(1, 4)));
-        node = node->next;
-    }
-
-    // Sorting the ID
-    std::sort(sortedID.begin(), sortedID.end());
-
-
-    bool found = false;
-    int i = 0;
-    int beforeID = 0;
-    int listLen = sortedID.size();
-    int maxID = -1;
-
-    // Will find if there is a gap between IDs
-    while ((i < listLen) && !found)
-    {
-        // Find a gap between ID numbers
-        if (sortedID[i] - beforeID > 1) {
-            id = std::to_string(beforeID + 1);
-
-            // Will stop Loop
-            found = true;
-        } else {
-            beforeID = sortedID[i];
-            if (maxID < sortedID[i]) {
-                maxID = sortedID[i];
-            }
-        }
-        i += 1;
-    }
-    
-    // If a gap is found
-    if (!found) {
-        id = std::to_string(maxID + 1);
-    }
-
-    // Find the needed amount of Zeroes
-    int num_digits = id.length();
-    string zeroes(4 - num_digits, '0');
-    
-    // Creating ID
-    id = "I" + zeroes + id;
-    
-    return id;
 }

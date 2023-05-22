@@ -47,7 +47,7 @@ public:
     // virtual void deleteLL();
 
     // Get next ID
-    virtual std::string getNextAvailableID();
+    // virtual std::string getNextAvailableID();
 
 private:
   

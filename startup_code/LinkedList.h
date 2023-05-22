@@ -35,7 +35,7 @@ public:
     virtual void deleteLL();
 
     // Get next ID
-    virtual std::string getNextAvailableID() = 0;
+    virtual std::string getNextAvailableID();
 
     Node* head;
 

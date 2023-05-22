@@ -49,7 +49,10 @@ public:
     // virtual void deleteLL();
 
     // Get next ID
-    virtual std::string getNextAvailableID();
+    // virtual std::string getNextAvailableID();
+
+    // Insert
+    virtual bool insertLL();
 
 private:
 
