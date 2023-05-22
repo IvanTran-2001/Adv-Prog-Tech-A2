@@ -8,8 +8,10 @@ class LinkedList
 {
 public:
 
+    virtual ~LinkedList() {}
+
     // Print linkedlist in a format
-    virtual void printLL() = 0;
+    virtual void printLL();
 
     // Find an item within list
     virtual Stock* findItem(std::string id) = 0;
@@ -34,6 +36,8 @@ public:
 
     // Get next ID
     virtual std::string getNextAvailableID() = 0;
+
+    Node* head;
 
 };
 

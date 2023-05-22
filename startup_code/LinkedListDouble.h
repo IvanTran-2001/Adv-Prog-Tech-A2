@@ -1,67 +1,66 @@
-#ifndef LINKEDLIST_DOUBLE_H
-#define LINKEDLIST_DOUBLE_H
+#ifndef LINKEDLIST_SINGLE_H
+#define LINKEDLIST_SINGLE_H
 
 #include "Helper.h"
-#include "LinkedListDouble.h"
-
+#include "LinkedList.h"
 /**
  * the node that holds the data about an item stored in memory
  **/
-class Node
+class NodeD : public Node
 {
 public:
 
-    Node(Stock* stock);
-    ~Node();
+    NodeD(Stock* stock);
+    ~NodeD();
     // pointer to the data held for the node 
     Stock* data;
     // pointer to the next node in the list 
-    Node* next;
-    Node* prev;
+    NodeD* next;
+    NodeD* prev;
 };
 
 
-class LinkedList : public LinkedList 
+class LinkedListDouble : public LinkedList
 {
 public:
-    LinkedList();
-    ~LinkedList();
+    LinkedListDouble();
+    virtual ~LinkedListDouble();
 
     // Print linkedlist in a format
-    void printLL();
+    virtual void printLL();
 
     // Find an item within list
-    Stock* findItem(std::string id);
+    virtual Stock* findItem(std::string id);
 
     // Saving list in a format as a file
-    void saveLL(std::string filename);
+    virtual void saveLL(std::string filename);
 
     // Reset all stock on hand by default value
-    void resetStock();
+    virtual void resetStock();
 
     // Removing a stock by id
-    bool remove(std::string id);
+    virtual bool remove(std::string id);
 
     // Adding a stock to the list in proper order
-    bool addLL(Stock* stock);
+    virtual bool addLL(Stock* stock);
 
     // Converting stock file to stock list
-    bool convertToStock(std::string fileName);
+    virtual bool convertToStock(std::string fileName);
 
     // freeing memory
-    void deleteLL();
+    virtual void deleteLL();
 
     // Get next ID
-    std::string getNextAvailableID();
+    virtual std::string getNextAvailableID();
 
 private:
 
     // the beginning of the list
-    Node* head;
-    Node* tail;
+    NodeD* head;
+    NodeD* tail;
   
     // how many nodes are there in the list?
     unsigned count;
 };
 
-#endif  // LINKEDLIST_DOUBLE_H
+#endif  // LINKEDLIST_SINGLE_H

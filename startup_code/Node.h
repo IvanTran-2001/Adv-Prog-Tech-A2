@@ -57,4 +57,14 @@ public:
     unsigned on_hand;    
 };
 
+class Node {
+
+public:
+
+    Node* head;
+    Node* next;
+    Stock* data;
+
+};
+
 #endif // NODE_H

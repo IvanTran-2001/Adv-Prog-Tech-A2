@@ -6,16 +6,16 @@
 /**
  * the node that holds the data about an item stored in memory
  **/
-class Node
+class NodeS : public Node
 {
 public:
 
-    Node(Stock* stock);
-    ~Node();
+    NodeS(Stock* stock);
+    ~NodeS();
     // pointer to the data held for the node 
     Stock* data;
     // pointer to the next node in the list 
-    Node* next;
+    NodeS* next;
 };
 
 
@@ -26,36 +26,36 @@ public:
     virtual ~LinkedListSingle();
 
     // Print linkedlist in a format
-    void printLL();
+    virtual void printLL();
 
     // Find an item within list
-    Stock* findItem(std::string id);
+    virtual Stock* findItem(std::string id);
 
     // Saving list in a format as a file
-    void saveLL(std::string filename);
+    virtual void saveLL(std::string filename);
 
     // Reset all stock on hand by default value
-    void resetStock();
+    virtual void resetStock();
 
     // Removing a stock by id
-    bool remove(std::string id);
+    virtual bool remove(std::string id);
 
     // Adding a stock to the list in proper order
-    bool addLL(Stock* stock);
+    virtual bool addLL(Stock* stock);
 
     // Converting stock file to stock list
-    bool convertToStock(std::string fileName);
+    virtual bool convertToStock(std::string fileName);
 
     // freeing memory
-    void deleteLL();
+    virtual void deleteLL();
 
     // Get next ID
-    std::string getNextAvailableID();
+    virtual std::string getNextAvailableID();
 
 private:
 
     // the beginning of the list
-    Node* head;
+    NodeS* head;
   
     // how many nodes are there in the list?
     unsigned count;
