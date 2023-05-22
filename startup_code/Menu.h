@@ -15,16 +15,18 @@ class Menu {
     delete command;
   }
 
-  void SetOnStart(Command *command) {
+  void set(Command *command) {
     this->command = command;
   }
 
 
-  void DoSomethingImportant() {
+  void press() {
 
     this->command->Execute();
 
   }
 };
+
+
 
 #endif  // MENU_H
