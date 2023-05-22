@@ -9,9 +9,10 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
+    enhancement = false;
 
     // Empty List
-    this->stockList = new LinkedListDouble();
+    this->stockList = new LinkedListSingle();
 
     // Constructing coin list
     this->coinList = Coin::convertToCoin(coinFile);
@@ -26,7 +27,6 @@ VendingMachine::~VendingMachine()
 
 void VendingMachine::on()
 {
-
     //Input
     string input;
 
@@ -59,7 +59,7 @@ void VendingMachine::on()
             purchaseItems();
 
         } else if (input == SAVE_EXIT){
-            saveAndExit();
+            save();
 
         } else if (input == ADD_ITEM) {
             addItem();
@@ -76,16 +76,72 @@ void VendingMachine::on()
         } else if (input == RESET_COINS) {
             resetCoins();
 
-        } 
+        } else if (input == ENHANCEMENT) {
+            toggleEnhancement();
+        }
 
     }
 
 }
 
+void VendingMachine::toggleEnhancement() {
+
+    // Save data.
+    save();
+    // Remove to create new type of list.
+    deleteStockList();
+
+    // Will change between single or double linked list
+    // Essentially turning off/on enhancements
+    if (enhancement) {
+        stockList = new LinkedListSingle();
+        enhancement = false;
+    } else {
+        stockList = new LinkedListDouble();
+        enhancement = true; 
+    }
+
+    this->stockList->convertToStock(stockFile);
+}
+
 void VendingMachine::displayItems()
 {
-    // Printing the linked list in certain format
-    this->stockList->printLL();
+
+    // Check if enhancement turned on
+    if (enhancement) {
+
+        string input = "0";
+        // User can decide
+        //  - Ascending order
+        //  - Decending order
+        while (input != "3") {
+
+            // Prompt
+            cout << "Display Order:" << endl;
+            cout << "\t1. Ascending" << endl;
+            cout << "\t2. Descending" << endl;
+            cout << "\t3. Menu" << endl;
+            cout << "Select your option (1-3): ";
+
+            //Getting input
+            input = Helper::readInput();
+            //removes all whitespace from input
+            input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
+
+            if (input == "1") {
+                // Display Ascending
+                this->stockList->printLL();
+                
+            } else if (input == "2") {
+
+                // Display Descending
+                dynamic_cast<LinkedListDouble*>(this->stockList)->displayReverse();
+            }
+        }
+
+    } else {
+        this->stockList->printLL();
+    }
 }
 
 bool VendingMachine::purchaseItems()
@@ -206,7 +262,7 @@ bool VendingMachine::purchaseItems()
 }
 
 
-void VendingMachine::saveAndExit() 
+void VendingMachine::save() 
 {
     // Saving to a file
     this->stockList->saveLL(stockFile);
@@ -379,8 +435,13 @@ void VendingMachine::optionMenu()
     cout << "\t6.Display Coins" << endl;
     cout << "\t7.Reset Stock" << endl;
     cout << "\t8.Reset Coins" << endl;
-    cout << "\t9.Abort Program" << endl;
-    cout << "Select your option (1-9): ";
+    if (enhancement) {
+        cout << "\t9.Enhancement: On" << endl;
+    } else {
+        cout << "\t9.Enhancement: Off" << endl;
+    }
+    cout << "\t10.Abort Program" << endl;
+    cout << "Select your option (1-10): ";
 }
 
 void VendingMachine::deleteStockList()

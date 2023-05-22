@@ -58,12 +58,13 @@ bool LinkedListDouble::addLL(Stock* stock) {
         // Comparing in lower case
         if (Helper::convertLowerCase(tempNode->data->name) \
             >= Helper::convertLowerCase(node->data->name)) {
-
+            
             tempNode->prev->next = node;
             node->next = tempNode;
             dynamic_cast<NodeD*>(node)->prev = tempNode->prev;
             tempNode->prev = node;
-            
+
+            std::cout << "found" << std::endl;
             add = true;
         }
     }
@@ -72,6 +73,7 @@ bool LinkedListDouble::addLL(Stock* stock) {
     if (!add) {
         // Will append node at the back
         tempNode->next = node;
+        dynamic_cast<NodeD*>(node)->prev = tempNode;
         tail = node;
         add = true;
     }
@@ -122,5 +124,43 @@ bool LinkedListDouble::remove(std::string id) {
 
     // boolean
     return found;
+
+}
+
+void LinkedListDouble::displayReverse() {
+
+    std::cout << "Items Menu | Descending Order" << std::endl;
+    std::cout << "----------" << std::endl;
+    std::cout << "ID   |Name                                    | Available | Price" << std::endl;
+    std::cout << "-------------------------------------------------------------------" << std::endl;
+
+    Stock* stock;
+    int nameLength;
+    int on_handLength;
+    NodeD* node = dynamic_cast<NodeD*>(tail);
+
+    while (node != nullptr){
+        
+        // Getting data
+        stock = node->data;
+
+        // The rest below is just formatting the data
+        nameLength = stock->name.length();
+        string nameSpaces(NAMELEN - nameLength, ' ');
+
+        on_handLength = std::to_string(stock->on_hand).length();
+        string availSpaces(11 - on_handLength, ' ');
+
+        string price = std::to_string(stock->price.dollars) + "." \
+                     + std::to_string(stock->price.cents);
+
+        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
+                  << stock->on_hand << availSpaces << "|$ " << price << std::endl;
+        
+        //Next node
+        node = dynamic_cast<NodeD*>(node->prev);
+    } 
+
+    std::cout << std::endl;
 
 }

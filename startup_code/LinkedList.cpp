@@ -5,7 +5,7 @@ using std::vector;
 void LinkedList::printLL(){
 
     // Formatting linked list
-    std::cout << "Items Menu" << std::endl;
+    std::cout << "Items Menu | Ascending Order" << std::endl;
     std::cout << "----------" << std::endl;
     std::cout << "ID   |Name                                    | Available | Price" << std::endl;
     std::cout << "-------------------------------------------------------------------" << std::endl;
@@ -37,6 +37,7 @@ void LinkedList::printLL(){
         //Next node
         node = node->next;
     } 
+    std::cout << std::endl;
 }
 
 bool LinkedList::convertToStock(std::string fileName) {

@@ -15,7 +15,8 @@
 #define DISPLAY_COINS "6"
 #define RESET_STOCK "7" 
 #define RESET_COINS "8"
-#define ABORT "9"
+#define ENHANCEMENT "9"
+#define ABORT "10"
 
 class VendingMachine
 {
@@ -27,6 +28,7 @@ private:
 
     std::string stockFile;
     std::string coinFile;
+    bool enhancement;
 
     // Displays all stock
     void displayItems();
@@ -35,7 +37,7 @@ private:
     bool purchaseItems();
 
     // Save stock and coin data into file
-    void saveAndExit();
+    void save();
 
     // Add stock to vending machine
     void addItem();
@@ -58,10 +60,12 @@ private:
     // Freeing coin memory
     void deleteCoinList();
 
+    // Can turn off/on enhancements
+    void toggleEnhancement();
+
     // User prompts
     void optionMenu();
     void purchaseMsg();
-
 
 public:
 
