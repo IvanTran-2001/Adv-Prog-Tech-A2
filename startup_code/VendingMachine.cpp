@@ -11,7 +11,7 @@ VendingMachine::VendingMachine(string s, string c)
     this->stockFile = s;
 
     // Empty List
-    this->stockList = new LinkedList();
+    this->stockList = new LinkedListSingle();
 
     // Constructing coin list
     this->coinList = Coin::convertToCoin(coinFile);

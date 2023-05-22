@@ -2,49 +2,39 @@
 #define LINKEDLIST_H
 
 #include "Helper.h"
-#include "Node.h"
+
 
 class LinkedList
 {
 public:
-    LinkedList();
-    ~LinkedList();
 
     // Print linkedlist in a format
-    void printLL();
+    virtual void printLL() = 0;
 
     // Find an item within list
-    Stock* findItem(std::string id);
+    virtual Stock* findItem(std::string id) = 0;
 
     // Saving list in a format as a file
-    void saveLL(std::string filename);
+    virtual void saveLL(std::string filename) = 0;
 
     // Reset all stock on hand by default value
-    void resetStock();
+    virtual void resetStock() = 0;
 
     // Removing a stock by id
-    bool remove(std::string id);
+    virtual bool remove(std::string id) = 0;
 
     // Adding a stock to the list in proper order
-    bool addLL(Stock* stock);
+    virtual bool addLL(Stock* stock) = 0;
 
     // Converting stock file to stock list
-    bool convertToStock(std::string fileName);
+    virtual bool convertToStock(std::string fileName) = 0;
 
     // freeing memory
-    void deleteLL();
+    virtual void deleteLL() = 0;
 
     // Get next ID
     std::string getNextAvailableID();
 
-private:
-
-    // the beginning of the list
-    Node* head;
-    Node* tail;
-  
-    // how many nodes are there in the list?
-    unsigned count;
 };
 
 #endif  // LINKEDLIST_H

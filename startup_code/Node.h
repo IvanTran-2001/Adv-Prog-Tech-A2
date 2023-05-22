@@ -57,20 +57,4 @@ public:
     unsigned on_hand;    
 };
 
-/**
- * the node that holds the data about an item stored in memory
- **/
-class Node
-{
-public:
-
-    Node(Stock* stock);
-    ~Node();
-    // pointer to the data held for the node 
-    Stock* data;
-    // pointer to the next node in the list 
-    Node* next;
-    Node* prev;
-};
-
 #endif // NODE_H
