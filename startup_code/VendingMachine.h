@@ -4,6 +4,7 @@
 #include "Helper.h"
 #include "LinkedList.h"
 #include "LinkedListSingle.h"
+#include "LinkedListDouble.h"
 #include "Coin.h"
 
 #define DISPLAY_ITEMS "1"

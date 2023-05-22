@@ -64,6 +64,8 @@ public:
     Node* next;
     Stock* data;
 
+    virtual ~Node() {}
+
 };
 
 #endif // NODE_H
