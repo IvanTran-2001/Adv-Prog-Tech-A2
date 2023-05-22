@@ -9,7 +9,7 @@
 //Reciever
 #include "VendingMachine.h"
 //Invoker
-#include "Menu.h"
+#include "Menu.cpp"
 //Command
 #include "Command.h"
 
@@ -34,20 +34,25 @@ int main(int argc, char **argv)
         vender->on();
         bool loop = true;
 
-            // Will quit if abort or save and exit
-        while (loop) {
+        // Checks if vender is valid
+        if (vender != nullptr) {
 
-            // Menu Options
-            vender->optionMenu();
-            
-            // Option Executions
-            loop = command_set_press(vender);
+            // Prompt
+            while (loop) {
 
+                // Menu Options
+                vender->optionMenu();
+                
+                // Command and press by invoker
+                loop = command_set_press(vender);
+
+            }
         }
 
         std::cout << "---Closing Vending Machine---\n" << std::endl;
 
     }
+
 
     return EXIT_SUCCESS;
     
@@ -56,21 +61,28 @@ int main(int argc, char **argv)
 bool command_set_press(VendingMachine* m) {
 
     bool loop = true;
-    Menu* userSelect = new Menu;
 
+    // The Invoker
+    Menu* userSelect = new Menu;
     
     std::string input = Helper::readInput();
-    //removes all whitespace from input
+    // Removes all whitespace from input
     input.erase(std::remove_if(input.begin(), input.end(), isspace), input.end());
 
+    // If statements will send commands (Command) to the menu (Invoker)
     if (input == DISPLAY_ITEMS){
+
+        //Display items
         userSelect->set(new DisplayItem(m));
                 
     } else if (input == PURCHASE_ITEMS){
+
+        //Purchase items
         userSelect->set(new PurchaseItem(m));
 
     } else if (input == SAVE_EXIT){
         userSelect->set(new Save(m));
+        userSelect->press();
         userSelect->set(new Abort(m));
         loop = false;
 
@@ -96,6 +108,11 @@ bool command_set_press(VendingMachine* m) {
         userSelect->set(new Abort(m));
         loop = false;
     }
+
+    // The given command will now be executed
+    // The command will be recieved by the vending machine
+    // Vending Machine executes the command
+    userSelect->press();
 
     return loop;
 }

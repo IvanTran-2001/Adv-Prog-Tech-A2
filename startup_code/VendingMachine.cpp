@@ -32,6 +32,8 @@ void VendingMachine::on()
     // Check if coin list empty
     if (!(this->stockList->convertToStock(stockFile)) || \
          (this->coinList.size() == 0)                 ) {
+
+        abort();
     }
 
 

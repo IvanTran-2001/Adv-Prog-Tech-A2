@@ -72,14 +72,6 @@ void ResetCoins::Execute() const{
     this->machine->resetCoins();
 }
 
-DisplayItem::DisplayItem(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void DisplayItem::Execute() const{
-    this->machine->displayItems();
-}
-
 ToggleEnhancement::ToggleEnhancement(VendingMachine* vendingMachine) {
     this->machine = vendingMachine;
 }
