@@ -30,7 +30,6 @@ bool LinkedListSingle::convertToStock(std::string fileName) {
     string line;
 
     // Used to construct Stock objects
-    LinkedList* items;
     vector<string> item;
     vector<string> price;
 

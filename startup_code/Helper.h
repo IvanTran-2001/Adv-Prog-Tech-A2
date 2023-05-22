@@ -15,7 +15,6 @@
 
 #include "Node.h"
 #include "Coin.h"
-#include "Node.h"
 
 class Helper
 {

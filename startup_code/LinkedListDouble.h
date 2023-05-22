@@ -2,6 +2,7 @@
 #define LINKEDLIST_DOUBLE_H
 
 #include "Helper.h"
+#include "LinkedListDouble.h"
 
 /**
  * the node that holds the data about an item stored in memory
@@ -20,7 +21,7 @@ public:
 };
 
 
-class LinkedList
+class LinkedList : public LinkedList 
 {
 public:
     LinkedList();

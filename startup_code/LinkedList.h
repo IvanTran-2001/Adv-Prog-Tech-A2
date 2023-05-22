@@ -33,7 +33,7 @@ public:
     virtual void deleteLL() = 0;
 
     // Get next ID
-    std::string getNextAvailableID();
+    virtual std::string getNextAvailableID() = 0;
 
 };
 
