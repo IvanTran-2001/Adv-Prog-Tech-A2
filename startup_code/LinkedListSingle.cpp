@@ -86,7 +86,7 @@ bool LinkedListSingle::remove(std::string id) {
         std::cout << "\"" << id << " - " << node->data->name << " - " <<        \
                      node->data->description << "\" has been removed from the system." << std::endl;
         head = node->next;
-        delete head;
+        delete node;
         found = true;
 
     }
