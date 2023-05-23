@@ -18,8 +18,10 @@ class ColorOutPut {
 
     public:
 
-        static std::string customString(std::string s, ColorCode code, bool enhance) {
+        template<typename T>
+        static std::string customString(T s, ColorCode code, bool enhance) {
             
+            // To change color of text
             std::map<ColorCode, std::string> colorStrings = {
                 {ColorCode::Reset, "\033[0m"},
                 {ColorCode::Red, "\033[31m"},
@@ -29,8 +31,10 @@ class ColorOutPut {
                 {ColorCode::B_AQUA, "\033[46m"}
             };
 
+            // Return as string
             std::string returnVal = "";
 
+            // If enhancement is enabled
             if (enhance) {
                 returnVal += colorStrings[code] + s + colorStrings[Reset];
             } else {
@@ -43,6 +47,7 @@ class ColorOutPut {
         template<typename T>
         static std::string customPrice(T s, ColorCode code, bool enhance) {
             
+            // To change color of text
             std::map<ColorCode, std::string> colorStrings = {
                 {ColorCode::Reset, "\033[0m"},
                 {ColorCode::Red, "\033[31m"},
@@ -52,9 +57,13 @@ class ColorOutPut {
                 {ColorCode::B_AQUA, "\033[46m"}
             };
 
+            // Return as string
             std::string returnVal = "";
 
+            // If enhancement is enabled
             if (enhance) {
+
+                // The method "convertToTwoDecimalPlaces" insures that output is 2 decimal places
                 returnVal += colorStrings[code] + convertToTwoDecimalPlaces(s) + colorStrings[Reset];
             } else {
                 returnVal += convertToTwoDecimalPlaces(s);
@@ -63,11 +72,12 @@ class ColorOutPut {
             return returnVal;
         }
 
-    static std::string convertToTwoDecimalPlaces(double value) {
-        std::ostringstream stream;
-        stream << std::fixed << std::setprecision(2) << value;
-        return stream.str();
-    }
+        // Returning exactly 2 decimal places
+        static std::string convertToTwoDecimalPlaces(double value) {
+            std::ostringstream stream;
+            stream << std::fixed << std::setprecision(2) << value;
+            return stream.str();
+        }
 };
 
     #endif // COLOROUTPUT_H

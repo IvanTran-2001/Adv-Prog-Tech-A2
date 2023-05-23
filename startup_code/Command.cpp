@@ -1,4 +1,5 @@
 #include "Command.h"
+// Essentially a list of object commands.
 
 Abort::Abort(VendingMachine* vendingMachine) {
     this->machine = vendingMachine;

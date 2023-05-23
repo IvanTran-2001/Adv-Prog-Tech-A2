@@ -3,6 +3,8 @@
 
 #include "VendingMachine.h"
 
+// Each command is an object and is
+// used to sent to the reciever
 class Command {
  public:
   virtual ~Command() {
