@@ -383,20 +383,20 @@ void VendingMachine::purchaseMsg()
 
 void VendingMachine::optionMenu()
 {
-    cout << "Main Menu:" << endl;
+    cout << ColorOutPut::customString("Main Menu:", ColorCode::Blue, this->enhancement) << endl;
     cout << "\t1.Display Items" << endl;
     cout << "\t2.Purchase Items" << endl;
     cout << "\t3.Save and Exit" << endl;
-    cout << "Administrator-Only Menu:" << endl;
+    cout << ColorOutPut::customString("Administrator-Only Menu:", ColorCode::Blue, this->enhancement) << endl;
     cout << "\t4.Add Item" << endl;
     cout << "\t5.Remove Item" << endl;
     cout << "\t6.Display Coins" << endl;
     cout << "\t7.Reset Stock" << endl;
     cout << "\t8.Reset Coins" << endl;
     if (enhancement) {
-        cout << "\t9.Enhancement: On" << endl;
+        cout << "\t9.Enhancement: " << ColorOutPut::customString("On", ColorCode::Green, this->enhancement)<< endl;
     } else {
-        cout << "\t9.Enhancement: Off" << endl;
+        cout << "\t9.Enhancement: " << ColorOutPut::customString("Off", ColorCode::Red, this->enhancement)<< endl;
     }
     cout << "\t10.Abort Program" << endl;
     cout << "Select your option (1-10): ";

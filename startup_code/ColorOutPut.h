@@ -10,6 +10,7 @@ enum ColorCode {
     Red,
     Green,
     Yellow,
+    Blue,
     B_AQUA
 };
 
@@ -24,6 +25,7 @@ class ColorOutPut {
                 {ColorCode::Red, "\033[31m"},
                 {ColorCode::Green, "\033[32m"},
                 {ColorCode::Yellow, "\033[33m"},
+                {ColorCode::Blue, "\033[34m"},
                 {ColorCode::B_AQUA, "\033[46m"}
             };
 
@@ -46,6 +48,7 @@ class ColorOutPut {
                 {ColorCode::Red, "\033[31m"},
                 {ColorCode::Green, "\033[32m"},
                 {ColorCode::Yellow, "\033[33m"},
+                {ColorCode::Blue, "\033[34m"},
                 {ColorCode::B_AQUA, "\033[46m"}
             };
 
