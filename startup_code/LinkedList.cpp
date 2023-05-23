@@ -2,7 +2,7 @@
 using std::string;
 using std::vector;
 
-void LinkedList::printLL(){
+void LinkedList::printLL(bool enhance){
 
     // Formatting linked list
     std::cout << "Items Menu | Ascending Order" << std::endl;
@@ -15,8 +15,11 @@ void LinkedList::printLL(){
     int nameLength;
     int on_handLength;
 
+    // 2 decimal places
+    std::cout << std::fixed << std::setprecision(2);
+
     // Loop through list until null
-    while (node != nullptr){
+    while (node != nullptr) {
         
         // Getting data
         stock = node->data;
@@ -28,8 +31,17 @@ void LinkedList::printLL(){
         on_handLength = std::to_string(stock->on_hand).length();
         string availSpaces(11 - on_handLength, ' ');
 
-        string price = std::to_string(stock->price.dollars) + "." \
+        string price = "";
+
+        if (stock->price.cents < 10) {
+            price = std::to_string(stock->price.dollars) + "." \
+                     + "0" + std::to_string(stock->price.cents);
+        } else {
+            price = std::to_string(stock->price.dollars) + "." \
                      + std::to_string(stock->price.cents);
+        }
+
+        price = ColorOutPut::customString(price, ColorCode::Red, enhance);
 
         std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
                   << stock->on_hand << availSpaces << "|$ " << price << std::endl;

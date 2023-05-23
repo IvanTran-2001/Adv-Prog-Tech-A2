@@ -11,7 +11,7 @@ public:
     virtual ~LinkedList() {}
 
     // Print linkedlist in a format
-    virtual void printLL();
+    virtual void printLL(bool enhance);
 
     // Find an item within list
     virtual Stock* findItem(std::string id);

@@ -52,7 +52,7 @@ public:
     // virtual std::string getNextAvailableID();
 
     // Insert
-    virtual void displayReverse();
+    virtual void displayReverse(bool enhance);
 
 private:
 

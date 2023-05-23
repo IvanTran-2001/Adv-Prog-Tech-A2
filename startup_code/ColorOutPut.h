@@ -2,67 +2,66 @@
 #define COLOROUTPUT_H
 
 #include <string>
-#include <string.h>
 #include <map>
-
+#include <iostream>
 
 enum ColorCode {
-        Reset,
-        Red,
-        Green,
-        Yellow
-    };
-
-std::map<ColorCode, std::string> colorStrings = {
-    {ColorCode::Reset, "\033[0m"},
-    {ColorCode::Red, "\033[31m"},
-    {ColorCode::Green, "\033[32m"},
-    {ColorCode::Yellow, "\033[33m"}
+    Reset,
+    Red,
+    Green,
+    Yellow
 };
 
+class ColorOutPut {
 
-// Used for highlighting strings or changing color of strings
-class ColorOutPut
-{
-private:
-    ColorOutPut();
+    public:
 
-public:
+        static std::string customString(std::string s, ColorCode code, bool enhance) {
+            
+            std::map<ColorCode, std::string> colorStrings = {
+                {ColorCode::Reset, "\033[0m"},
+                {ColorCode::Red, "\033[31m"},
+                {ColorCode::Green, "\033[32m"},
+                {ColorCode::Yellow, "\033[33m"}
+            };
 
-    template<typename T>
+            std::string returnVal = "";
 
-    static std::string custom(T s, ColorCode code, bool enhance) {
-
-        // The return value
-        std::string returnVal = "";
-
-        if (enhance) {
-
-            // Will check if string
-            if (std::is_same<T, std::string>::s) {
-
-                // Change color
-                returnVal = colorStrings[code] << (s) << colorStrings[Reset];
+            if (enhance) {
+                returnVal += colorStrings[code] + s + colorStrings[Reset];
             } else {
-                returnVal = colorStrings[code] << std::to_string(s) << colorStrings[Reset];
+                returnVal += s;
             }
 
-        } else {
-
-            if (std::is_same<T, std::string>::s) {
-
-                // Change color
-                returnVal = s
-            } else {
-                returnVal = std::to_string(s);
-            }
+            return returnVal;
         }
-        
-        return returnVal;
+
+        template<typename T>
+        static std::string customPrice(T s, ColorCode code, bool enhance) {
+            
+            std::map<ColorCode, std::string> colorStrings = {
+                {ColorCode::Reset, "\033[0m"},
+                {ColorCode::Red, "\033[31m"},
+                {ColorCode::Green, "\033[32m"},
+                {ColorCode::Yellow, "\033[33m"}
+            };
+
+            std::string returnVal = "";
+
+            if (enhance) {
+                returnVal += colorStrings[code] + convertToTwoDecimalPlaces(s) + colorStrings[Reset];
+            } else {
+                returnVal += convertToTwoDecimalPlaces(s);
+            }
+
+            return returnVal;
+        }
+
+    static std::string convertToTwoDecimalPlaces(double value) {
+        std::ostringstream stream;
+        stream << std::fixed << std::setprecision(2) << value;
+        return stream.str();
     }
-    // Custom color related to strings
-
-
 };
 
-#endif // COLOROUTPUT_H
+    #endif // COLOROUTPUT_H

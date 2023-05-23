@@ -50,12 +50,12 @@ void VendingMachine::toggleEnhancement() {
 
     // Will change between single or double linked list
     // Essentially turning off/on enhancements
-    if (enhancement) {
+    if (this->enhancement) {
         stockList = new LinkedListSingle();
-        enhancement = false;
+        this->enhancement = false;
     } else {
         stockList = new LinkedListDouble();
-        enhancement = true; 
+        this->enhancement = true; 
     }
 
     this->stockList->convertToStock(stockFile);
@@ -87,17 +87,17 @@ void VendingMachine::displayItems()
 
             if (input == "1") {
                 // Display Ascending
-                this->stockList->printLL();
+                this->stockList->printLL(this->enhancement);
                 
             } else if (input == "2") {
 
                 // Display Descending
-                dynamic_cast<LinkedListDouble*>(this->stockList)->displayReverse();
+                dynamic_cast<LinkedListDouble*>(this->stockList)->displayReverse(this->enhancement);
             }
         }
 
     } else {
-        this->stockList->printLL();
+        this->stockList->printLL(this->enhancement);
     }
 }
 
@@ -139,9 +139,10 @@ bool VendingMachine::purchaseItems()
         bool exit = false;
 
         // Output
+        cout << std::fixed << std::setprecision(2);
         cout << "You have selected \"" << item->name << " - " << item->description;
         cout << "\". This will cost you ";
-        cout << "$" << std::fixed << std::setprecision(2) << amount * 0.01 << "." << endl;
+        cout << "$" << amount * 0.01 << "." << endl;
         cout << "Please hand over the money - type in the value of each note/coins in cents." << endl;
         cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
 
@@ -149,7 +150,7 @@ bool VendingMachine::purchaseItems()
         while (amount > 0 && !exit){
 
             // Informing user money not fully paid.
-            cout << "You still need to give us $" << ColorOutPut::custom((amount * 0.01), this->priceColor, this->enhancement) << ": ";
+            cout << "You still need to give us $ " << ColorOutPut::customPrice((amount * 0.01f), this->priceColor, this->enhancement) + ": ";
             
             // Reading user input
             input = Helper::readInput();

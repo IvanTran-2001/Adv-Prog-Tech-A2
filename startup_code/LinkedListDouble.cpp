@@ -127,7 +127,7 @@ bool LinkedListDouble::remove(std::string id) {
 
 }
 
-void LinkedListDouble::displayReverse() {
+void LinkedListDouble::displayReverse(bool enhance) {
 
     std::cout << "Items Menu | Descending Order" << std::endl;
     std::cout << "----------" << std::endl;
@@ -151,8 +151,19 @@ void LinkedListDouble::displayReverse() {
         on_handLength = std::to_string(stock->on_hand).length();
         string availSpaces(11 - on_handLength, ' ');
 
-        string price = std::to_string(stock->price.dollars) + "." \
+        string price = "";
+
+        if (stock->price.cents < 10) {
+            price = std::to_string(stock->price.dollars) + "." \
+                     + "0" + std::to_string(stock->price.cents);
+        } else {
+            price = std::to_string(stock->price.dollars) + "." \
                      + std::to_string(stock->price.cents);
+        }
+
+
+        price = ColorOutPut::customString(price, ColorCode::Red, enhance);
+
 
         std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
                   << stock->on_hand << availSpaces << "|$ " << price << std::endl;
