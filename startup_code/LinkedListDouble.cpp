@@ -90,8 +90,9 @@ bool LinkedListDouble::remove(std::string id) {
     if (node->data->id == id) {
         std::cout << "\"" << id << " - " << node->data->name << " - " <<        \
                      node->data->description << "\" has been removed from the system." << std::endl;
-        delete head;
+
         head = node->next;
+        delete node;
         found = true;
 
     }
