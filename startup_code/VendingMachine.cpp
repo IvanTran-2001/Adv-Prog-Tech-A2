@@ -17,6 +17,8 @@ VendingMachine::VendingMachine(string s, string c)
     // Constructing coin list
     this->coinList = Coin::convertToCoin(coinFile);
 
+    this->priceColor = ColorCode::Red;
+
 }
 
 VendingMachine::~VendingMachine() 
@@ -138,8 +140,8 @@ bool VendingMachine::purchaseItems()
 
         // Output
         cout << "You have selected \"" << item->name << " - " << item->description;
-        cout << "\". This will cost you $ ";
-        cout << std::fixed << std::setprecision(2) << amount * 0.01 << "." << endl;
+        cout << "\". This will cost you ";
+        cout << "$" << std::fixed << std::setprecision(2) << amount * 0.01 << "." << endl;
         cout << "Please hand over the money - type in the value of each note/coins in cents." << endl;
         cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
 
@@ -147,7 +149,7 @@ bool VendingMachine::purchaseItems()
         while (amount > 0 && !exit){
 
             // Informing user money not fully paid.
-            cout << "You still need to give us $" << amount * 0.01 << ": ";
+            cout << "You still need to give us $" << ColorOutPut::custom((amount * 0.01), this->priceColor, this->enhancement) << ": ";
             
             // Reading user input
             input = Helper::readInput();

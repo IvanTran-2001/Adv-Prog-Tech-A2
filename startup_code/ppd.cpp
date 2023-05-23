@@ -62,8 +62,10 @@ bool command_set_press(VendingMachine* m) {
 
     bool loop = true;
 
-    // The Invoker
-    Menu* userSelect = new Menu;
+    // The Invoker.
+    // No need to make userSelect pointer.
+    // Has automatic freeing memory.
+    Menu userSelect;
     
     std::string input = Helper::readInput();
     // Removes all whitespace from input
@@ -73,48 +75,45 @@ bool command_set_press(VendingMachine* m) {
     if (input == DISPLAY_ITEMS){
 
         //Display items
-        userSelect->set(new DisplayItem(m));
+        userSelect.set(new DisplayItem(m));
                 
     } else if (input == PURCHASE_ITEMS){
 
         //Purchase items
-        userSelect->set(new PurchaseItem(m));
+        userSelect.set(new PurchaseItem(m));
 
     } else if (input == SAVE_EXIT){
-        userSelect->set(new Save(m));
-        userSelect->press();
-
-        userSelect->set(new Abort(m));
+        userSelect.set(new Save(m));
+        userSelect.set(new Abort(m));
         loop = false;
 
     } else if (input == ADD_ITEM) {
-        userSelect->set(new AddItem(m));
+        userSelect.set(new AddItem(m));
 
     } else if (input == REMOVE_ITEM) {
-        userSelect->set(new RemoveItem(m));
+        userSelect.set(new RemoveItem(m));
 
     } else if (input == DISPLAY_COINS) {
-        userSelect->set(new DisplayCoins(m));
+        userSelect.set(new DisplayCoins(m));
 
     } else if (input == RESET_STOCK) {
-        userSelect->set(new DisplayItem(m));
+        userSelect.set(new ResetStock(m));
 
     } else if (input == RESET_COINS) {
-        userSelect->set(new ResetCoins(m));
+        userSelect.set(new ResetCoins(m));
 
     } else if (input == ENHANCEMENT) {
-        userSelect->set(new ToggleEnhancement(m));
+        userSelect.set(new ToggleEnhancement(m));
 
     } else if (input == ABORT) {
-        userSelect->set(new Abort(m));
+        userSelect.set(new Abort(m));
         loop = false;
     }
 
     // The given command will now be executed
     // The command will be recieved by the vending machine
     // Vending Machine executes the command
-    userSelect->press();
-    delete userSelect;
+    userSelect.press();
 
     return loop;
 }

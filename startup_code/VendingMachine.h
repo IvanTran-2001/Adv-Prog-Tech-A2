@@ -29,6 +29,7 @@ private:
     std::string stockFile;
     std::string coinFile;
     bool enhancement;
+    ColorCode priceColor;
 
 
 public:

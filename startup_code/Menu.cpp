@@ -8,23 +8,39 @@
 class Menu {
 
  private:
-  Command* command;
+  std::vector<Command*> commands;
 
  public:
+
+  // No Need for deconstructor because
+  // Commands get deleted right after
+  // Execution
   ~Menu() {
-    delete command;
+
   }
 
+  // Getting commands
   void set(Command *command) {
-    this->command = command;
+    this->commands.push_back(command);
   }
 
 
   void press() {
 
-    this->command->Execute();
-    delete this->command;
+    // Executes all commands pressed.
+    for (Command* c : commands) {
+      c->Execute();
+    }
 
+    // Once commands executed, delete commands.
+    clear();
+
+  }
+
+  void clear() {
+    for (Command* c : commands) {
+      delete c;
+    }
   }
 };
 

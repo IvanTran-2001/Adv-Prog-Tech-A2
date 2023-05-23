@@ -13,6 +13,7 @@
 #include <algorithm> 
 #include <cstring> 
 
+#include "ColorOutPut.h"
 #include "Node.h"
 #include "Coin.h"
 
