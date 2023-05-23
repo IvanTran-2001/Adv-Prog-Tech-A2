@@ -30,6 +30,9 @@ private:
     std::string coinFile;
     bool enhancement;
     ColorCode priceColor;
+    ColorCode titleColor;
+    ColorCode numberColor;
+    ColorCode boarderColor;
 
 
 public:

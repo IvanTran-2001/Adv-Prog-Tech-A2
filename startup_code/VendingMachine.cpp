@@ -18,6 +18,8 @@ VendingMachine::VendingMachine(string s, string c)
     this->coinList = Coin::convertToCoin(coinFile);
 
     this->priceColor = ColorCode::Red;
+    this->titleColor = ColorCode::Blue;
+    this->boarderColor = ColorCode::Yellow;
 
 }
 
@@ -74,11 +76,11 @@ void VendingMachine::displayItems()
         while (input != "3") {
 
             // Prompt
-            cout << "Display Order:" << endl;
+            cout << ColorOutPut::customString("Display Order:", this->titleColor, this->enhancement) << endl;
             cout << "\t1. Ascending" << endl;
             cout << "\t2. Descending" << endl;
             cout << "\t3. Menu" << endl;
-            cout << "Select your option (1-3): ";
+            cout << ColorOutPut::customString("Select your option (1-3): ", this->titleColor, this->enhancement);
 
             //Getting input
             input = Helper::readInput();
@@ -117,13 +119,13 @@ bool VendingMachine::purchaseItems()
 
     // If invalid search
     if (item == nullptr){
-        cout << "invalid item" << endl;
+        cout << ColorOutPut::customString("invalid item", ColorCode::Red, this->enhancement) << endl;
         return_value = false;
     }
 
     // If no stock left
     else if (item->on_hand < 1){
-        cout << "item out of stock" << endl;
+        cout << ColorOutPut::customString("item out of stock", ColorCode::Red, this->enhancement) << endl;
         return_value = false;
     }
 
@@ -144,13 +146,15 @@ bool VendingMachine::purchaseItems()
         cout << "\". This will cost you ";
         cout << "$" << amount * 0.01 << "." << endl;
         cout << "Please hand over the money - type in the value of each note/coins in cents." << endl;
-        cout << "Please enter or ctrl-d on a new line to cancel this purchase:" << endl;
+        cout << ColorOutPut::customString("Please enter or ctrl-d on a new line to cancel this purchase:", \
+        this->titleColor, this->enhancement) << endl;
 
         // Will exit until price paid or user leaves
         while (amount > 0 && !exit){
 
             // Informing user money not fully paid.
-            cout << "You still need to give us $ " << ColorOutPut::customPrice((amount * 0.01f), this->priceColor, this->enhancement) + ": ";
+            cout << ColorOutPut::customString("You still need to give us $ ", this->titleColor, this->enhancement) \
+            << ColorOutPut::customPrice((amount * 0.01f), this->priceColor, this->enhancement) + ": ";
             
             // Reading user input
             input = Helper::readInput();
@@ -194,7 +198,8 @@ bool VendingMachine::purchaseItems()
             // Checking if possible to give change
             if (change == "-1"){
 
-                cout << "insufficient coins available for correct change" << endl;
+                cout << ColorOutPut::customString("insufficient coins available for correct change", \
+                ColorCode::Red, this->enhancement) << endl;
                 return_value = false;
             }
 
@@ -341,18 +346,18 @@ void VendingMachine::displayCoins()
 
     
     //display coins
-    cout << "Coins Summary" << endl;
-    cout << "-------------" << endl;
-    cout << "Denomination    |    Count" << endl;
-    cout << "---------------------------" << endl;
-    cout << "5 Cents         |" << formatting_spaces[7] << coinList[0]->count << endl;
-    cout << "10 Cents        |" << formatting_spaces[6] << coinList[1]->count << endl;
-    cout << "20 Cents        |" << formatting_spaces[5] << coinList[2]->count << endl;
-    cout << "50 Cents        |" << formatting_spaces[4] << coinList[3]->count << endl;
-    cout << "1 Dollar        |" << formatting_spaces[3] << coinList[4]->count << endl;
-    cout << "2 Dollars       |" << formatting_spaces[2] << coinList[5]->count << endl;
-    cout << "5 Dollars       |" << formatting_spaces[1] << coinList[6]->count << endl;
-    cout << "10 Dollars      |" << formatting_spaces[0] << coinList[7]->count << endl;
+    cout << ColorOutPut::customString("Coins Summary", this->titleColor, this->enhancement) << endl;
+    cout << ColorOutPut::customString("-------------", this->boarderColor, this->enhancement) << endl;
+    cout << "Denomination    " << ColorOutPut::customString("|", this->boarderColor, this->enhancement) << "    Count" << endl;
+    cout << ColorOutPut::customString("---------------------------", this->boarderColor, this->enhancement) << endl;
+    cout << "5 Cents         " << ColorOutPut::customString("|", this->boarderColor, this->enhancement) << formatting_spaces[7] << coinList[0]->count << endl;
+    cout << "10 Cents        " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[6] << coinList[1]->count << endl;
+    cout << "20 Cents        " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[5] << coinList[2]->count << endl;
+    cout << "50 Cents        " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[4] << coinList[3]->count << endl;
+    cout << "1 Dollar        " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[3] << coinList[4]->count << endl;
+    cout << "2 Dollars       " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[2] << coinList[5]->count << endl;
+    cout << "5 Dollars       " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[1] << coinList[6]->count << endl;
+    cout << "10 Dollars      " << ColorOutPut::customString("|", this->boarderColor, this->enhancement)<< formatting_spaces[0] << coinList[7]->count << endl;
 
     // for (Coin* c:this->coinList) {
     //     cout << "denomination: " << c->getDenomination() << ", Amount: " << c->count << std::endl;
@@ -383,23 +388,23 @@ void VendingMachine::purchaseMsg()
 
 void VendingMachine::optionMenu()
 {
-    cout << ColorOutPut::customString("Main Menu:", ColorCode::Blue, this->enhancement) << endl;
+    cout << ColorOutPut::customString("Main Menu:", this->titleColor, this->enhancement) << endl;
     cout << "\t1.Display Items" << endl;
     cout << "\t2.Purchase Items" << endl;
     cout << "\t3.Save and Exit" << endl;
-    cout << ColorOutPut::customString("Administrator-Only Menu:", ColorCode::Blue, this->enhancement) << endl;
+    cout << ColorOutPut::customString("Administrator-Only Menu:", this->titleColor, this->enhancement) << endl;
     cout << "\t4.Add Item" << endl;
     cout << "\t5.Remove Item" << endl;
     cout << "\t6.Display Coins" << endl;
     cout << "\t7.Reset Stock" << endl;
     cout << "\t8.Reset Coins" << endl;
     if (enhancement) {
-        cout << "\t9.Enhancement: " << ColorOutPut::customString("On", ColorCode::Green, this->enhancement)<< endl;
+        cout << "\t9.Enhancement: " << ColorOutPut::customString("On", ColorCode::Green, true)<< endl;
     } else {
-        cout << "\t9.Enhancement: " << ColorOutPut::customString("Off", ColorCode::Red, this->enhancement)<< endl;
+        cout << "\t9.Enhancement: " << ColorOutPut::customString("Off", ColorCode::Red, true)<< endl;
     }
     cout << "\t10.Abort Program" << endl;
-    cout << "Select your option (1-10): ";
+    cout << ColorOutPut::customString("Select your option (1-10): ", this->titleColor, this->enhancement);
 }
 
 void VendingMachine::deleteStockList()
