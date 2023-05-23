@@ -64,7 +64,6 @@ bool LinkedListDouble::addLL(Stock* stock) {
             dynamic_cast<NodeD*>(node)->prev = tempNode->prev;
             tempNode->prev = node;
 
-            std::cout << "found" << std::endl;
             add = true;
         }
     }
@@ -129,14 +128,15 @@ bool LinkedListDouble::remove(std::string id) {
 
 void LinkedListDouble::displayReverse(bool enhance) {
 
-    std::cout << "Items Menu | Descending Order" << std::endl;
-    std::cout << "----------" << std::endl;
-    std::cout << "ID   |Name                                    | Available | Price" << std::endl;
-    std::cout << "-------------------------------------------------------------------" << std::endl;
+    ColorCode boarder = ColorCode::Yellow;
+    // Formatting linked list
+    std::cout << "Items Menu " <<  ColorOutPut::customString("|", boarder, enhance) << " Ascending Order" << std::endl;
+    std::cout << ColorOutPut::customString("-------------------------------------------------------------------" , boarder, enhance)<< std::endl;
+    std::cout << "ID   " << ColorOutPut::customString("|", boarder, enhance) << "Name                                    " << ColorOutPut::customString("|", boarder, enhance) << " Available "<< \
+    ColorOutPut::customString("|", boarder, enhance) << " Price" << std::endl;
+    std::cout << ColorOutPut::customString("-------------------------------------------------------------------", boarder, enhance) << std::endl;
 
     Stock* stock;
-    int nameLength;
-    int on_handLength;
     NodeD* node = dynamic_cast<NodeD*>(tail);
 
     while (node != nullptr){
@@ -144,29 +144,7 @@ void LinkedListDouble::displayReverse(bool enhance) {
         // Getting data
         stock = node->data;
 
-        // The rest below is just formatting the data
-        nameLength = stock->name.length();
-        string nameSpaces(NAMELEN - nameLength, ' ');
-
-        on_handLength = std::to_string(stock->on_hand).length();
-        string availSpaces(11 - on_handLength, ' ');
-
-        string price = "";
-
-        if (stock->price.cents < 10) {
-            price = std::to_string(stock->price.dollars) + "." \
-                     + "0" + std::to_string(stock->price.cents);
-        } else {
-            price = std::to_string(stock->price.dollars) + "." \
-                     + std::to_string(stock->price.cents);
-        }
-
-
-        price = ColorOutPut::customString(price, ColorCode::Red, enhance);
-
-
-        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
-                  << stock->on_hand << availSpaces << "|$ " << price << std::endl;
+        printOne(*stock, enhance, boarder);
         
         //Next node
         node = dynamic_cast<NodeD*>(node->prev);

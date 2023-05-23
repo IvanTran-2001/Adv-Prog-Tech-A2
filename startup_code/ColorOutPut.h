@@ -9,7 +9,8 @@ enum ColorCode {
     Reset,
     Red,
     Green,
-    Yellow
+    Yellow,
+    B_AQUA
 };
 
 class ColorOutPut {
@@ -22,7 +23,8 @@ class ColorOutPut {
                 {ColorCode::Reset, "\033[0m"},
                 {ColorCode::Red, "\033[31m"},
                 {ColorCode::Green, "\033[32m"},
-                {ColorCode::Yellow, "\033[33m"}
+                {ColorCode::Yellow, "\033[33m"},
+                {ColorCode::B_AQUA, "\033[46m"}
             };
 
             std::string returnVal = "";
@@ -43,7 +45,8 @@ class ColorOutPut {
                 {ColorCode::Reset, "\033[0m"},
                 {ColorCode::Red, "\033[31m"},
                 {ColorCode::Green, "\033[32m"},
-                {ColorCode::Yellow, "\033[33m"}
+                {ColorCode::Yellow, "\033[33m"},
+                {ColorCode::B_AQUA, "\033[46m"}
             };
 
             std::string returnVal = "";

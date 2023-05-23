@@ -4,16 +4,16 @@ using std::vector;
 
 void LinkedList::printLL(bool enhance){
 
+    ColorCode boarder = ColorCode::Yellow;
     // Formatting linked list
-    std::cout << "Items Menu | Ascending Order" << std::endl;
-    std::cout << "----------" << std::endl;
-    std::cout << "ID   |Name                                    | Available | Price" << std::endl;
-    std::cout << "-------------------------------------------------------------------" << std::endl;
+    std::cout << "Items Menu " <<  ColorOutPut::customString("|", boarder, enhance) << " Ascending Order" << std::endl;
+    std::cout << ColorOutPut::customString("-------------------------------------------------------------------" , boarder, enhance)<< std::endl;
+    std::cout << "ID   " << ColorOutPut::customString("|", boarder, enhance) << "Name                                    " << ColorOutPut::customString("|", boarder, enhance) << " Available "<< \
+    ColorOutPut::customString("|", boarder, enhance) << " Price" << std::endl;
+    std::cout << ColorOutPut::customString("-------------------------------------------------------------------", boarder, enhance) << std::endl;
 
     Node* node = head;
     Stock* stock;
-    int nameLength;
-    int on_handLength;
 
     // 2 decimal places
     std::cout << std::fixed << std::setprecision(2);
@@ -24,32 +24,40 @@ void LinkedList::printLL(bool enhance){
         // Getting data
         stock = node->data;
 
-        // The rest below is just formatting the data
-        nameLength = stock->name.length();
-        string nameSpaces(NAMELEN - nameLength, ' ');
-
-        on_handLength = std::to_string(stock->on_hand).length();
-        string availSpaces(11 - on_handLength, ' ');
-
-        string price = "";
-
-        if (stock->price.cents < 10) {
-            price = std::to_string(stock->price.dollars) + "." \
-                     + "0" + std::to_string(stock->price.cents);
-        } else {
-            price = std::to_string(stock->price.dollars) + "." \
-                     + std::to_string(stock->price.cents);
-        }
-
-        price = ColorOutPut::customString(price, ColorCode::Red, enhance);
-
-        std::cout << stock->id << "|" << stock->name << nameSpaces << "|" \
-                  << stock->on_hand << availSpaces << "|$ " << price << std::endl;
+        printOne(*stock, enhance, boarder);
         
         //Next node
         node = node->next;
     } 
     std::cout << std::endl;
+}
+
+void LinkedList::printOne(Stock& stock, bool enhance, ColorCode b) {
+
+        int nameLength;
+        int on_handLength;
+            // The rest below is just formatting the data
+        nameLength = stock.name.length();
+        string nameSpaces(NAMELEN - nameLength, ' ');
+
+        on_handLength = std::to_string(stock.on_hand).length();
+        string availSpaces(11 - on_handLength, ' ');
+
+        string price = "";
+
+        if (stock.price.cents < 10) {
+            price = std::to_string(stock.price.dollars) + "." \
+                     + "0" + std::to_string(stock.price.cents);
+        } else {
+            price = std::to_string(stock.price.dollars) + "." \
+                     + std::to_string(stock.price.cents);
+        }
+
+        price = ColorOutPut::customString(price, ColorCode::Red, enhance);
+
+        std::cout << ColorOutPut::customString(stock.id, ColorCode::B_AQUA, enhance) << ColorOutPut::customString("|", b, enhance) << stock.name << \
+        nameSpaces << ColorOutPut::customString("|", b, enhance) << stock.on_hand << availSpaces << ColorOutPut::customString("|", b, enhance) \
+        << " $" << price << std::endl;
 }
 
 bool LinkedList::convertToStock(std::string fileName) {

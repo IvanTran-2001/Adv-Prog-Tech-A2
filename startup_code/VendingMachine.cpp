@@ -9,10 +9,10 @@ VendingMachine::VendingMachine(string s, string c)
 {
     this->coinFile = c;
     this->stockFile = s;
-    enhancement = false;
+    enhancement = true;
 
     // Empty List
-    this->stockList = new LinkedListSingle();
+    this->stockList = new LinkedListDouble();
 
     // Constructing coin list
     this->coinList = Coin::convertToCoin(coinFile);
