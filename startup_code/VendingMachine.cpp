@@ -77,9 +77,9 @@ void VendingMachine::displayItems()
 
             // Prompt
             cout << ColorOutPut::customString("Display Order:", this->titleColor, this->enhancement) << endl;
-            cout << "\t1. Ascending" << endl;
-            cout << "\t2. Descending" << endl;
-            cout << "\t3. Menu" << endl;
+            cout << "   1. Ascending" << endl;
+            cout << "   2. Descending" << endl;
+            cout << "   3. Menu" << endl;
             cout << ColorOutPut::customString("Select your option (1-3): ", this->titleColor, this->enhancement);
 
             //Getting input
@@ -119,7 +119,8 @@ bool VendingMachine::purchaseItems()
 
     // If invalid search
     if (item == nullptr){
-        cout << ColorOutPut::customString("invalid item", ColorCode::Red, this->enhancement) << endl;
+        cout << ColorOutPut::customString("Invalid item!!!", ColorCode::Red, this->enhancement) << endl;
+        cout << endl;
         return_value = false;
     }
 
@@ -144,7 +145,7 @@ bool VendingMachine::purchaseItems()
         cout << std::fixed << std::setprecision(2);
         cout << "You have selected \"" << item->name << " - " << item->description;
         cout << "\". This will cost you ";
-        cout << "$" << amount * 0.01 << "." << endl;
+        cout << "$" << ColorOutPut::customPrice(amount * 0.01, this->priceColor, this->enhancement) << "." << endl;
         cout << "Please hand over the money - type in the value of each note/coins in cents." << endl;
         cout << ColorOutPut::customString("Please enter or ctrl-d on a new line to cancel this purchase:", \
         this->titleColor, this->enhancement) << endl;
@@ -207,9 +208,10 @@ bool VendingMachine::purchaseItems()
             else {
                 amount *= -1;
 
-                cout << "Here is your " << item->name;
+                cout << ColorOutPut::customString("Here is your ", ColorCode::Green, this->enhancement) << item->name;
                 if (change != ":"){
-                    cout << " and your change of $" << amount * 0.01 << change << endl;
+                    cout << ColorOutPut::customString(" and your change of $", ColorCode::Green, this->enhancement) << \
+                    ColorOutPut::customPrice(amount * 0.01, this->priceColor, this->enhancement) << change << endl;
                 }
                 else {
                     cout << "!" << endl;
@@ -389,21 +391,21 @@ void VendingMachine::purchaseMsg()
 void VendingMachine::optionMenu()
 {
     cout << ColorOutPut::customString("Main Menu:", this->titleColor, this->enhancement) << endl;
-    cout << "\t1.Display Items" << endl;
-    cout << "\t2.Purchase Items" << endl;
-    cout << "\t3.Save and Exit" << endl;
+    cout << "   1.Display Items" << endl;
+    cout << "   2.Purchase Items" << endl;
+    cout << "   3.Save and Exit" << endl;
     cout << ColorOutPut::customString("Administrator-Only Menu:", this->titleColor, this->enhancement) << endl;
-    cout << "\t4.Add Item" << endl;
-    cout << "\t5.Remove Item" << endl;
-    cout << "\t6.Display Coins" << endl;
-    cout << "\t7.Reset Stock" << endl;
-    cout << "\t8.Reset Coins" << endl;
+    cout << "   4.Add Item" << endl;
+    cout << "   5.Remove Item" << endl;
+    cout << "   6.Display Coins" << endl;
+    cout << "   7.Reset Stock" << endl;
+    cout << "   8.Reset Coins" << endl;
     if (enhancement) {
-        cout << "\t9.Enhancement: " << ColorOutPut::customString("On", ColorCode::Green, true)<< endl;
+        cout << "   9.Enhancement: " << ColorOutPut::customString("On", ColorCode::Green, true)<< endl;
     } else {
-        cout << "\t9.Enhancement: " << ColorOutPut::customString("Off", ColorCode::Red, true)<< endl;
+        cout << "   9.Enhancement: " << ColorOutPut::customString("Off", ColorCode::Red, true)<< endl;
     }
-    cout << "\t10.Abort Program" << endl;
+    cout << "   10.Abort Program" << endl;
     cout << ColorOutPut::customString("Select your option (1-10): ", this->titleColor, this->enhancement);
 }
 
