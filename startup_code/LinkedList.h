@@ -13,6 +13,9 @@ public:
     // Print linkedlist in a format
     virtual void printLL(bool enhance);
 
+    // Print a stock info out
+    virtual void printOne(Stock& stock, bool enhance, ColorCode b);
+
     // Find an item within list
     virtual Stock* findItem(std::string id);
 
