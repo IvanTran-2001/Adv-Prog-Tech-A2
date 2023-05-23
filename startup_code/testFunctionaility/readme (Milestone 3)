@@ -1,0 +1,9 @@
+I have used the same testing as testFunctionality.
+For the coloring enhancement, I don't know how
+to get coloring on these files so I have just
+tested by looking at them.
+
+And the reason for using the same test is because
+the results won't be different. The only extra test 
+will be the reverse display. Insert was already a thing
+for the singly list, so using the same test is valid.
