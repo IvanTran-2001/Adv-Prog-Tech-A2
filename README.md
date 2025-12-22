@@ -15,21 +15,16 @@ Tech Stack / Requirements
 Instructions:
 Compilation
 
+The pdd file is in the "start_up code" folder
+
 Make sure you are using a G++ compiler or WSL terminal.
 If using the Makefile, simply run:
 make
 
-
-Alternatively, you can compile manually:
-
-g++ -std=c++14 *.cpp -o ppd
-
 Running the Program
-
-Place the executable in the same folder as your stock.dat and coins.dat files. Then run:
+Then run:
 
 ./ppd stock.dat coins.dat
-
 
 You can also specify your own stock and coin files (must follow same format):
 
@@ -48,5 +43,9 @@ Testing
 
 Author
 
+Coder:
 Ivan Tran
+
+Testers:
+iAndrewD and Ivan Tran
 
