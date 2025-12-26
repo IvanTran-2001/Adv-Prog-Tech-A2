@@ -226,7 +226,6 @@ bool VendingMachine::purchaseItems()
     return return_value;
 }
 
-
 void VendingMachine::save() 
 {
     // Saving to a file
