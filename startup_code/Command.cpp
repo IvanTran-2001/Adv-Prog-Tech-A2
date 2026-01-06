@@ -1,84 +1,82 @@
 #include "Command.h"
-// Essentially a list of object commands.
 
-Abort::Abort(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
+/**
+ * @file Command.cpp
+ * @brief Implementation of Command Pattern classes for vending machine operations
+ * 
+ * Each command class wraps a specific operation on the VendingMachine receiver.
+ * The constructor stores a reference to the machine, and Execute() delegates
+ * the actual work to the appropriate machine method.
+ */
+
+// ==================== Abort Command ====================
+Abort::Abort(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void Abort::Execute() const {
+    machine->abort();
 }
 
-void Abort::Execute() const{
-    this->machine->abort();
+// ==================== DisplayItem Command ====================
+DisplayItem::DisplayItem(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void DisplayItem::Execute() const {
+    machine->displayItems();
 }
 
-DisplayItem::DisplayItem(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
+// ==================== PurchaseItem Command ====================
+PurchaseItem::PurchaseItem(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void PurchaseItem::Execute() const {
+    machine->purchaseItems();
 }
 
-void DisplayItem::Execute() const{
-    this->machine->displayItems();
+// ==================== Save Command ====================
+Save::Save(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void Save::Execute() const {
+    machine->save();
 }
 
-PurchaseItem::PurchaseItem(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
+// ==================== AddItem Command ====================
+AddItem::AddItem(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void AddItem::Execute() const {
+    machine->addItem();
 }
 
-void PurchaseItem::Execute() const{
-    this->machine->purchaseItems();
+// ==================== RemoveItem Command ====================
+RemoveItem::RemoveItem(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void RemoveItem::Execute() const {
+    machine->removeItem();
 }
 
-Save::Save(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
+// ==================== DisplayCoins Command ====================
+DisplayCoins::DisplayCoins(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void DisplayCoins::Execute() const {
+    machine->displayCoins();
 }
 
-void Save::Execute() const{
-    this->machine->save();
+// ==================== ResetStock Command ====================
+ResetStock::ResetStock(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void ResetStock::Execute() const {
+    machine->resetStock();
 }
 
-AddItem::AddItem(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
+// ==================== ResetCoins Command ====================
+ResetCoins::ResetCoins(VendingMachine* vendingMachine) : machine(vendingMachine) {}
+
+void ResetCoins::Execute() const {
+    machine->resetCoins();
 }
 
-void AddItem::Execute() const{
-    this->machine->addItem();
-}
+// ==================== ToggleEnhancement Command ====================
+ToggleEnhancement::ToggleEnhancement(VendingMachine* vendingMachine) : machine(vendingMachine) {}
 
-RemoveItem::RemoveItem(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void RemoveItem::Execute() const{
-    this->machine->removeItem();
-}
-
-DisplayCoins::DisplayCoins(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void DisplayCoins::Execute() const{
-    this->machine->displayCoins();
-}
-
-ResetStock::ResetStock(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void ResetStock::Execute() const{
-    this->machine->resetStock();
-}
-
-ResetCoins::ResetCoins(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void ResetCoins::Execute() const{
-    this->machine->resetCoins();
-}
-
-ToggleEnhancement::ToggleEnhancement(VendingMachine* vendingMachine) {
-    this->machine = vendingMachine;
-}
-
-void ToggleEnhancement::Execute() const{
-    this->machine->toggleEnhancement();
+void ToggleEnhancement::Execute() const {
+    machine->toggleEnhancement();
 }
 
 
