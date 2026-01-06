@@ -7,13 +7,11 @@
                 "${workspaceFolder}/startup_code"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "_DEBUG"
             ],
-            "compilerPath": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\g++.exe",
             "cStandard": "c17",
-            "cppStandard": "gnu++17",
+            "cppStandard": "c++14",
             "intelliSenseMode": "windows-gcc-x64",
             "configurationProvider": "ms-vscode.makefile-tools"
         }
