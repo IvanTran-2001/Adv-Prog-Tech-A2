@@ -5,6 +5,8 @@
 test.cpp
 stock.dat
 coins.dat
+# Assignment PDF - course material
+*.pdf
 # Node artifact files
 node_modules/
 dist/
